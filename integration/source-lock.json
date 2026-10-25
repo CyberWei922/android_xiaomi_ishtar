@@ -56,7 +56,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "build/soong",
@@ -71,7 +71,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "frameworks/base",
@@ -86,7 +86,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "frameworks/native",
@@ -126,7 +126,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "device/lineage/sepolicy",
@@ -151,7 +151,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "device/qcom/sepolicy",
@@ -166,7 +166,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "device/qcom/sepolicy_vndr/sm8550",
@@ -206,7 +206,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "system/sepolicy",
@@ -221,7 +221,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "system/update_engine",
@@ -306,7 +306,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "vendor/lineage",
@@ -336,7 +336,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": true
+      "included_in_booted_build36": true
     },
     {
       "path": "hardware/xiaomi",
@@ -351,7 +351,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": false
+      "included_in_booted_build36": false
     },
     {
       "path": "vendor/qcom/opensource/vibrator",
@@ -366,7 +366,7 @@
         }
       ],
       "validation": "compiled_and_payload_verified_build37",
-      "device_tested": false
+      "included_in_booted_build36": false
     },
     {
       "path": "kernel/xiaomi/sm8550",
@@ -426,5 +426,6 @@
       "full_upstream_tree_identity_verified": false
     }
   ],
-  "full_kernel_upstream_identity_verified": false
+  "full_kernel_upstream_identity_verified": false,
+  "device_validation_note": "Inclusion in booted build36 is not complete functional or unit-test validation; build37 remains uninstalled."
 }

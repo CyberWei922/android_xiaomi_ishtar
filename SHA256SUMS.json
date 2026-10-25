@@ -221,7 +221,7 @@
   "integration/export-check.json": "e4c74f4cdff22881b2e31fe79e51887f07bd0ae0e7618273caff1f939497e2fd",
   "integration/install-check.json": "1f95f3dbbe276f52b6b342263cd8bd337ab814985a22e70a3cae617ab70ade5d",
   "integration/install-files.json": "fcb048d3c3c8cdd6d5a8fe21b9da5f8287742b247f82b8a54cdeabc55b189728",
-  "integration/source-lock.json": "355505f53eff4cd7f5718dc614c2302d6af53c95ad0beaa0c85409fa70ed9579",
+  "integration/source-lock.json": "4986c4dad6d69405f8cab01654396802e5b80c0007b04bb95cda2fc00cf917ed",
   "kernel/xiaomi/sm8550-devicetrees/Makefile": "857a98066f851a5548621b2a934edaa86ef5d39a40811b62376bd36a14c82719",
   "kernel/xiaomi/sm8550-devicetrees/NOTICE": "b6ae006895976b989443a22676b4599b9ffc26df83c42965daec11eeac5e76de",
   "kernel/xiaomi/sm8550-devicetrees/PORTING.md": "d40fdbdcd66144e230b7ccf710714282c14326c0b45ca342362c833745b9e4ef",
