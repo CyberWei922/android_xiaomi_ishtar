@@ -1,5 +1,5 @@
 {
-  "snapshot": "Android17 build43",
+  "snapshot": "Android17 build45",
   "components": [
     {
       "path": "device/xiaomi/ishtar",
@@ -132,7 +132,7 @@
       "path": "device/lineage/sepolicy",
       "patch": "patches/device__lineage__sepolicy.patch",
       "head": "8c6224ff52ec84d0207f35b7ea166ffe795dbfb1",
-      "sha256": "c2998aedac847b41af844d89999519ff99af9bf9f1d3c5da930554b8fbcd2cd8",
+      "sha256": "248aa79280d1b9f48a85626b56be726fc3beee59a1396a8f150fb9e2973c207c",
       "files": [
         {
           "path": "common/private/backuptool.te",
@@ -148,10 +148,16 @@
           "path": "common/private/update_engine.te",
           "before": "5ad5fbcd687e44ff7dc7d85654f7172f8c55280366d5c41ce8ca1a5e0245f33e",
           "after": "e82e5272ade35628dcbd033fa20a0978a43d54b3b3bedf17f7ac2254cd8fcba6"
+        },
+        {
+          "path": "common/private/updater_app.te",
+          "before": "f5ddc46c044bf9c6d8aa9a8e9b6bde3db6f0d12fd72bcd5e831ee3b1bf2519c5",
+          "after": "e298d63d47f76f5f719d6abc6aefcf4d905dd2346eba2f87fcbdc6b00e1889e3",
+          "introduced_in_build": 44
         }
       ],
-      "validation": "compiled_and_payload_verified_build37",
-      "included_in_booted_build36": true
+      "validation": "compiled_payload_verified_and_installed_build44",
+      "included_in_booted_build36": false
     },
     {
       "path": "device/qcom/sepolicy",
@@ -428,5 +434,5 @@
     }
   ],
   "full_kernel_upstream_identity_verified": false,
-  "device_validation_note": "Build43 installed with preserved data and root, global Permissive. Bluetooth and eight exact OEM radio labels verified. Three fresh camera open/close OIS lifecycle cycles passed. Build43 functional camera testing is assigned to the owner and remains pending. Earlier photo/video saves and six SurfaceFlinger regressions passed on build37; see docs/STATUS.md for scopes. Enforcing runtime acceptance pending."
+  "device_validation_note": "Build45 installed preserving data and KSU root; a bounded post-fs-data Enforcing startup verified actual kernel reclaim cpuset attachment and stable core processes. Permissive restored. Owner camera tests on43 passed; full Enforcing hardware acceptance remains pending."
 }

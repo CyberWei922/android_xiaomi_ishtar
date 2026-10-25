@@ -10,3 +10,6 @@ allow vendor_qti_init_shell vendor_data_file:dir { read open getattr };
 allow vendor_qti_init_shell domain:dir getattr;
 allow vendor_qti_init_shell kernel:dir search;
 allow vendor_qti_init_shell kernel:file { open read };
+
+# Moving the reclaim kernel thread into its cpuset checks task_setscheduler.
+allow vendor_qti_init_shell kernel:process setsched;

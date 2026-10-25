@@ -21,7 +21,7 @@ The current configuration targets **Evolution X 12.3**. The hardware configurati
 
 ## Status
 
-**Work in progress.** The current Android 17 source snapshot has been built and installed with data preserved and root verified. Repeated camera open/close tests passed after OIS lifecycle repairs. Functional camera acceptance of this revision is assigned to the owner and remains pending. Basic photo/video capture and six SurfaceFlinger regressions passed on an earlier build. SELinux remains Permissive; see [Validation status](docs/STATUS.md) for test scopes and remaining work.
+**Work in progress.** Build45 has been built and installed with data preserved and root verified. The owner reported camera tests passed on build43. A bounded Enforcing startup test from post-fs-data completed; the phone was restored to Permissive. Full Enforcing hardware acceptance remains pending. See [Validation status](docs/STATUS.md) for scopes and remaining work.
 
 The current development configuration uses **Permissive SELinux**, disabled AVB verification, KernelSU v3.3.1 LKM, and prebuilt TWRP. Detailed results and remaining validation are documented in [Status](docs/STATUS.md).
 

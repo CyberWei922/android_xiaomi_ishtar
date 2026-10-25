@@ -96,3 +96,16 @@ index 4ae6555..262f116 100644
 +
 +# Reap only the private worker process group after its controller exits.
 +allow update_engine backuptool:process sigkill;
+diff --git a/common/private/updater_app.te b/common/private/updater_app.te
+index a1628ed..0ee1ab0 100644
+--- a/common/private/updater_app.te
++++ b/common/private/updater_app.te
+@@ -8,6 +8,8 @@ binder_call(updater_app, update_engine)
+ 
+ allow updater_app app_api_service:service_manager find;
+ allow updater_app recovery_service:service_manager find;
++# SystemUpdateInfoPublisher publishes pending updates to SystemUpdateManager.
++allow updater_app system_update_service:service_manager find;
+ allow updater_app system_api_service:service_manager find;
+ allow updater_app update_engine_service:service_manager find;
+ 

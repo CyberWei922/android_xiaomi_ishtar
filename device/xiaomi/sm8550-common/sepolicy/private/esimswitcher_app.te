@@ -8,6 +8,8 @@ binder_use(esimswitcher_app)
 allow esimswitcher_app activity_service:service_manager find;
 allow esimswitcher_app activity_task_service:service_manager find;
 allow esimswitcher_app audio_service:service_manager find;
+# GraphicsEnvironment queries the standard GPU service during app startup.
+allow esimswitcher_app gpu_service:service_manager find;
 allow esimswitcher_app netstats_service:service_manager find;
 allow esimswitcher_app radio_service:service_manager find;
 allow esimswitcher_app voiceinteraction_service:service_manager find;

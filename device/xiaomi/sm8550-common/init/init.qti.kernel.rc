@@ -153,7 +153,8 @@ service kernel-boot /vendor/bin/sh /vendor/bin/init.qti.kernel.sh
 service kernel-post-boot /vendor/bin/sh /vendor/bin/init.kernel.post_boot.sh
     class core
     user root
-    group root system wakelock graphics
+    # Process labels are inspected before reading kernel thread names.
+    group root system wakelock graphics readproc
     disabled
     oneshot
 

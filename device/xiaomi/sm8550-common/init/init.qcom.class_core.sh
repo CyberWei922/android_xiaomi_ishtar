@@ -149,7 +149,11 @@ init_DMM()
 # For controlling console and shell on console on 8960 - perist.serial.enable 8960
 # On other target use default ro.debuggable property.
 #
-serial=`getprop persist.serial.enable`
+case "$target" in
+    "msm8960" | "msm8610" | "msm8974" | "msm8226")
+        serial=`getprop persist.serial.enable`
+        ;;
+esac
 dserial=`getprop ro.debuggable`
 case "$target" in
     "msm8960")

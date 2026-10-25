@@ -21,7 +21,7 @@
 
 ## 当前状态
 
-**开发中。** 当前 Android 17 源码快照已编译并保留数据刷入，root 已核验；OIS 生命周期修复后的连续开关相机测试已通过。本版相机功能交由机主人工验收，尚待反馈；此前版本已通过基础拍照、录像和六项 SurfaceFlinger 回归。当前仍为 Permissive，具体验收范围及剩余工作见[验证状态](docs/zh-CN/STATUS.md)。
+**开发中。** build45 已编译并保留数据刷入，root 已核验；机主已反馈 build43 相机测试通过。一次性 post-fs-data 阶段 Enforcing 启动检查已完成，结束后恢复 Permissive；Enforcing 下完整硬件验收仍待完成。具体验收范围及剩余工作见[验证状态](docs/zh-CN/STATUS.md)。
 
 当前开发配置使用 **SELinux Permissive**、关闭 AVB 验证、KernelSU v3.3.1 LKM 和预制 TWRP。详细结果及待验证项目见[验证状态](docs/zh-CN/STATUS.md)。
 
