@@ -1,40 +1,49 @@
-# Xiaomi 13 Ultra / ishtar — Android 17
+# Device configuration for Xiaomi 13 Ultra (`ishtar`)
 
-小米 13 Ultra 的 Android 17 适配集合。一个仓库包含本机设备树、SM8550 公共树、配套 DTS、内核与平台补丁、匹配的调试镜像及接入脚本。开发分支：`android-17`。
+**English** | [简体中文](README.zh-CN.md)
 
-硬件配置可以作为其他类原生 ROM 的移植基础；**当前验证的 ROM 是 Evolution X 12.3，不能据此保证所有 ROM 直接编译、开机。** 产品继承、组件、SELinux 和平台补丁需要与目标 ROM 对齐。见 [移植说明](docs/PORTABILITY.md)。
+Android 17 device configuration for the Xiaomi 13 Ultra, including the SM8550 common tree, device trees (DTS), and companion patches.
 
-## 当前状态
+The current configuration targets **Evolution X 12.3**. The hardware configuration can serve as a base for other AOSP-based ROMs; product configuration and platform patches need to be adapted to the target ROM. See [Porting](docs/PORTABILITY.md).
 
-| 版本 | 构建 | 实机 |
-| --- | --- | --- |
-| build36 / incremental `1792906981` | 完整 OTA、34 个 payload 分区核验通过 | 已从最终 Android 16 保留数据升级并开机；机主确认大部分基础功能正常；KSU root 已验证 |
-| **本仓库当前快照：build37 / `1792914428`** | 完整 OTA、实际 payload 和修复产物核验通过 | **尚未刷入**；新改动与 Enforcing 均未完成实机验收 |
+## Device specifications
 
-当前是调试配置：全局 **SELinux Permissive**、AVB 根 flags=3、KernelSU v3.3.1 LKM、保留自定义 TWRP，内核 5.15.211。策略中声明为 permissive 的域列表为空，与全局启动模式是两回事。见 [构建与验证状态](docs/STATUS.md)。
+| Component | Specification |
+| --- | --- |
+| Device | Xiaomi 13 Ultra |
+| Codename | `ishtar` |
+| SoC | Qualcomm Snapdragon 8 Gen 2 (SM8550) |
+| Architecture | ARM64 |
+| Display | 6.73-inch LTPO, 3200 × 1440, up to 120 Hz |
+| Shipped Android version | Android 13 |
+| Target Android version | Android 17 |
+| Kernel | Linux 5.15.211, GKI architecture, 4 KiB pages |
 
-机主未发现普通振动故障。37 的振动改动调整缺失 primitive 的返回值及复合能力报告，**没有证明日常触感存在问题或已得到改善**。
+## Status
 
-## 目录
+**Work in progress.** An earlier Android 17 build boots on the device, with core functionality reported working. The current source snapshot has passed a full OTA build and payload verification; device testing of this revision is pending.
 
-```text
-device/xiaomi/ishtar/                  本机配置
-device/xiaomi/sm8550-common/            公共设备配置
-kernel/xiaomi/sm8550-devicetrees/       配套 DTS 源码
-vendor/xiaomi/                        本次使用的 vendor 构建配方；不含专有载荷
-patches/                              14 个组件的配套补丁
-assets/                               压缩的匹配 TWRP 与 KSU init_boot 输入
-integration/                          提交、文件哈希、依赖和导出检查
-manifests/                            本次 EvoX 系统源码固定清单
-scripts/                              文件校验与源码接入
-docs/                                 构建、移植和验证说明
-```
+The current development configuration uses **Permissive SELinux**, disabled AVB verification, KernelSU v3.3.1 LKM, and prebuilt TWRP. Detailed results and remaining validation are documented in [Status](docs/STATUS.md).
 
-内核完整源码、内核模块完整源码、完整 Android 源码以及 Xiaomi/GMS 专有 APK/so 不复制进此适配仓库；依赖和现有核验范围见 [构建说明](docs/BUILD.md)。
+## Repository layout
 
-## 使用
+| Path | Contents |
+| --- | --- |
+| `device/xiaomi/ishtar` | Device-specific configuration |
+| `device/xiaomi/sm8550-common` | Shared SM8550 configuration |
+| `kernel/xiaomi/sm8550-devicetrees` | Kernel DTS sources |
+| `vendor/xiaomi` | Vendor build recipes and camera payload requirements |
+| `patches` | Companion kernel and platform patches |
+| `assets` | Compressed recovery and KernelSU init_boot inputs |
+| `manifests` | Pinned system source manifests |
+| `integration` | Source revisions, file hashes, and integration records |
+| `scripts` | Verification and integration tools |
 
-**把本仓库克隆到 Android 源码目录之外**，避免同一套 Android.bp 被 Soong 重复扫描。
+## Getting started
+
+Prepare the Android source tree, matching kernel sources, and proprietary dependencies described in the [Build guide](docs/BUILD.md).
+
+Clone this combined repository **outside the Android source tree**, then integrate its contents into the appropriate paths:
 
 ```bash
 git clone -b android-17 https://github.com/CyberWei922/android_xiaomi_ishtar.git
@@ -44,10 +53,38 @@ python3 scripts/integrate.py /path/to/android-source
 python3 scripts/integrate.py /path/to/android-source --apply
 ```
 
-先按 [构建说明](docs/BUILD.md) 准备固定版本的依赖。接入脚本默认只检查；已有文件必须与本快照一致，补丁输入必须匹配原始文件哈希，发现冲突会在写入前停止。它不执行编译或刷机。
+The integration tool checks existing files and patch inputs before writing. A conflicting file stops integration. The combined repository itself is not a single `device/xiaomi/ishtar` repo project.
 
-这是合并布局，不能把整个仓库直接作为 `device/xiaomi/ishtar` 的单个 repo project。接入脚本会把各部分放到 Android 源码中的正确位置。源码内原有 `PORTING.md` 是早期迁移记录，当前状态以本 README 和 `docs/` 为准。
+## Build
 
-## 来源与许可证
+From the prepared Android source root:
 
-保留原文件的版权和许可证声明；不同上游组件沿用各自许可证，不对整个集合重新许可。来源提交及补丁前后哈希见 `integration/source-lock.json`，完整系统来源见 `manifests/evox17-build37.xml`。内核补丁来源和 TWRP 源码定位的限制见 [来源说明](docs/PROVENANCE.md)。
+```bash
+source build/envsetup.sh
+source vendor/lineage/vars/aosp_target_release
+lunch "lineage_ishtar-${aosp_target_release}-userdebug"
+export OUT_DIR=out
+export NINJA_HIGHMEM_NUM_JOBS=1
+m -j6 otapackage target-files-package 'KERNEL_CC=CC=" clang" LD="ld.lld --threads=1"'
+```
+
+See the [Build guide](docs/BUILD.md) for pinned dependencies and memory requirements. The bundled boot images match this development configuration; other ROMs need matching images.
+
+## Documentation
+
+- [Build guide](docs/BUILD.md)
+- [Porting to other ROMs](docs/PORTABILITY.md)
+- [Validation status](docs/STATUS.md)
+- [Source provenance](docs/PROVENANCE.md)
+
+## Credits
+
+- [LineageOS](https://github.com/LineageOS)
+- [ishtar-aosp](https://github.com/ishtar-aosp)
+- [Evolution X](https://github.com/Evolution-X)
+- [KernelSU](https://github.com/tiann/KernelSU)
+- All original authors and contributors to the included sources.
+
+## License
+
+Original copyright notices and licenses are retained. Each component remains under its respective upstream license. See [Source provenance](docs/PROVENANCE.md) for component origins and prebuilt source availability.
