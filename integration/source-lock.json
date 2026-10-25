@@ -1,5 +1,5 @@
 {
-  "snapshot": "Android17 build37",
+  "snapshot": "Android17 build43",
   "components": [
     {
       "path": "device/xiaomi/ishtar",
@@ -92,7 +92,7 @@
       "path": "frameworks/native",
       "patch": "patches/frameworks__native.patch",
       "head": "49687694bd18a4a2df972f89b6717dbfce610721",
-      "sha256": "58ba29358de397271a7ec80730605b346efe920a6dad7fd3fa1dd059d50c4d11",
+      "sha256": "603e872ea17c4fc83b5d13ed2afbd243f5d179eab9287b64dd2db8ff24fde9f1",
       "files": [
         {
           "path": "services/surfaceflinger/Scheduler/Scheduler.cpp",
@@ -112,7 +112,7 @@
         {
           "path": "services/surfaceflinger/tests/unittests/SchedulerTest.cpp",
           "before": "c72ae2a1024879c299a07acb0521b2956f40559a9bbf86609dfb6530fa332c4e",
-          "after": "a53ae59af67872cd5168f7e6cfce49e816d870387f8a9a6eb3308f1db17d30ee"
+          "after": "6147478457819b8dcf4dcef3127563913a67e93f5291ea7c805b5fa963adb82c"
         },
         {
           "path": "services/surfaceflinger/tests/unittests/SurfaceFlinger_DisplayTransactionCommitTest.cpp",
@@ -125,7 +125,7 @@
           "after": "bef078868edc77223fb4948fb23cbab72d68381a488d7a255821738ef9c584bc"
         }
       ],
-      "validation": "compiled_and_payload_verified_build37",
+      "validation": "compiled_build39_six_device_regressions_passed_on_build37",
       "included_in_booted_build36": true
     },
     {
@@ -389,7 +389,7 @@
       "patch": "patches/kernel-modules.patch",
       "head": "cf984f86bcfc795190429a7c094fe6bbde5f7b02",
       "repository": "https://github.com/ishtar-aosp/android_kernel_xiaomi_sm8550-modules.git",
-      "sha256": "29d91952e44ae59fe100c408cc56005ae287be9dda159f167a10bec82a6e6863",
+      "sha256": "c2304da1491f44291a3c064eea811ddacd243e872c1aa442de2218799e085d7b",
       "files": [
         {
           "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_eeprom/cam_eeprom_core.c",
@@ -399,7 +399,7 @@
         {
           "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_ois/cam_ois_core.c",
           "before": "103b0e1a02c0fa8fa2c2f53a5b1a4cff1fafbb12e30104171a999da3bbc14410",
-          "after": "7ac78601034479adb2ea637bd7e1d5bd34dac2367e5ab9f55b8dc01c33bd2a00"
+          "after": "40b1d14331cc195f4447a024315c5ec225fd845caaf7d5760d1e35ff488b289c"
         },
         {
           "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_core.c",
@@ -423,9 +423,10 @@
         }
       ],
       "provenance": "archive_restore_not_git_checkout",
-      "full_upstream_tree_identity_verified": false
+      "full_upstream_tree_identity_verified": false,
+      "validation": "compiled_and_payload_verified_build43_repeated_camera_sessions_passed_on_device"
     }
   ],
   "full_kernel_upstream_identity_verified": false,
-  "device_validation_note": "Inclusion in booted build36 is not complete functional or unit-test validation; build37 remains uninstalled."
+  "device_validation_note": "Build43 installed with preserved data and root, global Permissive. Bluetooth and eight exact OEM radio labels verified. Three fresh camera open/close OIS lifecycle cycles passed. Build43 functional camera testing is assigned to the owner and remains pending. Earlier photo/video saves and six SurfaceFlinger regressions passed on build37; see docs/STATUS.md for scopes. Enforcing runtime acceptance pending."
 }

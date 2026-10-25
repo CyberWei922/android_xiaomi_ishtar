@@ -102,7 +102,16 @@
  		vfree(e_ctrl->cal_data.mapdata);
 --- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_ois/cam_ois_core.c
 +++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_ois/cam_ois_core.c
-@@ -2359,6 +2359,17 @@
+@@ -1499,6 +1499,8 @@
+ 
+ 	if ((csl_packet->header.op_code & 0xFFFFFF) !=
+ 		CAM_OIS_PACKET_OPCODE_INIT &&
++		/* Request zero is an immediate command, outside the frame queue. */
++		csl_packet->header.request_id != 0 &&
+ 		csl_packet->header.request_id <= o_ctrl->last_flush_req &&
+ 		o_ctrl->last_flush_req != 0) {
+ 		CAM_DBG(CAM_OIS,
+@@ -2359,6 +2361,17 @@
  			goto release_mutex;
  		}
  
@@ -120,6 +129,23 @@
  		if (o_ctrl->cam_ois_state == CAM_OIS_CONFIG) {
  #if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
  			parklens_power_down = ois_parklens_power_down(o_ctrl);
+@@ -2377,6 +2390,16 @@
+ 			}
+ #endif
+ 		}
++
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
++		/* A completed worker must not survive into the next acquisition. */
++		if (parklens_atomic_read(&o_ctrl->parklens_ctrl.parklens_state) ==
++			PARKLENS_STOP) {
++			rc = ois_deinit_parklens_info(o_ctrl);
++			if (rc < 0)
++				goto release_mutex;
++		}
++#endif
+ 
+ 		if (o_ctrl->bridge_intf.device_hdl == -1) {
+ 			CAM_ERR(CAM_OIS, "link hdl: %d device hdl: %d",
 --- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_core.c
 +++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_core.c
 @@ -1986,7 +1986,7 @@

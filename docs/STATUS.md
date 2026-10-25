@@ -2,30 +2,46 @@
 
 **English** | [简体中文](zh-CN/STATUS.md)
 
-Recorded on October 25, 2026. Build numbers below refer to development runs.
+Recorded on October 25, 2026. Build numbers refer to development runs.
 
-## build36 — installed baseline
+## build43 — installed source snapshot
 
-- Android 17 / SDK 37 / Evolution X 12.3, incremental `1792906981`.
-- Upgraded from the final Android 16 build while preserving data. All 34 payload partitions and postinstall checks passed.
-- Booted successfully. The device owner reported that most core functions worked. Existing user apps and the data marker were preserved, and KernelSU `su uid=0` was verified.
-- Global SELinux mode is Permissive. Android 17 Enforcing validation remains pending.
-- OTA SHA256: `9edbe1b9ab25ae2c00f6fbb7386a39d5e542d56b14f11f141be274432490db03`.
+- Android 17 / SDK 37 / Evolution X 12.3, incremental `1792926429`.
+- Six build jobs, existing 25G/27G memory guards and Full LTO. All 53 pinned source inputs and all 34 actual OTA payload partitions passed verification.
+- Installed from build41 with data preserved. Installer hashes matched all 34 partitions; seven target boot images were read back. All 24 preinstall user packages and the data marker remained present.
+- Global **Permissive**, verified KernelSU v3.3.1 LKM root, AVB root flags=3, preserved TWRP and kernel 5.15.211. Android 17 Enforcing runtime acceptance remains pending.
+- Actual policy SHA256: `e328e8bd9cf832d5b261b6fc319d0866e121215efae71dc72e4e119274483276`; declared permissive domains: `[]`. Global Permissive mode is distinct from per-domain policy declarations.
+- OTA SHA256: `8b87bbcbdc5b72c771080c1047f83bf6317144401420b8209a3586c5f1ed965a`.
 
-## build37 — current source snapshot, not installed
+## OIS lifecycle repairs in build43
 
-- Incremental `1792914428`. The full build, 50 pinned source inputs, nine changed vendor outputs, and all 34 actual payload partitions passed verification.
-- Added performance HAL access to the actual WALT policy label, removed unsupported rootTG hint entries, and created the kswapd cpuset with kernel-thread label filtering for task assignment.
-- Removed absent ptt / boot_slpi startup entries while retaining active DSP and sensor configuration.
-- Haptics changes return unsupported for missing primitives, treat NOOP as delay only, map THUD to its matching ordinary waveform, and stop advertising composition when four required calibrated primitive waveforms are absent. The owner did not report an ordinary vibration fault; an improvement in everyday haptics has not been demonstrated.
-- Fifteen independent new-library checks and six isolated HAL-method checks passed. Temporary kswapd assignment tests were restored afterward. The running HAL was not replaced.
-- Camera drivers were unchanged. Existing evidence does not establish a camera defect; targeted lens-switching and shutdown validation remains pending.
-- Retains global Permissive mode, KernelSU v3.3.1 LKM, AVB root flags=3, the preserved TWRP image, and kernel 5.15.211.
-- Actual policy SHA256: `e328e8bd9cf832d5b261b6fc319d0866e121215efae71dc72e4e119274483276`; declared permissive domains: `[]`.
-- OTA SHA256: `d6d2f11d29315cd751a86fcbfad1fdce6082b7b4bf12d7836a1d23d5f335bf5b`.
-- **This build has not been installed.** Validation of the new HAL in the installed ROM, overall runtime behavior, and Enforcing mode remains pending.
-- Six depmod metadata warnings and a Ninja restat warning are unchanged from build36.
+- A fresh build40 trace reproduced 14 request-ID-zero rejections after queue flush. The frame-number guard now excludes immediate request zero; all original checks for nonzero stale frames remain. Eight C predicate checks passed before driver compilation.
+- Normal device release now deinitializes a completed lens-parking worker after the power-down decision. This prevents stale STOP/exit state from carrying into the next acquisition. Existing thread joining and power ownership checks are retained; no register tables or firmware were changed.
+- The rebuilt camera module was verified in the actual OTA and on the phone: `ea88ece9db5674f8d657ca3202d914a86db52264d4c2b620559cf1eb912f809b`. The kernel Image remains unchanged.
+- 3 consecutive camera open/close cycles passed with active/released clients and a stable provider. Fresh OIS traces showed no request-zero rejection, wrong-state parking or OIS packet-parse failure in those cycles. Temporary OIS logging and USB-awake settings were restored.
+- Functional camera testing on build43 is assigned to the owner. Photo/video capture, telephoto switching and normal-use behavior remain pending manual feedback. Automated capture attempts are not accepted as complete coverage; photos and phone logs stay private.
+- These checks do not establish stabilization quality, all camera modes, or long-duration reliability.
 
-## Android 16 reference
+## Thermal startup repair in build43
 
-The final Android 16 build, incremental `1792575161`, ran in Enforcing mode and had no declared permissive domains in its final policy. The nine permissive domains seen during early Android 17 migration were an intermediate migration state.
+- Removed the boot-complete wait/write for an attribute that the current thermal driver does not export. The earlier init log showed a 5002 ms timeout for that path.
+- The installed init script and fresh boot log were checked. The sconfig action is retained and both mi_thermald and vendor.thermal-hal remain running. Kernel thermal controls were unchanged.
+
+## Earlier repairs retained and checked
+
+- Exact vendor labels for the Bluetooth offload capability and eight OEM radio properties were verified on the device; their captured property-write denials no longer appeared. Existing domain permissions cover them; no allow rules were added for these property repairs. Bluetooth codec configuration was retained; headset playback is not tested.
+- WALT performance access, unsupported rootTG hints, kswapd cpuset setup and obsolete ptt/boot_slpi startup entries were corrected in build37. Nine installed outputs still match the audited OTA and their earlier startup errors were absent.
+- Haptic primitives without calibrated data return unsupported, NOOP is delay only and THUD uses its corresponding ordinary waveform. Composition stays unadvertised because four mandatory calibrated waveforms are missing. Ordinary vibration was reported working by the owner; no improvement to everyday haptics is claimed.
+
+## Tests on earlier builds
+
+- Build37: rear 0.5x / 1x / 3.2x / 5x and front photos were captured and saved, with EXIF focal-length checks. A rear 1080p video was recorded and saved. This is basic capture/save coverage, not image-quality acceptance.
+- All six reapplyDisplayModes regressions passed on the phone using the build39 test binary, SHA256 `2b9a1580e5ae5d00d862314d00636dab374a3e03fced53434b594139e38fdc90`. The corrections concerned Android 17 test assumptions; production SurfaceFlinger was unchanged by those test corrections.
+
+## Remaining work
+
+- Android 17 Enforcing runtime acceptance, Bluetooth headset playback, complete haptic composition and broader hardware/long-duration testing remain open.
+- Other AVCs need individual cause review. Captured records include optional lookups, third-party probes, secure-DSP fallback probes and diagnostics; raw counts are not independent bug counts. No blanket allow rules were generated.
+- Full upstream identity of the restored kernel/module trees remains unproven; pinned file and patch hashes do not replace that provenance check.
+
+The final Android 16 build, incremental `1792575161`, ran Enforcing with no declared permissive domains. The nine domains seen early in Android 17 migration were an intermediate migration state.

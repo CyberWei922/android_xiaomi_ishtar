@@ -13,7 +13,7 @@
   "integration_idempotence": true,
   "conflict_refuses_before_writes": true,
   "actual_build_source_readonly_check": "identical_no_changes_needed",
-  "pinned_build37_files_covered": 50,
+  "pinned_build43_files_covered": 53,
   "phone_accessed": false,
   "actual_source_modified": false,
   "rom_rebuilt": false

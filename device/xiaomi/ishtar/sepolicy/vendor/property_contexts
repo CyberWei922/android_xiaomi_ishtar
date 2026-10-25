@@ -20,3 +20,10 @@ vendor.sys.thermal.bcl.boot_completed u:object_r:vendor_thermal_normal_prop:s0 e
 vendor.miui.vcamera.state u:object_r:vendor_camera_prop:s0 exact string
 # Radio-owned OEM serial publication from libxiaomi_qcril; no generic set.
 ro.vendor.oem.sno u:object_r:vendor_radio_prop:s0 exact string
+ro.vendor.oem.psno u:object_r:vendor_radio_prop:s0 exact string
+ro.vendor.oem.imei u:object_r:vendor_radio_prop:s0 exact string
+ro.vendor.oem.imei1 u:object_r:vendor_radio_prop:s0 exact string
+ro.vendor.oem.imei2 u:object_r:vendor_radio_prop:s0 exact string
+ro.vendor.oem.meid u:object_r:vendor_radio_prop:s0 exact string
+ro.vendor.oem.ctacode u:object_r:vendor_radio_prop:s0 exact string
+persist.vendor.oem.cta_code u:object_r:vendor_radio_prop:s0 exact string

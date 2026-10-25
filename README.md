@@ -21,7 +21,7 @@ The current configuration targets **Evolution X 12.3**. The hardware configurati
 
 ## Status
 
-**Work in progress.** An earlier Android 17 build boots on the device, with core functionality reported working. The current source snapshot has passed a full OTA build and payload verification; device testing of this revision is pending.
+**Work in progress.** The current Android 17 source snapshot has been built and installed with data preserved and root verified. Repeated camera open/close tests passed after OIS lifecycle repairs. Functional camera acceptance of this revision is assigned to the owner and remains pending. Basic photo/video capture and six SurfaceFlinger regressions passed on an earlier build. SELinux remains Permissive; see [Validation status](docs/STATUS.md) for test scopes and remaining work.
 
 The current development configuration uses **Permissive SELinux**, disabled AVB verification, KernelSU v3.3.1 LKM, and prebuilt TWRP. Detailed results and remaining validation are documented in [Status](docs/STATUS.md).
 

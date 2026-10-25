@@ -21,7 +21,7 @@
 
 ## 当前状态
 
-**开发中。** 此前的 Android 17 构建已在设备上正常开机，机主反馈基础功能正常。当前源码快照已通过完整 OTA 构建和实际 payload 核验，本版的实机验证尚未完成。
+**开发中。** 当前 Android 17 源码快照已编译并保留数据刷入，root 已核验；OIS 生命周期修复后的连续开关相机测试已通过。本版相机功能交由机主人工验收，尚待反馈；此前版本已通过基础拍照、录像和六项 SurfaceFlinger 回归。当前仍为 Permissive，具体验收范围及剩余工作见[验证状态](docs/zh-CN/STATUS.md)。
 
 当前开发配置使用 **SELinux Permissive**、关闭 AVB 验证、KernelSU v3.3.1 LKM 和预制 TWRP。详细结果及待验证项目见[验证状态](docs/zh-CN/STATUS.md)。
 

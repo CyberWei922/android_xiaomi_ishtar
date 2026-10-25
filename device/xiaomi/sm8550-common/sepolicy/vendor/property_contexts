@@ -1,3 +1,8 @@
+# Bluetooth
+# Keep the codec capability on the vendor property label rather than the
+# broader system_ext persist.vendor.bt.a2dp prefix.
+persist.vendor.bt.a2dp_offload_cap u:object_r:vendor_bluetooth_prop:s0 exact string
+
 # Camera
 persist.vendor.EnableP3ColorSpace               u:object_r:vendor_camera_p3enable_prop:s0
 vendor.camera.sensor.                           u:object_r:vendor_camera_sensor_prop:s0
