@@ -1,0 +1,18 @@
+# Dedicated domain for /odm/bin/fidoca.
+type vendor_mfidoca, domain;
+type vendor_mfidoca_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_mfidoca)
+hal_server_domain(vendor_mfidoca, hal_xiaomi_mfidoca)
+hwbinder_use(vendor_mfidoca)
+get_prop(vendor_mfidoca, hwservicemanager_prop)
+allow vendor_mfidoca hidl_manager_hwservice:hwservice_manager find;
+
+# Startup AVCs identify smcinvoke INVOKE_REQ 0x9801 / SERVER_REQ 0x9803
+# and DMA_HEAP_IOCTL_ALLOC 0x4800. Keep access scoped to this daemon.
+allow vendor_mfidoca tee_device:chr_file { getattr open read write ioctl };
+allowxperm vendor_mfidoca tee_device:chr_file ioctl { 0x9801 0x9803 };
+allow vendor_mfidoca { vendor_dmabuf_qseecom_heap_device vendor_dmabuf_qseecom_ta_heap_device }:chr_file { open read ioctl };
+allowxperm vendor_mfidoca { vendor_dmabuf_qseecom_heap_device vendor_dmabuf_qseecom_ta_heap_device }:chr_file ioctl { 0x4800 };
+
+# Publish the existing FIDO payment capability property.
+set_prop(vendor_mfidoca, vendor_payment_security_prop)

@@ -1,0 +1,26 @@
+// Exact accepted legacy shim, selected only by the ishtar camera product.
+// Global scope lets Soong pair this prebuilt with its existing platform source module.
+soong_config_module_type {
+    name: "ishtar_camera_hidltransport_prebuilt",
+    module_type: "cc_prebuilt_library_shared",
+    config_namespace: "ishtar_camera",
+    bool_variables: ["accepted_hidltransport"],
+    properties: ["enabled", "prefer"],
+}
+
+ishtar_camera_hidltransport_prebuilt {
+    name: "libhidltransport",
+    owner: "xiaomi",
+    srcs: ["//vendor/xiaomi/ishtar-camera:accepted_libhidltransport_blob"],
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libc++", "libc", "libm", "libdl"],
+    soong_config_variables: {
+        accepted_hidltransport: {
+            prefer: true,
+            conditions_default: { enabled: false },
+        },
+    },
+}

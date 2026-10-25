@@ -1,0 +1,7 @@
+# recovery sysfs is vendor_sysfs_ssr_toggle; vendor_init only has vendor_sysfs_ssr.
+allow vendor_init vendor_sysfs_ssr_toggle:file w_file_perms;
+
+# persist.vendor.ssr.* is vendor_ssr_prop. odm.prop already sets
+# restart_level=ALL_ENABLE, but vendor_init cannot apply it without this, so
+# vendor.ssr_setup never starts.
+set_prop(vendor_init, vendor_ssr_prop);

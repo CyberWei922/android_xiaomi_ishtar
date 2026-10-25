@@ -1,0 +1,11 @@
+// Copyright (C) 2026 CyberWei922
+// SPDX-License-Identifier: Apache-2.0
+
+android_app {
+    name: "IshtarCameraDefaults",
+    srcs: ["src/**/*.java"],
+    certificate: "platform",
+    platform_apis: true,
+    system_ext_specific: true,
+    optimize: { enabled: false },
+}

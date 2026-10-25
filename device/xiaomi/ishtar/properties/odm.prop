@@ -1,0 +1,19 @@
+# Bluetooth
+bluetooth.device.default_name=Xiaomi 13 Ultra
+
+# Display
+vendor.display.disable_3d_adaptive_tm=0
+persist.sys.miui_resolution=1440x3200
+
+# Fingerprint
+persist.vendor.sys.fp.fod.location.X_Y=720,2541
+persist.vendor.sys.fp.fod.size.width_height=246,246
+
+# USB
+vendor.usb.product_string=Xiaomi 13 Ultra
+
+# NFC
+ro.hardware.nfc=ST_NFC
+ro.vendor.nfc.repair=1
+ro.vendor.nfc.dispatch_optim=1
+ro.vendor.nfc.wallet_fusion=1

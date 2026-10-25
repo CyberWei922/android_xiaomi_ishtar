@@ -1,0 +1,20 @@
+# Ishtar ToF interface: the current stmvl53l5_ioctl_defs.h defines command
+# group 'p', functions 0x01..0x0b. Restrict to this node and its documented ABI.
+allow hal_camera_default vendor_stmvl53l5_device:chr_file { getattr open read write ioctl };
+allowxperm hal_camera_default vendor_stmvl53l5_device:chr_file ioctl { 0x7001-0x700b };
+
+# The KGSL devfreq link is a lnk_file; the common policy already permits
+# reading its file target.
+allow hal_camera_default vendor_sysfs_kgsl:lnk_file read;
+
+# The shipped camera provider implements the Xiaomi QuickCamera HAL itself.
+# Use the server attribute so the existing registration/neverallow rules agree.
+hal_server_domain(hal_camera_default, hal_quickcamera)
+
+# AON is registered through the framework Binder service manager. Label its
+# exact instance and confine registration to the actual camera provider.
+add_service(hal_camera_default, vendor_aon_camera_service)
+
+# The shipped camera HAL calls the registered Qualcomm QSPM HIDL service.
+# Keep the existing client discovery, Binder callbacks and fd-use contract.
+hal_client_domain(hal_camera_default, vendor_hal_qspmhal)

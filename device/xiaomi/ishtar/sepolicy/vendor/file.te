@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+
+# QRTR lookup output only; keep other vendor data outside this type.
+type vendor_qrtr_lookup_data_file, file_type, data_file_type;
+
+# Only /data/vendor/modem/diag_logs and descendants.
+type vendor_ishtar_diag_router_data_file, file_type, data_file_type;

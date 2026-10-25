@@ -1,0 +1,7 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# The shipped daemon initializes ownership/mode of its thermal data files.
+# File MAC rules remain unchanged; capabilities cannot be restricted by path.
+# Do not add DAC bypasses, generic file setattr or sysfs permissions.
+allow mi_thermald self:capability { chown fowner };

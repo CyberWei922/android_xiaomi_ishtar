@@ -1,0 +1,12 @@
+diff --git a/private/su.te b/private/su.te
+index 4d453f7..11cf88c 100644
+--- a/private/su.te
++++ b/private/su.te
+@@ -142,5 +142,5 @@ userdebug_or_eng(`
+   typeattribute su hal_wifi_supplicant_client;
+ ')
+ 
+-# su is also permissive to permit setenforce.
+-permissive su;
++# KernelSU uses its separate dynamically configured ksu domain.
++# Keep this debug domain subject to its existing SELinux rules.

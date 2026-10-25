@@ -1,0 +1,430 @@
+{
+  "snapshot": "Android17 build37",
+  "components": [
+    {
+      "path": "device/xiaomi/ishtar",
+      "kind": "complete_source_snapshot",
+      "head": "719e3e212764a33bb65a82e824594e30c562eb4e",
+      "files": 86,
+      "upstream_commits": [
+        "719e3e212764a33bb65a82e824594e30c562eb4e ishtar: prepare EvoX cnb product and require pinned recovery contract",
+        "6fe5b7db58f99a5ecaf7655d91d2732a882b2e2b ishtar: preserve accepted Android16 device fixes as migration baseline",
+        "8605aa5b3749f70b062fae1932db5c5e531a21b1 ishtar: Moving core 64 bit only makefile"
+      ],
+      "repository": "https://github.com/ishtar-aosp/android_device_xiaomi_ishtar.git"
+    },
+    {
+      "path": "device/xiaomi/sm8550-common",
+      "kind": "complete_source_snapshot",
+      "head": "9b424fbf62981955997c1e11edc9ffc4a26fcae5",
+      "files": 122,
+      "upstream_commits": [
+        "9b424fbf62981955997c1e11edc9ffc4a26fcae5 ishtar: retain firmware fallback cmdline for accepted prebuilt recovery",
+        "2f38687cb6a12fb7f53f098520b47ec39b724a72 sm8550-common: adapt lineage24 with accepted ishtar307 vendor compatibility",
+        "668c6497bb6885f193ff27a26af4c1e228f4098d Merge xiaomi-sm8550-devs lineage-24.0"
+      ],
+      "repository": "https://github.com/ishtar-aosp/android_device_xiaomi_sm8550-common.git"
+    },
+    {
+      "path": "kernel/xiaomi/sm8550-devicetrees",
+      "kind": "complete_source_snapshot",
+      "head": "84022f844cfc0a7807e103d672361d0a66a82d48",
+      "files": 5768,
+      "upstream_commits": [
+        "84022f844cfc0a7807e103d672361d0a66a82d48 ishtar: document unchanged accepted DTS baseline for Android17",
+        "459e035f746ca8110a72c984b123db8b3f08516e ishtar: Add xiaomi-touch panel-primary for screen-off FOD"
+      ],
+      "repository": "https://github.com/ishtar-aosp/android_kernel_xiaomi_sm8550-devicetrees.git"
+    }
+  ],
+  "patches": [
+    {
+      "path": "build/make",
+      "patch": "patches/build__make.patch",
+      "head": "75f33f854b8f750c46b5fd666457cea5c3636a65",
+      "sha256": "6b0cfd8e9e7b3326dabbf91e5dada8e19bf4ceb5dac5982c0c5941ad03781415",
+      "files": [
+        {
+          "path": "core/Makefile",
+          "before": "abed5ee779ce95c2eff1bbd2fd798c9ca0845e9b346331aed1e94769d9024607",
+          "after": "cc512debb621fb3c0855f10a5ef21f51571c6eef5dc49716e0320d7dd1ee3dd3"
+        },
+        {
+          "path": "tools/releasetools/add_img_to_target_files.py",
+          "before": "e4c96d2e7a5b1df1f20b3287d2056afdc530d45fc8f4b5b168b9482322ac43bf",
+          "after": "a4041e830d95377ad0bbef2d89bbfcb72e03179bc7796648c03267f20a733ceb"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "build/soong",
+      "patch": "patches/build__soong.patch",
+      "head": "6d3f832007e9040df8fbeb757b68228ae00e2e87",
+      "sha256": "29ef9c40b0ca65e1818486f6cac708b8c1118db272168d3fb2ad3740d2020250",
+      "files": [
+        {
+          "path": "ui/build/soong.go",
+          "before": "ab745182f4fba6ab4fbd1cea6fc4943b78e588b4187dfc735cd28826bbaa7027",
+          "after": "513ccba4481d1dc83ee915f717c8144075d4998f68230a734d3d22be510e8453"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "frameworks/base",
+      "patch": "patches/frameworks__base.patch",
+      "head": "7ce477290165bc3c0a6299464db471e11acd8c12",
+      "sha256": "bfb9c802078494d8f077696050ab33b24a9b7c7863863566d22ea7e4db7cfb4f",
+      "files": [
+        {
+          "path": "services/core/java/com/android/server/pm/AppsFilterBase.java",
+          "before": "e49a99d0cf7eb040469691acd72c87768a32f998247c925a5795fec5db36a216",
+          "after": "075a3e5f813bcd9c827f91cfa73d5a386f4d7fd73a1b81f7052421cf513cd557"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "frameworks/native",
+      "patch": "patches/frameworks__native.patch",
+      "head": "49687694bd18a4a2df972f89b6717dbfce610721",
+      "sha256": "58ba29358de397271a7ec80730605b346efe920a6dad7fd3fa1dd059d50c4d11",
+      "files": [
+        {
+          "path": "services/surfaceflinger/Scheduler/Scheduler.cpp",
+          "before": "3b5ff2080300b3731ef6bbbf2b56dba40352457e1244801a60efd356834416bd",
+          "after": "6565202d890abf33f23e09693b6e8fbbb87a03508c8911ca701c00505b7b2ff9"
+        },
+        {
+          "path": "services/surfaceflinger/Scheduler/Scheduler.h",
+          "before": "3b2cbba98a8b8c81662a75bcf7f3c0751b2c12c44886d65225d04bf25f1fc829",
+          "after": "9bff167d9930a7d62476a918f47479beb7c03c9ff0e1269bf1a66df300f20415"
+        },
+        {
+          "path": "services/surfaceflinger/SurfaceFlinger.cpp",
+          "before": "385680e69dcdd4f8e5e7a1f9db8fd68cf607e1f10cc307db7efd33b1c0297ea6",
+          "after": "c30fd2ebb5a2e0b30a9ad403d5a4923962cfd7895c382f1960b864c095562403"
+        },
+        {
+          "path": "services/surfaceflinger/tests/unittests/SchedulerTest.cpp",
+          "before": "c72ae2a1024879c299a07acb0521b2956f40559a9bbf86609dfb6530fa332c4e",
+          "after": "a53ae59af67872cd5168f7e6cfce49e816d870387f8a9a6eb3308f1db17d30ee"
+        },
+        {
+          "path": "services/surfaceflinger/tests/unittests/SurfaceFlinger_DisplayTransactionCommitTest.cpp",
+          "before": "4c62e445b6d229f273013153e4d04f3bc9337cfd40fdaee6782673dba9aa57b3",
+          "after": "7536cae61cb055abff73dadbabbe81bb3bfd5ed227579727a5d898afbc184e49"
+        },
+        {
+          "path": "services/surfaceflinger/tests/unittests/TestableSurfaceFlinger.h",
+          "before": "6c515df250aaa7c4026ba74f44d095ba9339c234b2ea85fe4c4359ce791c470d",
+          "after": "bef078868edc77223fb4948fb23cbab72d68381a488d7a255821738ef9c584bc"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "device/lineage/sepolicy",
+      "patch": "patches/device__lineage__sepolicy.patch",
+      "head": "8c6224ff52ec84d0207f35b7ea166ffe795dbfb1",
+      "sha256": "c2998aedac847b41af844d89999519ff99af9bf9f1d3c5da930554b8fbcd2cd8",
+      "files": [
+        {
+          "path": "common/private/backuptool.te",
+          "before": "6ca72b5bf144227a2fd7088013ca34fb4369f51148f2e22a584186b2854a4133",
+          "after": "12f479b6846b38b0befde18a331830216a9c975112a5e8addfe5a1bfd6b6a632"
+        },
+        {
+          "path": "common/private/file_contexts",
+          "before": "5460b11b4ee67ffdc3de3b705a2508b73a8df1edd753c98d66eee8fd549d1c30",
+          "after": "22733f94866a513a1275215a9672b6350afe88fd2274d872fa6ceead3e574e1d"
+        },
+        {
+          "path": "common/private/update_engine.te",
+          "before": "5ad5fbcd687e44ff7dc7d85654f7172f8c55280366d5c41ce8ca1a5e0245f33e",
+          "after": "e82e5272ade35628dcbd033fa20a0978a43d54b3b3bedf17f7ac2254cd8fcba6"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "device/qcom/sepolicy",
+      "patch": "patches/device__qcom__sepolicy.patch",
+      "head": "98d96fe9b1f4ea0b35a8bb5ce0ac2ae3bf766647",
+      "sha256": "53165f00e6582e03cedbd7026f98fa3af45bff9884dcc5613496f1fd6702de06",
+      "files": [
+        {
+          "path": "generic/private/qti-testscripts.te",
+          "before": "368f324c923e6c6b5922cfe7b8594d087d387172ed235dd4a73a592417a94a3a",
+          "after": "97a4a63c2bdfe02d31bfb4064d49eb0cdcf3194062c707ad17370c00f1f4d616"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "device/qcom/sepolicy_vndr/sm8550",
+      "patch": "patches/device__qcom__sepolicy_vndr__sm8550.patch",
+      "head": "3246964ec405f5c7f9c6aa15e7331b4de1c04bbc",
+      "sha256": "16969d11d8094dcaefa92f17ec41ff34f553fa4448724fd13a49748805152796",
+      "files": [
+        {
+          "path": "generic/vendor/test/pdt_app.te",
+          "before": "831fbf6cd45b9e52285bbcf54eaf69e7bd0357d3d9446b9be420e3e6aaf458c8",
+          "after": "d9a14cf7b944110c85dd416f0bca5b560bfeac98fe87c1e2030091fb8015ada8"
+        },
+        {
+          "path": "generic/vendor/test/vendor-qti-testscripts.te",
+          "before": "74fafb14bfa39af6b7fa326e9aa633f1741864ca43e3f6f25c9db24c72cb3050",
+          "after": "69e1aa34c77bac101c2ec518dc5186544106c0693a39ad3faa1b3957067ebe54"
+        },
+        {
+          "path": "qva/vendor/test/aoncameraservice_app.te",
+          "before": "b0593cfd2446db1c5931c18d6f72d66cd607b9c5da2e4a7797ef0f1b38f02b8d",
+          "after": "a7bfd71261709ad58ea94904114db2b7ce0e89285dbd273dc8c785377a29609f"
+        },
+        {
+          "path": "qva/vendor/test/hal_debugutils_default.te",
+          "before": "8cdf62f0ef66852ea41b56d931c26622b024f1c3737561f6cba59f921242f3dd",
+          "after": "52c5c28d6aa6dcbba2564f0acabc900954395c5a7ee8f6e05cc043dcdeeb17b4"
+        },
+        {
+          "path": "qva/vendor/test/vendor_cta_app.te",
+          "before": "5a184ddf2dc529a2261ddb9a4f724c90cb4562028f478d03bfbe1777c93787dd",
+          "after": "61f6beef94de38fdb7b581207a22d1b87c77382b8fd687b20224c2d76595f73b"
+        },
+        {
+          "path": "qva/vendor/test/vendor_logkit_app.te",
+          "before": "b6e313423e550630650c993b39b8b9a0d11f9d2327e8e087fac1480104742e49",
+          "after": "c197c670ce9113c8cb4ab8aaa1750b2db2bbc4f24dd435eaabc59b59ab17fce0"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "system/sepolicy",
+      "patch": "patches/system__sepolicy.patch",
+      "head": "c3997bf608b40a7217d0eb2257af887afa78617b",
+      "sha256": "0045d1bf956c5407131238a59affac4318c5ba9d3872a963b22a11122eb1df69",
+      "files": [
+        {
+          "path": "private/su.te",
+          "before": "cfeeaa3cc87b3fb8df82a958aa0984ce3adbf1922c39932235a43906afdc005e",
+          "after": "07aab340f5a9487ee8f2efdd67486d67fcb6194c849c86738bf25048f6c79efd"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "system/update_engine",
+      "patch": "patches/system__update_engine.patch",
+      "head": "1ef2cbc4f6f3fee374b9124b005da6eab13f8880",
+      "sha256": "99e7b453ab062ed6e5a7913d5887a33c85d6b1ffc440c7c3b234a48df36dd231",
+      "files": [
+        {
+          "path": "Android.bp",
+          "before": "9cc2d95b3b0d0be495a70a809aa73cbf220615e53dfabc307ba2b988d1150145",
+          "after": "52532839829228b3b50f0750bf136846f04560b66cfb881301b92ab0e658169f"
+        },
+        {
+          "path": "backuptool_broker/Android.bp",
+          "before": null,
+          "after": "2898f92f87203a36897b35401d657b717a45c6f9eb87f6c575a4e9a97e539f5b"
+        },
+        {
+          "path": "backuptool_broker/backuptool_staged.sh",
+          "before": null,
+          "after": "0835b6701de36661a04e1f37a723002b861fb3bce4efbc9eef31c9076dc32bcb"
+        },
+        {
+          "path": "backuptool_broker/broker.cpp",
+          "before": null,
+          "after": "13eac290b1a6b458e447b3bfa2c1b97794fe17d4f37b1c764eb92b3c44b1844e"
+        },
+        {
+          "path": "backuptool_broker/broker.h",
+          "before": null,
+          "after": "078d0ce3ec730ef2876995925c5c38dcb1564c566c5192c0cfa1806d74d97825"
+        },
+        {
+          "path": "backuptool_broker/main.cpp",
+          "before": null,
+          "after": "427073d786c5fb85587d47e3cc461053cb4fe036efdd255d40ceb09b973966b0"
+        },
+        {
+          "path": "backuptool_broker/worker.cpp",
+          "before": null,
+          "after": "59a99e791dfb872d82c1088a66894b65e123225da6176fab715c2bb596b416a3"
+        },
+        {
+          "path": "backuptool_broker/worker.h",
+          "before": null,
+          "after": "ef36782b9d56fc1661695c7e85560a693337c928d3cf9bb73e48b35f23785c2f"
+        },
+        {
+          "path": "backuptool_store/Android.bp",
+          "before": null,
+          "after": "7419dc862e8de4ea33d7b01a3b732475a5895d897b0f9d13535fe655b4d7a57a"
+        },
+        {
+          "path": "backuptool_store/COPYING",
+          "before": null,
+          "after": "f6b78c087c3ebdf0f3c13415070dd480a3f35d8fc76f3d02180a407c1c812f79"
+        },
+        {
+          "path": "backuptool_store/io.cpp",
+          "before": null,
+          "after": "1e8ba94a74db4271f1f2b4adf78b456d2ca0c2ace1a600d5f0476038e50d257c"
+        },
+        {
+          "path": "backuptool_store/main.cpp",
+          "before": null,
+          "after": "4b6b1c9d14bf5f5cfae5035d0e123ef5ec291ca704ac571614e04e13c5826e61"
+        },
+        {
+          "path": "backuptool_store/offline.cpp",
+          "before": null,
+          "after": "05bb8d346eceafde2bc30ebe33543a9f17d827ddcdce761ae364ba40951f1194"
+        },
+        {
+          "path": "backuptool_store/store.h",
+          "before": null,
+          "after": "e02d5a9485da4fc5cb9c4291bdb173137a573c5bef479e46b732f681b558b340"
+        },
+        {
+          "path": "payload_consumer/postinstall_runner_action.cc",
+          "before": "4045be4c4c5e4ef24cb110ebe964c99ada8993df1962e006479c3bc07e0b9e6e",
+          "after": "255c7effc2dfeb9ec4d0699e2376195d2e64a99badf00dd03c297db59f0cc1f6"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "vendor/lineage",
+      "patch": "patches/vendor__lineage.patch",
+      "head": "3f7c545720e61b85a0e707393dc015807da32b80",
+      "sha256": "ffa1a0bf3431f451ac764b95e4fa86d5a3ce245990d9382726d89a867d2c372d",
+      "files": [
+        {
+          "path": "prebuilt/common/bin/50-lineage.sh",
+          "before": "5b57f695f7c9bc54874e787d2e8594f496ace6bad14aefd8bf3e452c34b57538",
+          "after": "362fbbea03f91f8106bc19ef36cf5602b7a0a8b1190fa37f2495026fd3a49ab1"
+        },
+        {
+          "path": "prebuilt/common/bin/backuptool_ab.functions",
+          "before": "bb80d560491be77776e118c4137e3d033f3006e0364db7077550d29f4cd2a2c6",
+          "after": "7096c4224709877eec19551ebe8a47e106961e0c9dd303f21d64e2cd34cca91f"
+        },
+        {
+          "path": "prebuilt/common/bin/backuptool_ab.sh",
+          "before": "be20061c9b0f0baf8c2f92073789ec8cef1383173fc273ca1517cc10c4242cd8",
+          "after": "7613926de078be3a4f2a2790647f345e962d9129f556fa5a5ccafaf88dfdc834"
+        },
+        {
+          "path": "prebuilt/common/bin/backuptool_postinstall.sh",
+          "before": "a4e71eab3b45878bcf4d384262d79bb8cb6bc67ee61fcf6706996b736c3d0e8d",
+          "after": "c2d1e629690837997eba4e71692b9fea2149c6a5a0e4244cbe54273bfd1868dc"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": true
+    },
+    {
+      "path": "hardware/xiaomi",
+      "patch": "patches/hardware__xiaomi.patch",
+      "head": "7dd87795288bf6713795f112056b1bf549355c81",
+      "sha256": "06141d5928fef8bdb57a5652064912de5610734f8f8ff80cca54b85ef6356005",
+      "files": [
+        {
+          "path": "vibrator/effect/effect.cpp",
+          "before": "fd3b53345caec934880ae9db3320d3d6eb91b5087b58a0ad4291a9691f616e40",
+          "after": "2c0a82434970709573ee4d35f14e98379456c60ce37bf1b19d1b12c692febb46"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": false
+    },
+    {
+      "path": "vendor/qcom/opensource/vibrator",
+      "patch": "patches/vendor__qcom__opensource__vibrator.patch",
+      "head": "97d88ab231d84ba0b5549e6d6148522d6d73ee24",
+      "sha256": "bcfad3ef96871654df2a5e80474f0a130a242f3ed12b0a82051c1ed39eadd5bd",
+      "files": [
+        {
+          "path": "aidl/VibratorOL/Vibrator.cpp",
+          "before": "717dee67c83b9fed312f048d6d3c37f9bb48f7d3d2860d55ea59967fd9b07280",
+          "after": "530881b0409b9eb93b0c77b18d33b8de8ae3a233b0d0ff4440af8c66c5e34d9c"
+        }
+      ],
+      "validation": "compiled_and_payload_verified_build37",
+      "device_tested": false
+    },
+    {
+      "path": "kernel/xiaomi/sm8550",
+      "patch": "patches/kernel.patch",
+      "head": "34eaaccbb3d71edb8e03eb903d113e0e105b6237",
+      "repository": "https://github.com/ishtar-aosp/android_kernel_xiaomi_sm8550.git",
+      "sha256": "0a8a008cbcaa16b1dbd50b898efc9f9e14be1e5ea22833233be1810254d5fa38",
+      "files": [
+        {
+          "path": "arch/arm64/configs/vendor/ishtar_GKI.config",
+          "before": "23af3bd43c9989b5385f315ff66bfb1cb9c4b841b68b79f4141f1be6544910d6",
+          "after": "9db251ee7989adfb7a7d0100cbbfa7ff9b524f24dedbd20b1f54372bc48039d1"
+        }
+      ],
+      "provenance": "archive_restore_not_git_checkout",
+      "full_upstream_tree_identity_verified": false
+    },
+    {
+      "path": "kernel/xiaomi/sm8550-modules",
+      "patch": "patches/kernel-modules.patch",
+      "head": "cf984f86bcfc795190429a7c094fe6bbde5f7b02",
+      "repository": "https://github.com/ishtar-aosp/android_kernel_xiaomi_sm8550-modules.git",
+      "sha256": "29d91952e44ae59fe100c408cc56005ae287be9dda159f167a10bec82a6e6863",
+      "files": [
+        {
+          "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_eeprom/cam_eeprom_core.c",
+          "before": "430aee9984011b708894524d9d5810fe36f7cad9cad9013aac60e7c7f011acf8",
+          "after": "a69d8717f3b6d1d000976b1a3d93bf08eedcb591ee83a2ccfb1c6acc85efbc27"
+        },
+        {
+          "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_ois/cam_ois_core.c",
+          "before": "103b0e1a02c0fa8fa2c2f53a5b1a4cff1fafbb12e30104171a999da3bbc14410",
+          "after": "7ac78601034479adb2ea637bd7e1d5bd34dac2367e5ab9f55b8dc01c33bd2a00"
+        },
+        {
+          "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_core.c",
+          "before": "78871e1033ac0d0b255df24f3f8abe4bd3847af4960db36962f2b1569bc6fa52",
+          "after": "acda1bea4e671df4e9ab4b8cdb5a458947d262dfe5b888939f7f4c7a764983b0"
+        },
+        {
+          "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_dev.h",
+          "before": "b19e7a18a7778fbe46f2f6c130e0bd8788db28132a178db44d3fc9d142ea631a",
+          "after": "9ad07443cc398397b5be580474eacc5fd8c59f769dfedc96d2684a8ff36599de"
+        },
+        {
+          "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_soc.c",
+          "before": "480cad301b1e097c151a07fb25a4473cd7172e790df11186ff8d9a32a9a53f02",
+          "after": "85a37dbdd5e71474e5adb05fcf9d62a4a4e41b731db58d90a626f56f24b6d6a3"
+        },
+        {
+          "path": "qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_sensor/cam_sensor_core.c",
+          "before": "d741564db875c3f8473438938573a4ee24adca1c97c637003da34ea62130888e",
+          "after": "53e4e8de427cb490564e5fe3406ab6fca612db68c142b849ce47b8da3d776a9e"
+        }
+      ],
+      "provenance": "archive_restore_not_git_checkout",
+      "full_upstream_tree_identity_verified": false
+    }
+  ],
+  "full_kernel_upstream_identity_verified": false
+}

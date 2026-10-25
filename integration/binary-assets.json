@@ -1,0 +1,25 @@
+{
+  "assets": [
+    {
+      "archive": "assets/prebuilt-recovery.img.gz",
+      "destination": "device/xiaomi/ishtar/recovery/prebuilt-recovery.img",
+      "bytes": 104857600,
+      "sha256": "c39e0236d4aac787e59827f835d58ec3af127357bcd576fb2b66da72c2c4057e",
+      "compressed_bytes": 70761548,
+      "compressed_sha256": "e47aa16b930424a68c619f1f38a49b9f1e3b36b81054168569a0cfcb1d1e072d",
+      "scope": "matched build36/37 input; not a universal image for other ROMs"
+    },
+    {
+      "archive": "assets/init_boot-KernelSU-v3.3.1.img.gz",
+      "destination": "device/xiaomi/ishtar/root/init_boot-KernelSU-v3.3.1.img",
+      "bytes": 8388608,
+      "sha256": "d1188cf4dcf960b53a16a4fceabec1d70b887f165e2a557bdf20600f85654ddc",
+      "compressed_bytes": 1966540,
+      "compressed_sha256": "313bd302f79a1838f5b4e1bc163d95686f460a8854290445bdb909e8d76ffd3c",
+      "scope": "matched build36/37 input; not a universal image for other ROMs"
+    }
+  ],
+  "kernelsu_upstream": "https://github.com/tiann/KernelSU/releases/tag/v3.3.1",
+  "recovery_source_repository_identified": false,
+  "note": "Recovery is the preserved custom TWRP binary. This export does not provide its source project."
+}

@@ -1,0 +1,22 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# The camera provider implements Xiaomi IBGService. Only the MIUI app is its client.
+hal_client_domain(ishtar_miui_camera_app, vendor_hal_camerapostproc_xiaomi)
+hal_server_domain(hal_camera_default, vendor_hal_camerapostproc_xiaomi)
+
+# Reads observed in MIUI camera startup; neither property is writable by the app.
+get_prop(ishtar_miui_camera_app, vendor_camera_p3enable_prop)
+get_prop(ishtar_miui_camera_app, vendor_audio_prop)
+
+# Match the shipped QSPM HIDL client contract for this camera only.
+# The Qualcomm platform_app baseline already used this HAL client attribute.
+hal_client_domain(ishtar_miui_camera_app, vendor_hal_qspmhal)
+
+# The shipped FastRPC library has a DSP HAL fallback when direct device open
+# fails. Grant its standard client contract, keeping secure XDSP access denied.
+hal_client_domain(ishtar_miui_camera_app, vendor_hal_dspmanager)
+
+# CameraSetup reads the existing vendor-public sensor capability properties.
+# Only the camera provider remains responsible for writing these properties.
+get_prop(ishtar_miui_camera_app, vendor_camera_sensor_prop)

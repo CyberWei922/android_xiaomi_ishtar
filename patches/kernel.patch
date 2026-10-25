@@ -1,0 +1,11 @@
+--- a/arch/arm64/configs/vendor/ishtar_GKI.config
++++ b/arch/arm64/configs/vendor/ishtar_GKI.config
+@@ -43,4 +43,6 @@
+ # Xiaomi HWID
+ CONFIG_MI_HARDWARE_ID=m
+ 
+-# CONFIG_QCOM_WCD_USBSS_I2C is not set
+\ No newline at end of file
++# CONFIG_QCOM_WCD_USBSS_I2C is not set
++
++# Rootless release: no built-in root implementation.

@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: Apache-2.0
+
+# Preserve the closed service string ABI while narrowing property ownership.
+persist.vendor.sys.pay.widevine u:object_r:vendor_mtd_widevine_prop:s0 exact string
+vendor.sys.rpmb_state u:object_r:vendor_mtd_rpmb_prop:s0 exact string
+
+persist.vendor.sys.provision.status u:object_r:vendor_mtd_provision_status_prop:s0 exact string
+vendor.sys.feature_state u:object_r:vendor_mtd_feature_state_prop:s0 exact string
+
+# Exact libmt@1.3 output; do not relabel the persist.vendor.sys prefix.
+persist.vendor.sys.rkp.status u:object_r:vendor_mtd_rkp_status_prop:s0 exact string
+
+# Exact status output; keep the surrounding persist.vendor.sys prefix intact.
+persist.vendor.sys.attestation.status u:object_r:vendor_mtd_attestation_status_prop:s0 exact string
+
+# Boot status from mi_thermald; reuse its existing thermal property ownership.
+vendor.sys.thermal.bcl.boot_completed u:object_r:vendor_thermal_normal_prop:s0 exact string
+
+# Exact status output from the shipped virtual-camera helper in camera HAL.
+vendor.miui.vcamera.state u:object_r:vendor_camera_prop:s0 exact string
+# Radio-owned OEM serial publication from libxiaomi_qcril; no generic set.
+ro.vendor.oem.sno u:object_r:vendor_radio_prop:s0 exact string

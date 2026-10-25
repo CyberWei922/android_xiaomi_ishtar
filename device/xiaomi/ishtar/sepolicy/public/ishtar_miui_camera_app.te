@@ -1,0 +1,5 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# Export only this app's domain name to the product's vendor policy.
+type ishtar_miui_camera_app, domain;

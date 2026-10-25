@@ -1,0 +1,18 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# Preserve the existing enabled value through its framework property owner.
+bluetooth.auto_connect_profiles.enabled=true
+
+# Keep legacy framework configuration values, initialized by system init.
+# BAP server has no current AOSP consumer; preserve its existing value only.
+audio.sys.noisy.broadcast.delay=600
+bluetooth.profile.bap.unicast.server.enabled=true
+
+# Preserve two remaining legacy defaults through system initialization.
+audio.sys.offload.pstimeout.secs=3
+bluetooth.profile.tbs.server.enabled=true
+
+# Preserve legacy framework values under system initialization; no new vendor grants.
+bluetooth.profile.vc.server.enabled=true
+ro.mediaserver.64b.enable=true

@@ -1,0 +1,7 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# Goodix driver events use AF_NETLINK/SOCK_RAW, private protocol 25.
+# SELinux groups private protocols under netlink_socket; no network or
+# capability grant is added. These are the four observed socket operations.
+allow hal_fingerprint_default self:netlink_socket { create bind write read };

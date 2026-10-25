@@ -1,0 +1,13 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# The legacy system radio property is evaluated by core init.
+# Keep the shipped restart operations and vendor service identities unchanged.
+on property:persist.radio.restart_rild=1
+    stop vendor.qcrild
+    start vendor.qcrild
+on property:persist.radio.restart_rild=2
+    stop vendor.qcrild
+    stop vendor.qcrild2
+    start vendor.qcrild
+    start vendor.qcrild2

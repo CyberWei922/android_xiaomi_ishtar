@@ -1,0 +1,6 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# init.sm8550.rc configures vendor.qti.qcc.oper.mode=3 at boot.
+# Reuse its existing vendor-owned type; never grant generic property writes.
+set_prop(vendor_init, vendor_qcc_prop)

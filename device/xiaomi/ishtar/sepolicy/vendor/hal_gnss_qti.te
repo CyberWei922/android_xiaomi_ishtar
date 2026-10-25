@@ -1,0 +1,6 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# The shipped GNSS INS client reads the existing sensor property area.
+# This does not authorize changing sensor properties.
+get_prop(vendor_hal_gnss_qti, vendor_sensors_prop)

@@ -1,0 +1,7 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# The shipped startup path calls the registered Qualcomm QSPM HAL.
+# Use its existing HIDL client contract, including callbacks and fd passing.
+# No compositor, frame-rate, performance hint or HAL implementation is changed.
+hal_client_domain(surfaceflinger, vendor_hal_qspmhal)

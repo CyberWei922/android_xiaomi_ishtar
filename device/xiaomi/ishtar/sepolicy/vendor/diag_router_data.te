@@ -1,0 +1,9 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# diag-router checks, creates and writes the bootup FIFO (mkfifo + O_WRONLY).
+# Keep regular files and other vendor/modem data inaccessible.
+userdebug_or_eng(`
+    allow vendor_diag-router vendor_ishtar_diag_router_data_file:dir { search getattr write add_name };
+    allow vendor_diag-router vendor_ishtar_diag_router_data_file:fifo_file { create getattr open write };
+')

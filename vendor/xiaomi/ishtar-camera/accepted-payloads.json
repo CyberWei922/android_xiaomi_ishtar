@@ -1,0 +1,131 @@
+{
+  "camera_payloads": [
+    {
+      "device_target": "/odm/etc/camera/camxoverridesettings.txt",
+      "source_path": "vendor/xiaomi/ishtar/proprietary/odm/etc/camera/camxoverridesettings.txt",
+      "sha256": "c891376a9d9bc6b65c5253bb34570564791dd5db6526a307ffe83d97ce510724"
+    },
+    {
+      "device_target": "/odm/etc/camera/miSAT_params_2sat.json",
+      "source_path": "vendor/xiaomi/ishtar/proprietary/odm/etc/camera/miSAT_params_2sat.json",
+      "sha256": "0003cad4cf1c9d207f01914355ab8ff7cab192c05bbbc585fddcca5e1d52ee4f"
+    },
+    {
+      "device_target": "/odm/etc/camera/miSAT_params_4sat.json",
+      "source_path": "vendor/xiaomi/ishtar/proprietary/odm/etc/camera/miSAT_params_4sat.json",
+      "sha256": "f05d212d93b4734942458a2ee0cfc6a56e5139e2457fa335d908795ce465ac9d"
+    },
+    {
+      "device_target": "/odm/lib64/camera/com.qti.ois.ishtar_tele3x_bu24721_ois.so",
+      "source_path": "vendor/xiaomi/ishtar/proprietary/odm/lib64/camera/com.qti.ois.ishtar_tele3x_bu24721_ois.so",
+      "sha256": "26dd7bd5dcae59c374b30d77e35e1e60fcb4a22b3e89697e5d3cd41ca34989b7"
+    },
+    {
+      "device_target": "/odm/lib64/com.qualcomm.mcx.policy.mfl.so",
+      "source_path": "vendor/xiaomi/ishtar/proprietary/odm/lib64/com.qualcomm.mcx.policy.mfl.so",
+      "sha256": "b9daff9a4d26a4ccf3268b7648f5c7fc353fff09fa22cd1e51ed64193f27b071"
+    },
+    {
+      "device_target": "/odm/lib64/libmiSAT.so",
+      "source_path": "vendor/xiaomi/ishtar/proprietary/odm/lib64/libmiSAT.so",
+      "sha256": "79e2724520ccffb2413bc7e55eb6407c52e19d21354d2300445127cb58a05c7a"
+    },
+    {
+      "device_target": "/system/etc/default-permissions/miuicamera-permissions.xml",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/etc/default-permissions/miuicamera-permissions.xml",
+      "sha256": "95fc1793d62979e1fe4e417b989c7dc80d6c910512146ff5aff1dab3163fadf9"
+    },
+    {
+      "device_target": "/system/etc/permissions/privapp-permissions-miuicamera.xml",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/etc/permissions/privapp-permissions-miuicamera.xml",
+      "sha256": "cfd337db2c9635362913354ba4f0dcf1d05bce0913c18ee5cf143e3e5a140fc1"
+    },
+    {
+      "device_target": "/system/etc/sysconfig/miuicamera-hiddenapi-package-whitelist.xml",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/etc/sysconfig/miuicamera-hiddenapi-package-whitelist.xml",
+      "sha256": "09967b083b85c68836091042e60a54be0c30f55d7175b94f4d04f3f6a46ec877"
+    },
+    {
+      "device_target": "/system/lib64/libOpenCL.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libOpenCL.so",
+      "sha256": "808d0c3ae88e9d5db241082a2bfa130dd711b5266f5775a23365a2a54cbadcb3"
+    },
+    {
+      "device_target": "/system/lib64/libcamera_algoup_jni.xiaomi.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libcamera_algoup_jni.xiaomi.so",
+      "sha256": "ae329487ccd16b947a06c5e4ab74d55ffc528e460c32a03da7660b370334ffcc"
+    },
+    {
+      "device_target": "/system/lib64/libcamera_mianode_jni.xiaomi.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libcamera_mianode_jni.xiaomi.so",
+      "sha256": "a29cec35409a19cbe7f135d2ca1f4acde099053c70143da064e2f05b06666cf1"
+    },
+    {
+      "device_target": "/system/lib64/libcdsprpc.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libcdsprpc.so",
+      "sha256": "69ab29cad88e56cb4d8dc1552b08542053ef84f43e572e2e3c873b16ba9b729a"
+    },
+    {
+      "device_target": "/system/lib64/libhidltransport.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libhidltransport.so",
+      "sha256": "4e1f3cf6421cebfca5cdd30b9a5185949a6c8a19c396db7f343139dc41fb7906",
+      "build_module": "libhidltransport",
+      "build_source": "vendor/xiaomi/ishtar-camera-platform/Android.bp",
+      "integration": "device-selected prebuilt paired with platform module; exact accepted bytes; vendor/static platform variants retained"
+    },
+    {
+      "device_target": "/system/lib64/libmicampostproc_client.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libmicampostproc_client.so",
+      "sha256": "deeb8d47c3f4b135ccb6fb8c2fb479edb3672ddd6901b4d1417eb726c3073174"
+    },
+    {
+      "device_target": "/system/lib64/libopencl-camera.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libopencl-camera.so",
+      "sha256": "1307fd7db43d37427976241819756b1006533e02b0634cb5858766c1984c7c84"
+    },
+    {
+      "device_target": "/system/lib64/libvmmem.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/libvmmem.so",
+      "sha256": "796c71ea830a1f07aa76d22c7d06b3214ba8723b1e18213099820dda24dcc1a7"
+    },
+    {
+      "device_target": "/system/lib64/vendor.qti.hardware.dsp@1.0.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/vendor.qti.hardware.dsp@1.0.so",
+      "sha256": "05f40566029e08a243f51834c1497e37687897c8bbf40f8add6cf889ef8eb376"
+    },
+    {
+      "device_target": "/system/lib64/vendor.xiaomi.hardware.campostproc@1.0.so",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/lib64/vendor.xiaomi.hardware.campostproc@1.0.so",
+      "sha256": "1caf3d76f1cb446844423081ea8f73430e2d6ba2b41297a0fbc683184f8c08b6"
+    },
+    {
+      "device_target": "/system/priv-app/MiuiCamera/MiuiCamera.apk",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/system/priv-app/MiuiCamera/MiuiCamera.apk",
+      "sha256": "b7b2c4c77c4a4656e94569b918b208293f4d1a0d60900c0e805082770452f9ea"
+    },
+    {
+      "device_target": "/vendor/etc/camera/camxoverridesettings.txt",
+      "source_path": "vendor/xiaomi/ishtar-camera/proprietary/vendor/etc/camera/camxoverridesettings.txt",
+      "sha256": "c891376a9d9bc6b65c5253bb34570564791dd5db6526a307ffe83d97ce510724"
+    }
+  ],
+  "protected_hals": [
+    {
+      "path": "/odm/lib64/hw/camera.xiaomi.so",
+      "sha256": "de882fb0f453d58e56407792f800f1e5486229325a7c3bd753c13684a702fc10",
+      "policy": "Preserve adapted current ROM baseline; not replaced by original OTA version during this repair"
+    },
+    {
+      "path": "/odm/lib64/hw/camera.qcom.so",
+      "sha256": "8b960e8e7004af175770f03c5f11dd9ddb115703ae4376c76abeb24c9a7d9106",
+      "policy": "Preserve adapted current ROM baseline; not replaced by original OTA version during this repair"
+    },
+    {
+      "path": "/odm/bin/hw/vendor.qti.camera.provider-service_64",
+      "sha256": "8a327c0843bb62b2693a156362ee1157ce0ffc4807d71d86c2c09c9b39daf7a4",
+      "policy": "Preserve adapted current ROM baseline; not replaced by original OTA version during this repair"
+    }
+  ],
+  "kernel_source": "kernel/xiaomi/sm8550-modules/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_sensor/cam_sensor_core.c",
+  "kernel_source_sha256": "53e4e8de427cb490564e5fe3406ab6fca612db68c142b849ce47b8da3d776a9e"
+}

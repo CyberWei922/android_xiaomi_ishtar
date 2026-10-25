@@ -1,0 +1,6 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# Framework runtime reads the ROM version metadata owned by system_ext.
+# These are the existing ro.lineage.* keys; no property write is granted.
+get_prop(system_server, custom_version_prop)

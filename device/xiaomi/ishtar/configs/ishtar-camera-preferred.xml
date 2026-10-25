@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2026 CyberWei922; SPDX-License-Identifier: Apache-2.0 -->
+<preferred-activities>
+    <item name="com.android.camera/com.android.camera.AssistantCamera">
+        <filter>
+            <action name="android.media.action.STILL_IMAGE_CAMERA" />
+            <cat name="android.intent.category.DEFAULT" />
+        </filter>
+    </item>
+    <item name="com.android.camera/com.android.camera.Camera">
+        <filter>
+            <action name="android.media.action.STILL_IMAGE_CAMERA_SECURE" />
+            <cat name="android.intent.category.DEFAULT" />
+        </filter>
+    </item>
+    <item name="com.android.camera/com.android.camera.OneShotImageCapture">
+        <filter>
+            <action name="android.media.action.IMAGE_CAPTURE" />
+            <cat name="android.intent.category.DEFAULT" />
+        </filter>
+    </item>
+    <item name="com.android.camera/com.android.camera.OneShotCamera">
+        <filter>
+            <action name="android.media.action.IMAGE_CAPTURE_SECURE" />
+            <cat name="android.intent.category.DEFAULT" />
+        </filter>
+    </item>
+    <item name="com.android.camera/com.android.camera.VideoCamera">
+        <filter>
+            <action name="android.media.action.VIDEO_CAMERA" />
+            <cat name="android.intent.category.DEFAULT" />
+        </filter>
+    </item>
+    <item name="com.android.camera/com.android.camera.OneShotVideoCapture">
+        <filter>
+            <action name="android.media.action.VIDEO_CAPTURE" />
+            <cat name="android.intent.category.DEFAULT" />
+        </filter>
+    </item>
+</preferred-activities>

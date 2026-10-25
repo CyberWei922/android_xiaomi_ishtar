@@ -1,0 +1,246 @@
+diff --git a/core/Makefile b/core/Makefile
+index 2827850..458c698 100644
+--- a/core/Makefile
++++ b/core/Makefile
+@@ -287,6 +287,35 @@ endif
+ endif
+ endif
+ 
++ISHTAR_PREBUILT_RECOVERY_CONTRACT_VERSION := 1
++
++# A prebuilt recovery must be packaged as the same image, not regenerated from
++# the platform recovery ramdisk. Limit this path to dedicated A/B recoveries;
++# non-A/B tools need a source recovery fstab/tree and are not supported here.
++ifdef BOARD_PREBUILT_RECOVERYIMAGE
++ifneq ($(BUILDING_RECOVERY_IMAGE),true)
++$(error BOARD_PREBUILT_RECOVERYIMAGE requires BUILDING_RECOVERY_IMAGE)
++endif
++ifneq ($(AB_OTA_UPDATER),true)
++$(error BOARD_PREBUILT_RECOVERYIMAGE supports only A/B updates)
++endif
++ifeq ($(TARGET_OTA_ALLOW_NON_AB),true)
++$(error BOARD_PREBUILT_RECOVERYIMAGE does not support non-A/B updates)
++endif
++ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),$(PRODUCT_OUT)/recovery.img)
++$(error BOARD_PREBUILT_RECOVERYIMAGE requires a dedicated recovery partition)
++endif
++ifneq ($(strip $(BOARD_CUSTOM_BOOTIMG_MK)$(BOARD_CUSTOM_BOOTIMG)),)
++$(error BOARD_PREBUILT_RECOVERYIMAGE cannot be combined with custom boot images)
++endif
++ifneq ($(BOARD_AVB_ENABLE),true)
++$(error BOARD_PREBUILT_RECOVERYIMAGE requires AVB integrity verification)
++endif
++ifndef BOARD_PREBUILT_RECOVERYIMAGE_SHA256
++$(error BOARD_PREBUILT_RECOVERYIMAGE requires a pinned SHA256)
++endif
++endif
++
+ ifeq ($(BOARD_USES_PVMFWIMAGE),true)
+ INSTALLED_PVMFWIMAGE_TARGET := $(PRODUCT_OUT)/pvmfw.img
+ endif
+@@ -2422,6 +2451,22 @@ endef
+ INSTALLED_FILES_OUTSIDE_IMAGES := $(filter-out $(TARGET_RECOVERY_OUT)/%, $(INSTALLED_FILES_OUTSIDE_IMAGES))
+ ifdef BUILDING_RECOVERY_IMAGE
+ 
++ifdef BOARD_PREBUILT_RECOVERYIMAGE
++recoveryimage-deps := $(BOARD_PREBUILT_RECOVERYIMAGE) $(AVBTOOL) $(ACP)
++$(INSTALLED_RECOVERYIMAGE_TARGET): $(recoveryimage-deps)
++	@echo "Target pinned prebuilt recovery image: $@"
++	$(hide) echo "$(BOARD_PREBUILT_RECOVERYIMAGE_SHA256)  $(BOARD_PREBUILT_RECOVERYIMAGE)" | sha256sum -c -
++	$(hide) mkdir -p $(dir $@)
++	$(hide) $(ACP) $(BOARD_PREBUILT_RECOVERYIMAGE) $@
++	$(hide) $(AVBTOOL) verify_image --image $@
++	$(call assert-max-image-size,$@,$(BOARD_RECOVERYIMAGE_PARTITION_SIZE))
++
++$(call declare-1p-container,$(INSTALLED_RECOVERYIMAGE_TARGET),)
++$(call declare-container-license-deps,$(INSTALLED_RECOVERYIMAGE_TARGET),$(recoveryimage-deps),$(PRODUCT_OUT)/:/)
++UNMOUNTED_NOTICE_VENDOR_DEPS += $(INSTALLED_RECOVERYIMAGE_TARGET)
++RECOVERY_RESOURCE_ZIP :=
++else # BOARD_PREBUILT_RECOVERYIMAGE
++
+ INTERNAL_RECOVERYIMAGE_FILES := $(filter $(TARGET_RECOVERY_OUT)/%, \
+     $(ALL_DEFAULT_INSTALLED_MODULES))
+ INTERNAL_RECOVERYIMAGE_FILES += $(filter $(PRODUCT_OUT)/install/%, \
+@@ -2865,6 +2910,7 @@ recoveryimage-nodeps:
+ 	$(call build-recoveryimage-target, $(INSTALLED_RECOVERYIMAGE_TARGET), \
+ 	  $(if $(filter true, $(BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE)),, $(recovery_kernel)))
+ 
++endif # BOARD_PREBUILT_RECOVERYIMAGE
+ else # BUILDING_RECOVERY_IMAGE
+ RECOVERY_RESOURCE_ZIP :=
+ endif # BUILDING_RECOVERY_IMAGE
+@@ -5891,11 +5937,17 @@ else
+         build_ota_package := false
+       endif
+     endif # INSTALLED_BOOTIMAGE_TARGET == ""
++    # A validated dedicated A/B prebuilt recovery has no source ramdisk fstab.
++    # releasetools._FindAndLoadRecoveryFstab returns None for this A/B-only
++    # contract; its payload uses META/ab_partitions.txt instead. Keep the source
++    # recovery fstab prerequisite for every ordinary/non-A/B path.
++    ifndef BOARD_PREBUILT_RECOVERYIMAGE
+     ifeq ($(recovery_fstab),)
+       ifeq ($(filter $(TARGET_RECOVERY_ROOT_OUT)/system/etc/recovery.fstab,$(INTERNAL_RECOVERYIMAGE_FILES)),)
+         build_ota_package := false
+       endif
+     endif
++    endif # BOARD_PREBUILT_RECOVERYIMAGE not defined
+   endif # PRODUCT_BUILD_GENERIC_OTA_PACKAGE
+ 
+   # Set build_otatools_package, and allow opt-out below.
+@@ -6108,6 +6160,10 @@ $(INSTALLED_MISC_INFO_TARGET):
+ 	$(call pretty,"Target misc_info.txt: $@")
+ 	$(hide) echo "recovery_api_version=$(RECOVERY_API_VERSION)" >> $@
+ 	$(hide) echo "fstab_version=$(RECOVERY_FSTAB_VERSION)" >> $@
++ifdef BOARD_PREBUILT_RECOVERYIMAGE
++	$(hide) echo "prebuilt_recovery_image=true" >> $@
++	$(hide) echo "prebuilt_recovery_image_sha256=$(BOARD_PREBUILT_RECOVERYIMAGE_SHA256)" >> $@
++endif
+ ifdef BOARD_FLASH_BLOCK_SIZE
+ 	$(hide) echo "blocksize=$(BOARD_FLASH_BLOCK_SIZE)" >> $@
+ endif
+@@ -6609,7 +6665,9 @@ ifdef BUILDING_RECOVERY_IMAGE
+   else
+     $(BUILT_TARGET_FILES_DIR): $(INSTALLED_RECOVERYIMAGE_TARGET)
+   endif
++  ifndef BOARD_PREBUILT_RECOVERYIMAGE
+   $(BUILT_TARGET_FILES_DIR): $(INTERNAL_RECOVERYIMAGE_FILES)
++  endif
+ endif
+ 
+ # Conditionally depend on the image files if the image is being built so the
+@@ -6757,6 +6815,7 @@ $(BUILT_TARGET_FILES_DIR): \
+ 	$(hide) rm -rf $@ $@.list $(zip_root)
+ 	$(hide) mkdir -p $(dir $@) $(zip_root)
+ ifneq (,$(INSTALLED_RECOVERYIMAGE_TARGET)$(filter true,$(BOARD_USES_RECOVERY_AS_BOOT))$(filter true,$(BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT)))
++ifndef BOARD_PREBUILT_RECOVERYIMAGE
+ 	@# Components of the recovery image
+ 	$(hide) mkdir -p $(zip_root)/$(PRIVATE_RECOVERY_OUT)
+ # Exclude recovery files in the default vendor ramdisk if including a standalone
+@@ -6804,6 +6863,7 @@ ifdef BOARD_KERNEL_PAGESIZE
+ 	echo "$(BOARD_KERNEL_PAGESIZE)" > $(zip_root)/$(PRIVATE_RECOVERY_OUT)/pagesize
+ endif
+ endif # not (BUILDING_VENDOR_BOOT_IMAGE and BOARD_USES_RECOVERY_AS_BOOT)
++endif # BOARD_PREBUILT_RECOVERYIMAGE not defined
+ endif # INSTALLED_RECOVERYIMAGE_TARGET defined or BOARD_USES_RECOVERY_AS_BOOT is true
+ 	@# Components of the boot image
+ 	$(hide) mkdir -p $(zip_root)/BOOT
+@@ -6887,6 +6947,12 @@ ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
+ 	$(hide) $(ACP) $(INSTALLED_RECOVERYIMAGE_TARGET) $(zip_root)/BOOTABLE_IMAGES/
+ endif
+ endif
++ifdef BOARD_PREBUILT_RECOVERYIMAGE
++	@# common.GetBootableImage prefers BOOTABLE_IMAGES, preserving this exact
++	@# verified image instead of rebuilding an unrelated platform recovery.
++	$(hide) mkdir -p $(zip_root)/BOOTABLE_IMAGES
++	$(hide) $(ACP) $(INSTALLED_RECOVERYIMAGE_TARGET) $(zip_root)/BOOTABLE_IMAGES/
++endif
+ ifdef BUILDING_SYSTEM_IMAGE
+ 	@# Contents of the system image
+ ifneq ($(SOONG_DEFINED_SYSTEM_IMAGE_PATH),)
+@@ -7214,8 +7280,10 @@ ifneq ($(INSTALLED_VENDOR_BOOTIMAGE_TARGET),)
+ 	$(call fs_config,$(zip_root)/VENDOR_BOOT/RAMDISK,) > $(zip_root)/META/vendor_boot_filesystem_config.txt
+ endif
+ ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
++ifndef BOARD_PREBUILT_RECOVERYIMAGE
+ 	$(hide) $(call fs_config,$(zip_root)/RECOVERY/RAMDISK,) > $(zip_root)/META/recovery_filesystem_config.txt
+ endif
++endif
+ ifdef BUILDING_SYSTEM_OTHER_IMAGE
+ 	$(hide) $(call copy-image-and-generate-map,$(BUILT_SYSTEMOTHERIMAGE_TARGET),$(zip_root)/IMAGES)
+ 	$(hide) $(call fs_config,$(zip_root)/SYSTEM_OTHER,system/) > $(zip_root)/META/system_other_filesystem_config.txt
+diff --git a/tools/releasetools/add_img_to_target_files.py b/tools/releasetools/add_img_to_target_files.py
+index a52a163..248101b 100644
+--- a/tools/releasetools/add_img_to_target_files.py
++++ b/tools/releasetools/add_img_to_target_files.py
+@@ -52,6 +52,7 @@ from __future__ import print_function
+ 
+ import avbtool
+ import datetime
++import hashlib
+ import logging
+ import os
+ import shlex
+@@ -88,6 +89,42 @@ OPTIONS.is_signing = False
+ OPTIONS.avb_resolve_rollback_index_location_conflict = False
+ 
+ 
++def RecoveryNeedsTwoStepImage(info_dict, unpack_dir, has_recovery):
++  """Keep source recovery two-step behavior; validate pinned A/B-only prebuilts."""
++  if info_dict.get("prebuilt_recovery_image") != "true":
++    return True
++  if (not has_recovery or info_dict.get("ab_update") != "true" or
++      info_dict.get("allow_non_ab") == "true"):
++    raise ExternalError("Pinned prebuilt recovery requires dedicated pure A/B recovery")
++  expected = info_dict.get("prebuilt_recovery_image_sha256", "")
++  if len(expected) != 64 or any(c not in "0123456789abcdef" for c in expected):
++    raise ExternalError("Pinned prebuilt recovery requires an exact SHA-256")
++  try:
++    size = int(info_dict.get("recovery_size", 0))
++  except (TypeError, ValueError):
++    raise ExternalError("Pinned prebuilt recovery has invalid partition size")
++  if size <= 0:
++    raise ExternalError("Pinned prebuilt recovery requires a partition size")
++  prebuilt = os.path.join(unpack_dir, "BOOTABLE_IMAGES", "recovery.img")
++  for path in (prebuilt, os.path.join(unpack_dir, "IMAGES", "recovery.img")):
++    if path != prebuilt and not os.path.lexists(path):
++      continue
++    if not os.path.isfile(path) or os.path.islink(path):
++      raise ExternalError("Pinned prebuilt recovery is missing or unsafe: " + path)
++    if os.path.getsize(path) > size:
++      raise ExternalError("Pinned prebuilt recovery exceeds its partition size")
++    digest = hashlib.sha256()
++    with open(path, "rb") as stream:
++      for block in iter(lambda: stream.read(1024 * 1024), b""):
++        digest.update(block)
++    if digest.hexdigest() != expected:
++      raise ExternalError("Pinned prebuilt recovery SHA-256 mismatch: " + path)
++  # Pure A/B payload writes recovery to its own partition. The special image
++  # booted from /boot by non_ab_ota is neither used nor constructible here.
++  # Do not fabricate it or rebuild a different source ramdisk.
++  return False
++
++
+ def ParseAvbFooter(img_path) -> avbtool.AvbFooter:
+   with open(img_path, 'rb') as fp:
+     fp.seek(-avbtool.AvbFooter.SIZE, os.SEEK_END)
+@@ -1040,6 +1077,8 @@ def AddImagesToTargetFiles(filename):
+         if output_zip:
+           vendor_kernel_boot_image.AddToZip(output_zip)
+ 
++  recovery_needs_two_step = RecoveryNeedsTwoStepImage(
++      OPTIONS.info_dict, OPTIONS.input_tmp, has_recovery)
+   recovery_image = None
+   if has_recovery:
+     banner("recovery")
+@@ -1053,18 +1092,19 @@ def AddImagesToTargetFiles(filename):
+       if output_zip:
+         recovery_image.AddToZip(output_zip)
+ 
+-      banner("recovery (two-step image)")
+-      # The special recovery.img for two-step package use.
+-      recovery_two_step_image = common.GetBootableImage(
+-          "OTA/recovery-two-step.img", "recovery-two-step.img",
+-          OPTIONS.input_tmp, "RECOVERY", two_step_image=True)
+-      assert recovery_two_step_image, "Failed to create recovery-two-step.img."
+-      recovery_two_step_image_path = os.path.join(
+-          OPTIONS.input_tmp, "OTA", "recovery-two-step.img")
+-      if not os.path.exists(recovery_two_step_image_path):
+-        recovery_two_step_image.WriteToDir(OPTIONS.input_tmp)
+-        if output_zip:
+-          recovery_two_step_image.AddToZip(output_zip)
++      if recovery_needs_two_step:
++        banner("recovery (two-step image)")
++        # The special recovery.img for two-step package use.
++        recovery_two_step_image = common.GetBootableImage(
++            "OTA/recovery-two-step.img", "recovery-two-step.img",
++            OPTIONS.input_tmp, "RECOVERY", two_step_image=True)
++        assert recovery_two_step_image, "Failed to create recovery-two-step.img."
++        recovery_two_step_image_path = os.path.join(
++            OPTIONS.input_tmp, "OTA", "recovery-two-step.img")
++        if not os.path.exists(recovery_two_step_image_path):
++          recovery_two_step_image.WriteToDir(OPTIONS.input_tmp)
++          if output_zip:
++            recovery_two_step_image.AddToZip(output_zip)
+ 
+   def add_partition(partition, has_partition, add_func, add_args):
+     if has_partition:

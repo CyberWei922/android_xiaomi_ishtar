@@ -1,0 +1,2 @@
+# Camera time-of-flight range sensor; do not grant access to generic device.
+type vendor_stmvl53l5_device, dev_type;

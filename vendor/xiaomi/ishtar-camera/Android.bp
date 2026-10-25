@@ -1,0 +1,126 @@
+// Accepted camera03 payloads. System-only names preserve existing vendor variants.
+soong_namespace {}
+
+android_app_import {
+    name: "MiuiCamera",
+    owner: "xiaomi",
+    apk: "proprietary/system/priv-app/MiuiCamera/MiuiCamera.apk",
+    privileged: true,
+    preprocessed: true,
+    // Vendor DEX is kept intact; defer optimization to the normal runtime.
+    dex_preopt: { enabled: false },
+    optional_uses_libs: ["miui-cameraopt", "androidx.window.extensions", "androidx.window.sidecar"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libOpenCL",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libOpenCL.so"],
+    stem: "libOpenCL",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libcutils", "libvndksupport", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libcamera_algoup_jni.xiaomi",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libcamera_algoup_jni.xiaomi.so"],
+    stem: "libcamera_algoup_jni.xiaomi",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libbinder", "libcamera_client", "libcamera_metadata", "libcutils", "libgui", "liblog", "libutils", "libvndksupport", "libandroid", "libandroid_runtime", "libbase", "libmedia_jni_utils", "libnativehelper", "libnativewindow", "libui", "android.hidl.token@1.0-utils", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libcamera_mianode_jni.xiaomi",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libcamera_mianode_jni.xiaomi.so"],
+    stem: "libcamera_mianode_jni.xiaomi",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libbinder", "libcamera_client", "libcamera_metadata", "libcutils", "libgui", "liblog", "libutils", "libvndksupport", "libxml2", "libandroid", "libmedia_jni_utils", "libui", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libcdsprpc",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libcdsprpc.so"],
+    stem: "libcdsprpc",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libhidlbase", "libhardware", "libutils", "ishtar_camera_vendor.qti.hardware.dsp@1.0", "liblog", "libc", "libcutils", "libdmabufheap", "ishtar_camera_libvmmem", "libc++", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libmicampostproc_client",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libmicampostproc_client.so"],
+    stem: "libmicampostproc_client",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["liblog", "libutils", "libcutils", "libhardware", "libnativewindow", "libEGL", "libGLESv2", "libfmq", "libgui", "libui", "libcamera_client", "libcamera_metadata", "libmedia_jni_utils", "libnativehelper", "libhidlbase", "libhidltransport", "ishtar_camera_vendor.xiaomi.hardware.campostproc@1.0", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libopencl-camera",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libopencl-camera.so"],
+    stem: "libopencl-camera",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libcutils", "libvndksupport", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_libvmmem",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/libvmmem.so"],
+    stem: "libvmmem",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["liblog", "libbase", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_vendor.qti.hardware.dsp@1.0",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/vendor.qti.hardware.dsp@1.0.so"],
+    stem: "vendor.qti.hardware.dsp@1.0",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["libhidlbase", "liblog", "libutils", "libcutils", "libc++", "libc", "libm", "libdl"],
+}
+
+cc_prebuilt_library_shared {
+    name: "ishtar_camera_vendor.xiaomi.hardware.campostproc@1.0",
+    owner: "xiaomi",
+    srcs: ["proprietary/system/lib64/vendor.xiaomi.hardware.campostproc@1.0.so"],
+    stem: "vendor.xiaomi.hardware.campostproc@1.0",
+    compile_multilib: "64",
+    strip: { none: true },
+    check_elf_files: true,
+    system_shared_libs: [],
+    shared_libs: ["android.hardware.camera.common@1.0", "libhidlbase", "liblog", "libutils", "libcutils", "libc++", "libc", "libm", "libdl"],
+}
+
+filegroup {
+    name: "accepted_libhidltransport_blob",
+    srcs: ["proprietary/system/lib64/libhidltransport.so"],
+}

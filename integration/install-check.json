@@ -1,0 +1,20 @@
+{
+  "all_14_patch_sets_applied_in_fixture": true,
+  "kernel_patch_original_hashes_reconstructed": [
+    {
+      "component": "kernel/xiaomi/sm8550",
+      "reverse_matches_pinned_originals": true
+    },
+    {
+      "component": "kernel/xiaomi/sm8550-modules",
+      "reverse_matches_pinned_originals": true
+    }
+  ],
+  "integration_idempotence": true,
+  "conflict_refuses_before_writes": true,
+  "actual_build_source_readonly_check": "identical_no_changes_needed",
+  "pinned_build37_files_covered": 50,
+  "phone_accessed": false,
+  "actual_source_modified": false,
+  "rom_rebuilt": false
+}

@@ -1,0 +1,2 @@
+# Xiaomi camera provider AON AIDL instance.
+type vendor_aon_camera_service, service_manager_type, hal_service_type;

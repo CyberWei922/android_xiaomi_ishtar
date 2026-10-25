@@ -1,0 +1,79 @@
+{
+  "source_checkout_modified": false,
+  "source_files": 5990,
+  "patch_roundtrips": [
+    {
+      "path": "build/make",
+      "files": 2,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "build/soong",
+      "files": 1,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "frameworks/base",
+      "files": 1,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "frameworks/native",
+      "files": 6,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "device/lineage/sepolicy",
+      "files": 3,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "device/qcom/sepolicy",
+      "files": 1,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "device/qcom/sepolicy_vndr/sm8550",
+      "files": 6,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "system/sepolicy",
+      "files": 1,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "system/update_engine",
+      "files": 15,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "vendor/lineage",
+      "files": 4,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "hardware/xiaomi",
+      "files": 1,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "vendor/qcom/opensource/vibrator",
+      "files": 1,
+      "upstream_to_actual_roundtrip": true
+    },
+    {
+      "path": "kernel/xiaomi/sm8550",
+      "selected_actual_file_hashes_match": true,
+      "files": 1,
+      "full_tree_identity_verified": false
+    },
+    {
+      "path": "kernel/xiaomi/sm8550-modules",
+      "selected_actual_file_hashes_match": true,
+      "files": 6,
+      "full_tree_identity_verified": false
+    }
+  ],
+  "assets_decompressed_hash_checked": true
+}

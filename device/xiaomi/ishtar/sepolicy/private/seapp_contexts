@@ -1,0 +1,5 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# Keep the APK certificate and app UID/data layout intact. More specific than platform_app.
+user=_app seinfo=platform isPrivApp=true name=com.android.camera domain=ishtar_miui_camera_app type=app_data_file levelFrom=user

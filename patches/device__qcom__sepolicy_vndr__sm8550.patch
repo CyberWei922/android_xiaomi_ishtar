@@ -1,0 +1,74 @@
+diff --git a/generic/vendor/test/pdt_app.te b/generic/vendor/test/pdt_app.te
+index d785503..6924b8d 100644
+--- a/generic/vendor/test/pdt_app.te
++++ b/generic/vendor/test/pdt_app.te
+@@ -32,7 +32,7 @@ userdebug_or_eng(`
+ type vendor_pdt_app, domain;
+ app_domain(vendor_pdt_app);
+ net_domain(vendor_pdt_app)
+-permissive vendor_pdt_app;
++# Keep this debug domain subject to its existing SELinux rules.
+ # r_dir_file(vendor_pdt_app, domain)
+ dontaudit vendor_pdt_app service_manager_type:service_manager *;
+ dontaudit vendor_pdt_app hwservice_manager_type:hwservice_manager *;
+diff --git a/generic/vendor/test/vendor-qti-testscripts.te b/generic/vendor/test/vendor-qti-testscripts.te
+index 1555f40..504cafb 100644
+--- a/generic/vendor/test/vendor-qti-testscripts.te
++++ b/generic/vendor/test/vendor-qti-testscripts.te
+@@ -28,7 +28,7 @@
+ userdebug_or_eng(`
+   type vendor-qti-testscripts, domain, mlstrustedsubject;
+   type vendor-qti-testscripts_exec, exec_type, file_type, vendor_file_type;
+-  permissive vendor-qti-testscripts;
++  # Keep this debug domain subject to its existing SELinux rules.
+ 
+   domain_trans(init, vendor_shell_exec, vendor-qti-testscripts)
+ 
+diff --git a/qva/vendor/test/aoncameraservice_app.te b/qva/vendor/test/aoncameraservice_app.te
+index 21cbc8b..41c7004 100644
+--- a/qva/vendor/test/aoncameraservice_app.te
++++ b/qva/vendor/test/aoncameraservice_app.te
+@@ -27,7 +27,7 @@
+ 
+ userdebug_or_eng(`
+ type aoncameraservice_app, domain;
+-permissive aoncameraservice_app;
++# Keep this debug domain subject to its existing SELinux rules.
+ app_domain(aoncameraservice_app)
+ diag_use(aoncameraservice_app)
+ binder_call(aoncameraservice_app, hal_camera)
+diff --git a/qva/vendor/test/hal_debugutils_default.te b/qva/vendor/test/hal_debugutils_default.te
+index d9acc9f..a7f474e 100644
+--- a/qva/vendor/test/hal_debugutils_default.te
++++ b/qva/vendor/test/hal_debugutils_default.te
+@@ -31,7 +31,7 @@ type vendor_hal_debugutils_default_exec, exec_type, vendor_file_type, file_type;
+ hal_server_domain(vendor_hal_debugutils_default, vendor_hal_debugutils)
+ init_daemon_domain(vendor_hal_debugutils_default)
+ 
+-permissive vendor_hal_debugutils_default;
++# Keep this debug domain subject to its existing SELinux rules.
+ binder_call(vendor_hal_debugutils_server, vendor_hal_debugutils_client);
+ binder_call(vendor_hal_debugutils_client, vendor_hal_debugutils_server);
+ hal_attribute_hwservice(vendor_hal_debugutils,hal_debugutils_hwservice);
+diff --git a/qva/vendor/test/vendor_cta_app.te b/qva/vendor/test/vendor_cta_app.te
+index 63223fb..b83af55 100644
+--- a/qva/vendor/test/vendor_cta_app.te
++++ b/qva/vendor/test/vendor_cta_app.te
+@@ -31,5 +31,5 @@
+ userdebug_or_eng(`
+ type vendor_cta_app, domain;
+ app_domain(vendor_cta_app);
+-permissive vendor_cta_app;
++# Keep this debug domain subject to its existing SELinux rules.
+ ')
+diff --git a/qva/vendor/test/vendor_logkit_app.te b/qva/vendor/test/vendor_logkit_app.te
+index 5b3d62d..0cb6809 100644
+--- a/qva/vendor/test/vendor_logkit_app.te
++++ b/qva/vendor/test/vendor_logkit_app.te
+@@ -31,5 +31,5 @@
+ userdebug_or_eng(`
+ type vendor_logkit_app, domain;
+ app_domain(vendor_logkit_app);
+-permissive vendor_logkit_app;
++# Keep this debug domain subject to its existing SELinux rules.
+ ')

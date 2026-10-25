@@ -1,0 +1,6 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# SPI wakeup statistics consumed by system_suspend through sysfs_wakeup.
+# The wakeup child number is assigned at boot; scope the label to this device.
+genfscon sysfs /devices/platform/soc/8c0000.qcom,qupv3_2_geni_se/880000.spi/spi_master/spi1/spi1.0/wakeup u:object_r:sysfs_wakeup:s0

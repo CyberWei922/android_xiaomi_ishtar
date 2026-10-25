@@ -1,0 +1,199 @@
+--- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_eeprom/cam_eeprom_core.c
++++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_eeprom/cam_eeprom_core.c
+@@ -60,6 +60,7 @@
+ 		if (emap[j].page.valid_size) {
+ 			i2c_reg_settings.addr_type = emap[j].page.addr_type;
+ 			i2c_reg_settings.data_type = emap[j].page.data_type;
++			i2c_reg_settings.delay = emap[j].page.delay;
+ 			i2c_reg_settings.size = 1;
+ 			i2c_reg_array.reg_addr = emap[j].page.addr;
+ 			i2c_reg_array.reg_data = emap[j].page.data;
+@@ -1301,10 +1302,52 @@
+  *
+  * Returns success or failure
+  */
++/* SPDX-License-Identifier: GPL-2.0-only */
++/* Balance each successful power-up before retrying a read-only INIT request. */
++static int cam_eeprom_read_calibration_retry(struct cam_eeprom_ctrl_t *e_ctrl,
++	struct cam_packet *packet)
++{
++	struct cam_eeprom_soc_private *soc_private = e_ctrl->soc_info.soc_private;
++	int rc = -EINVAL, down_rc, attempt;
++	bool read_complete;
++
++	for (attempt = 0; attempt < MAX_RETRY_TIMES; attempt++) {
++		rc = cam_eeprom_power_up(e_ctrl, &soc_private->power_info);
++		if (rc) {
++			CAM_ERR(CAM_EEPROM, "power up failed rc %d at times %d",
++				rc, attempt);
++			usleep_range(10000, 11000);
++			continue;
++		}
++
++		e_ctrl->cam_eeprom_state = CAM_EEPROM_CONFIG;
++		rc = cam_eeprom_read_memory(e_ctrl, &e_ctrl->cal_data);
++		read_complete = !rc;
++		if (read_complete)
++			rc = cam_eeprom_get_cal_data(e_ctrl, packet);
++		else
++			CAM_ERR(CAM_EEPROM, "read failed rc %d at times %d",
++				rc, attempt);
++
++		/* Do not request another set of GPIO/pinctrl/clock resources while
++		 * the preceding successful power-up is still active.
++		 */
++		down_rc = cam_eeprom_power_down(e_ctrl);
++		if (down_rc) {
++			CAM_ERR(CAM_EEPROM, "retry cleanup failed rc %d", down_rc);
++			return rc ? rc : down_rc;
++		}
++		e_ctrl->cam_eeprom_state = CAM_EEPROM_ACQUIRE;
++		if (read_complete)
++			return rc;
++		usleep_range(10000, 11000);
++	}
++	return rc;
++}
++
+ static int32_t cam_eeprom_pkt_parse(struct cam_eeprom_ctrl_t *e_ctrl, void *arg)
+ {
+ 	int32_t                         rc = 0;
+-	int32_t                         i = 0;
+ 	struct cam_control             *ioctl_ctrl = NULL;
+ 	struct cam_config_dev_cmd       dev_config;
+ 	uintptr_t                       generic_pkt_addr;
+@@ -1393,31 +1436,12 @@
+ 			}
+ 		}
+ 
+-		for (i = 0; i < MAX_RETRY_TIMES; i++) {
+-			rc = cam_eeprom_power_up(e_ctrl,
+-				&soc_private->power_info);
+-			if (rc) {
+-				CAM_ERR(CAM_EEPROM, "failed rc %d at times %d", rc, i);
+-				usleep_range(10*1000, 11*1000);
+-				continue;
+-			}
+-
+-			e_ctrl->cam_eeprom_state = CAM_EEPROM_CONFIG;
+-			rc = cam_eeprom_read_memory(e_ctrl, &e_ctrl->cal_data);
+-			if (rc) {
+-				CAM_ERR(CAM_EEPROM,
+-					"read_eeprom_memory failed at times %d", i);
+-				usleep_range(10*1000, 11*1000);
+-				continue;
+-			} else {
+-				rc = cam_eeprom_get_cal_data(e_ctrl, csl_packet);
+-				rc = cam_eeprom_power_down(e_ctrl);
+-				break;
+-			}
+-		}
+-
+-		if (i == MAX_RETRY_TIMES)
+-			goto power_down;
++		rc = cam_eeprom_read_calibration_retry(e_ctrl, csl_packet);
++		if (rc) {
++			if (e_ctrl->cam_eeprom_state == CAM_EEPROM_CONFIG)
++				goto power_down;
++			goto memdata_free;
++		}
+ 
+ 		e_ctrl->cam_eeprom_state = CAM_EEPROM_ACQUIRE;
+ 		vfree(e_ctrl->cal_data.mapdata);
+--- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_ois/cam_ois_core.c
++++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_ois/cam_ois_core.c
+@@ -2359,6 +2359,17 @@
+ 			goto release_mutex;
+ 		}
+ 
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
++		/* The parklens worker owns the power tables until it has exited. */
++		if (parklens_atomic_read(&o_ctrl->parklens_ctrl.parklens_state) ==
++			PARKLENS_RUNNING) {
++			rc = ois_parklens_thread_stop(o_ctrl,
++				EXIT_PARKLENS_WITH_POWERDOWN);
++			if (rc < 0)
++				goto release_mutex;
++		}
++#endif
++
+ 		if (o_ctrl->cam_ois_state == CAM_OIS_CONFIG) {
+ #if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 			parklens_power_down = ois_parklens_power_down(o_ctrl);
+--- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_core.c
++++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_core.c
+@@ -1986,7 +1986,7 @@
+ 		mutex_unlock(&cci_dev->init_mutex);
+ 		break;
+ 	case MSM_CCI_I2C_READ:
+-#if defined(CONFIG_TARGET_PRODUCT_NUWA)
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 		mutex_lock(&cci_dev->cci_master_info[master].master_mutex);
+ #endif
+ 		/*
+@@ -1999,7 +1999,7 @@
+ 		} else {
+ 			rc = cam_cci_read_bytes(sd, cci_ctrl);
+ 		}
+-#if defined(CONFIG_TARGET_PRODUCT_NUWA)
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 		mutex_unlock(&cci_dev->cci_master_info[master].master_mutex);
+ #endif
+ 		break;
+@@ -2009,7 +2009,7 @@
+ 	case MSM_CCI_I2C_WRITE_SYNC:
+ 	case MSM_CCI_I2C_WRITE_ASYNC:
+ 	case MSM_CCI_I2C_WRITE_SYNC_BLOCK:
+-#if defined(CONFIG_TARGET_PRODUCT_NUWA)
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 		mutex_lock(&cci_dev->cci_master_info[master].master_mutex);
+ #endif
+ 		rc = cam_cci_write(sd, cci_ctrl);
+@@ -2021,6 +2021,8 @@
+ 					cci_ctrl->cci_info->cci_device,
+ 					cci_ctrl->cci_info->cci_i2c_master);
+ 		}
++#endif
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 		mutex_unlock(&cci_dev->cci_master_info[master].master_mutex);
+ #endif
+ 		break;
+--- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_dev.h
++++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_dev.h
+@@ -141,7 +141,7 @@
+ 	struct mutex freq_cnt_lock;
+ 	uint16_t freq_ref_cnt;
+ 	bool is_initilized;
+-#if defined(CONFIG_TARGET_PRODUCT_NUWA)
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 	struct mutex master_mutex;
+ #endif
+ };
+--- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_soc.c
++++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_cci/cam_cci_soc.c
+@@ -245,7 +245,7 @@
+ 		new_cci_dev->cci_master_info[i].freq_ref_cnt = 0;
+ 		new_cci_dev->cci_master_info[i].is_initilized = false;
+ 		mutex_init(&new_cci_dev->cci_master_info[i].mutex);
+-#if defined(CONFIG_TARGET_PRODUCT_NUWA)
++#if defined(CONFIG_TARGET_PRODUCT_NUWA) || defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+ 		mutex_init(&new_cci_dev->cci_master_info[i].master_mutex);
+ #endif
+ 		sema_init(&new_cci_dev->cci_master_info[i].master_sem, 1);
+--- a/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_sensor/cam_sensor_core.c
++++ b/qcom/opensource/camera-kernel/drivers/cam_sensor_module/cam_sensor/cam_sensor_core.c
+@@ -1685,14 +1685,6 @@
+ 		info->p_delay = CAM_PIPELINE_DELAY_2;
+ 		info->m_delay = CAM_MODESWITCH_DELAY_2;
+ 	}
+-#if defined(CONFIG_TARGET_PRODUCT_ISHTAR)
+-	if (info->p_delay > CAM_PIPELINE_DELAY_1) {
+-		CAM_INFO(CAM_REQ,
+-			"Clamp ishtar sensor pipeline delay %d to %d",
+-			info->p_delay, CAM_PIPELINE_DELAY_1);
+-		info->p_delay = CAM_PIPELINE_DELAY_1;
+-	}
+-#endif
+ 	info->trigger = CAM_TRIGGER_POINT_SOF;
+ 
+ 	CAM_DBG(CAM_REQ, "num batched frames %d p_delay is %d",

@@ -1,0 +1,21 @@
+diff --git a/ui/build/soong.go b/ui/build/soong.go
+index 4521b4a..74301ba 100644
+--- a/ui/build/soong.go
++++ b/ui/build/soong.go
+@@ -215,6 +215,16 @@ func (pb PrimaryBuilderFactory) primaryBuilderInvocation(config Config) bootstra
+ 
+ 	commonArgs = append(commonArgs, "-l", filepath.Join(pb.config.FileListDir(), "Android.bp.list"))
+ 	invocationEnv := make(map[string]string)
++	// Preserve numeric Go runtime limits across the builder's isolated environment.
++	// GOMEMLIMIT is expressed in bytes; decimal values are safe in Ninja's shell command.
++	for _, key := range []string{"GOGC", "GOMEMLIMIT", "GOMAXPROCS"} {
++		if value, ok := config.Environment().Get(key); ok {
++			if _, err := strconv.ParseUint(value, 10, 64); err != nil {
++				panic(fmt.Sprintf("%s must be an unsigned decimal integer: %v", key, err))
++			}
++			invocationEnv[key] = value
++		}
++	}
+ 	if pb.debugPort != "" {
+ 		//debug mode
+ 		commonArgs = append(commonArgs, "--delve_listen", pb.debugPort,

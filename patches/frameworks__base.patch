@@ -1,0 +1,15 @@
+diff --git a/services/core/java/com/android/server/pm/AppsFilterBase.java b/services/core/java/com/android/server/pm/AppsFilterBase.java
+index 02e7af4..284ab4a 100644
+--- a/services/core/java/com/android/server/pm/AppsFilterBase.java
++++ b/services/core/java/com/android/server/pm/AppsFilterBase.java
+@@ -402,6 +402,10 @@ public abstract class AppsFilterBase implements AppsFilterSnapshot {
+         if (!isHiddenPackage(targetPackageName)) {
+             return false;
+         }
++        // Package hiding must not prevent an app from resolving its own components.
++        if (snapshot.isCallerSameApp(targetPackageName, callingUid)) {
++            return false;
++        }
+         final int callingAppId = UserHandle.getAppId(callingUid);
+         if (callingAppId < Process.FIRST_APPLICATION_UID) {
+             return false;

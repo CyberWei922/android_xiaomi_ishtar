@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='utf-8'?>
+<manifest>
+  <remote name="ishtar17-tuna-lineage" fetch="https://mirrors.tuna.tsinghua.edu.cn/git/lineageOS" />
+  <extend-project name="LineageOS/android_bootable_deprecated-ota" path="bootable/deprecated-ota" revision="a60893a68b92701ff76b366c44910915c5f1fed4" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_development" path="development" revision="27a3ac31b7987ef6d07835240f2608bb6041dfab" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_generic_car" path="device/generic/car" revision="ac1078dc4d5cf484503df4a1c5b607805544722c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_generic_common" path="device/generic/common" revision="2daf417b6d1ed7c43e45ad166343b9792a3b06f6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_generic_goldfish" path="device/generic/goldfish" revision="c97eaa102f9594e1cc548279450854cf2039ee19" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_google_atv" path="device/google/atv" revision="dfc2c1e2f341d2b75abc36d4c28ac41786cf8d9d" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_google_car" path="device/google_car" revision="cb434f2e702d45c3942eabaa00b09eb9a9744db9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_lineage_atv" path="device/lineage/atv" revision="32c40894271f41483075e9e1215c2734c3dc9abe" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_lineage_car" path="device/lineage/car" revision="0f3b40241c5ceff1be0d19dd41bffca028e7c75c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy" path="device/qcom/sepolicy" revision="98d96fe9b1f4ea0b35a8bb5ce0ac2ae3bf766647" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy" path="device/qcom/sepolicy-legacy-um" revision="3ba04b19a72afb83c5793c7c908670d559a1c5e6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy_vndr" path="device/qcom/sepolicy_vndr/legacy-um" revision="33df3b661808b86eb9cf91429daef2ab26a69fa4" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy_vndr" path="device/qcom/sepolicy_vndr/sm8450" revision="a6bcda4da1e7fc3677c61b24495e00671294dfc5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy_vndr" path="device/qcom/sepolicy_vndr/sm8550" revision="3246964ec405f5c7f9c6aa15e7331b4de1c04bbc" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy_vndr" path="device/qcom/sepolicy_vndr/sm8650" revision="3d37d21988dcc27bacefc37bb469b628d5790322" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy_vndr" path="device/qcom/sepolicy_vndr/sm8750" revision="78d2d36a7ea3a5cc1f618b72012f5aacb9582cb0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_device_qcom_sepolicy_vndr" path="device/qcom/sepolicy_vndr/sm8850" revision="08110cc1a7e540367543d9cfac489be2b1517f49" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_ant-wireless_hidl" path="external/ant-wireless/hidl" revision="ce589dc08e4215b063bfac73eb7b9b52cf46d944" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_avb" path="external/avb" revision="cb5eae91a6b83e1394882decbf6de133239107e1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_bash" path="external/bash" revision="1094f161361ad75af92c968da680f2f5b3cf752b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_chromium-webview_patches" path="external/chromium-webview/patches" revision="3847f83c25fa2e400f95298e012a7f026caf7c46" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_chromium-webview_prebuilt_arm" path="external/chromium-webview/prebuilt/arm" revision="170e8996e41ef542769b5479297ab91072b487e2" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_chromium-webview_prebuilt_arm64" path="external/chromium-webview/prebuilt/arm64" revision="604ad4cbc41d3b894065ee6e83189c76e1ec06a1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_chromium-webview_prebuilt_x86" path="external/chromium-webview/prebuilt/x86" revision="2ca10d72f62377581fcc98cf5f8c35df6e0308b5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_chromium-webview_prebuilt_x86_64" path="external/chromium-webview/prebuilt/x86_64" revision="de57895442140a9c3c46c8e82a14e0b5a7ec6813" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_conscrypt" path="external/conscrypt" revision="5ea9f383f1384da7a9ca55b14389340be472f224" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_dng_sdk" path="external/dng_sdk" revision="104f789f8d920ee34ef7e5d4a374dc4b41760399" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_dtc" path="external/dtc" revision="c1197f56b8f468effbbf5e79feae353c4280e2ea" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_e2fsprogs" path="external/e2fsprogs" revision="347a1592a840e193b9c52674227d72c9c3cc1a69" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_exfatprogs" path="external/exfatprogs" revision="3379ed50f76459f84e3859aa679942e9daced46c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_freetype" path="external/freetype" revision="698bebbc462fd7fbb9847907e3dd52a515c23160" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_gptfdisk" path="external/gptfdisk" revision="1b4c182411747173deb1a5cccdcdd3d36b87295b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_htop" path="external/htop" revision="ff411eb6f0b716294440dbb5b24a090a1ad67af9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_json-c" path="external/json-c" revision="53b84fa96d174d7debafa3ac560dc36271872637" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_libcupsfilters" path="external/libcupsfilters" revision="69f64894c810da761c18d1c1be4465c4b650e1b5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_libhevc" path="external/libhevc" revision="e0c3a0dc07174cf6b5821e12711bd5a73e70ebf6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_libjxl" path="external/libjxl" revision="8f6c04effd294e395427e0bac642145e0fa28712" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_libncurses" path="external/libncurses" revision="cf8d1a3f3b0ab6f9385c3361e1aada7ecc635ad6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_libpng" path="external/libpng" revision="e092faae2320e16f61cf0ef51b6dad2ea832e3f8" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_libppd" path="external/libppd" revision="1d50d9fda9df49e37b9d23c481643debd1664110" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_mksh" path="external/mksh" revision="35d7cce387b94c2a33fd3e64a48301552fce7fd5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_nano" path="external/nano" revision="b83fc23d564c5377fc7c3322e5f75e81d8dad37e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_ntfs-3g" path="external/ntfs-3g" revision="e2415df401538976fb89aa20370903e0c46e51ff" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_openssh" path="external/openssh" revision="60ca88651d39f699932f63d41409facc18c5ad19" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_rsync" path="external/rsync" revision="6a2e628ca95b172243abfdad1e86b88fb895fb3f" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_selinux" path="external/selinux" revision="fbd5d3e731d34bc2ad6e5cacc43efa3a14a863c4" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_setupcompat" path="external/setupcompat" revision="15f79d6014e9cc3c70819d81ccb70687ed2dab28" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_tinyalsa" path="external/tinyalsa" revision="28a6a6bff916f5c617b73dcb0fec1a9ade7b9335" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_tinycompress" path="external/tinycompress" revision="7a3ded281c0068322b89eb49438308fa5f46dfa1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_unrar" path="external/unrar" revision="140cfb9e8fc984cab5060cd09983e6d33a2fae41" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_v4l2_codec2" path="external/v4l2_codec2" revision="6685af1c65467d0b550d7b904418f65059bc3cbb" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_vim" path="external/vim" revision="f31199df8fca8148b61ae94bbfcb834021f5bdd9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_wpa_supplicant_8" path="external/wpa_supplicant_8" revision="1063d796b547c4cd2c23c21da72ed988ac70a84a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_external_zstd" path="external/zstd" revision="1bfdf8aef6bdec0e817c1f75aeaf382db22de668" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_frameworks_hardware_interfaces" path="frameworks/hardware/interfaces" revision="f80da5a738798ed94d061f79ebe78edf26391424" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_frameworks_opt_car_services" path="frameworks/opt/car/services" revision="4f323bff6b3c971f98773e0b6490334fcf6a2176" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_broadcom_libbt" path="hardware/broadcom/libbt" revision="a4004b63a0d4e8b495a3bf36505801589a7210c5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_google_camera" path="hardware/google/camera" revision="02ce1b699c02dc02f1360bcf921992a7e0d35f37" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_google_interfaces" path="hardware/google/interfaces" revision="17741d228def813f7a1c03003b2c87f0d0e32b93" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_google_pixel-sepolicy" path="hardware/google/pixel-sepolicy" revision="1117c69c767ca3b45187f6602fa7466334ced1be" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_knowles_athletico_sound_trigger_hal" path="hardware/knowles/athletico/sound_trigger_hal" revision="16e4d7f6d3201905f103d36ff7195d9e21ce1671" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_libhardware" path="hardware/libhardware" revision="d7f13275b6a210f56110b46609a2e83b2feccd99" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_lineage_generic-ims" path="hardware/lineage/generic-ims" revision="83bfe33f584f1405a4c06a0476f012edb53d401d" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_lineage_interfaces" path="hardware/lineage/interfaces" revision="9866a164e8902619bf27aa0fda01546c120263f8" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_nxp_nfc" path="hardware/nxp/nfc" revision="66ef2f3dfcb7cee2e3a6cac16ff3272a150b59e2" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_nxp_secure_element" path="hardware/nxp/secure_element" revision="4b5f88a55ec8413ef08f7eae94a368630c71a0a9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom-caf_common" path="hardware/qcom-caf/common" revision="c7eda1ff7fd99f29999abbe19922ce59a41ee000" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio" path="hardware/qcom-caf/msm8953/audio" revision="f9ff4f29d8f330a8a97c4d3b49de5d9f37ebcb8a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio" path="hardware/qcom-caf/msm8996/audio" revision="560c079979144611f90e32f5a7485e631ef022c9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio" path="hardware/qcom-caf/sdm660/audio" revision="90647c475fc51315a1a09fd244cdf5592f0e295b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio" path="hardware/qcom-caf/sm8150/audio" revision="d1ae1d822e49422a2a02e9864578fb92491b355e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio" path="hardware/qcom-caf/sm8250/audio" revision="52e2a183b8f82c077a98aeeb545380d8ceb13c5e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio" path="hardware/qcom-caf/sm8350/audio" revision="9596e4bcde851fdff2e312c69a13ac06645c6681" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio-ar" path="hardware/qcom-caf/sm8450/audio/primary-hal" revision="25c64ed45218ef124659047b441167051cb0cf5c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio-ar" path="hardware/qcom-caf/sm8450-6.6/audio/primary-hal" revision="62783f84fcea8e25b291b6eb675ab114532ae2e4" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio-ar" path="hardware/qcom-caf/sm8550/audio/primary-hal" revision="a674b233f85bb00f48705a72cf2c0f5a43dad045" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio-ar" path="hardware/qcom-caf/sm8650/audio/primary-hal" revision="2aa541f626ecc029fce24f3882aaee84c11fb161" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio-ar" path="hardware/qcom-caf/sm8750/audio/primary-hal" revision="31964dd4cb5824bb71cadb19b39d82d77bd8b5a7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_audio-ar" path="hardware/qcom-caf/sm8850/audio/primary-hal" revision="adc0fb9abe4add0b5b9a202ec36c21668da796c6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_bootctrl" path="hardware/qcom-caf/bootctrl" revision="25092672e644459db328b43fd1c7c57cbff65c91" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/msm8953/display" revision="fd1cfe095f3cb4073f2ac6216e4d4457ba50f312" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/msm8996/display" revision="92dc6b713dc4b4d37959b6af1078b98dd73ba740" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sdm660/display" revision="0ce1694ece44c596362d97c8f375fa7a861b7865" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8250/display" revision="1906af862ac456dc8b0d64ea94c30dbb66e02467" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8350/display" revision="e9bbe9a980d408af36b52f2abaae7c35647b7425" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8450/display" revision="aea8d60119598d755f29e2e15312b4ff491d1808" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8450-6.6/display/hal" revision="692023c723e25844dc69362e534c1ba6f47139dc" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8550/display" revision="d679d895cd1e35d088b67bfd19d9141c76da5207" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8650/display" revision="fe6db19f67a58c43a794b9517eade8426dcce71c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8750/display/hal" revision="9c00ef9bd5cc5799a441c13e442a09756b6db51e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_display" path="hardware/qcom-caf/sm8850/display/hal" revision="511d5ca4731479f58c398150ff7f4a59615759f8" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_media" path="hardware/qcom-caf/msm8953/media" revision="9861d78316d1933b3d0a20cf9139a3a23aa88fd7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_media" path="hardware/qcom-caf/msm8996/media" revision="cff2d89174901b16d404df2461e76cc8c9b24d8c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_media" path="hardware/qcom-caf/sdm660/media" revision="2098857ca9e357840703605c1520c9a9b4c21ff2" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_media" path="hardware/qcom-caf/sm8150/media" revision="67641d710ec876fa922fcd10f6f65f7632e5ca08" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_media" path="hardware/qcom-caf/sm8250/media" revision="de3a6cfed8654aaf187bd9c69127f3c5bf0f98ac" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_sm7250_display" path="hardware/qcom/sm7250/display" revision="d3fae6913731a30c135a6cd1fab803913da06998" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_sm7250_gps" path="hardware/qcom/sm7250/gps" revision="c0e0375f06c0335062f19e3d87cb84d3c27cbc57" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_sm8150_display" path="hardware/qcom/sm8150/display" revision="bcae019f82f572efbe44fa4b68fde26690bce3c3" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_sm8150_gps" path="hardware/qcom/sm8150/gps" revision="c102ecaf661265a5bb4bab028c4dba8454016e1b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_thermal" path="hardware/qcom-caf/thermal" revision="a54c4bef6ae6df53684ec538e9fdd713775238cb" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_thermal" path="hardware/qcom-caf/thermal-legacy-um" revision="07a34951c4a85be57bacf6041d6e84f65f22b866" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_wlan" path="hardware/qcom/wlan" revision="4110d72de3eaee4c1091ba17af8b52449acb62a6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_qcom_wlan" path="hardware/qcom-caf/wlan" revision="721c1429f40242ab40dfd28ce23a180451ddf2a5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_hardware_st_nfc" path="hardware/st/nfc" revision="7cf8d50bd425329cff555fe94dd64b20c89ad18a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Aperture" path="packages/apps/Aperture" revision="485c98def2f18bf2245a1aa17464a29fa92ec8fa" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_AudioFX" path="packages/apps/AudioFX" revision="2fc3a5405fb9d7330ad787e106af8229c7a72830" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Backgrounds" path="packages/apps/Backgrounds" revision="b087d2df6601aa25939e654028321bb59857d12e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Camelot" path="packages/apps/Camelot" revision="cdaa5702eea5c725599b650bede715550dbd8a4c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Canvas" path="packages/apps/Canvas" revision="52265a4619e4b0f867903a5c117ec6c01aefc686" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Car_Settings" path="packages/apps/Car/Settings" revision="fdb1419080dc9ad7cd2dab353cdcfd6095bed300" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Car_SystemUI" path="packages/apps/Car/SystemUI" revision="7d57597c4c292edf00d3b1b2f39bbb9a203aa895" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Catapult" path="packages/apps/Catapult" revision="95352d52e94bf2d514b5beaf650e1d21b59dc6d2" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_CellBroadcastReceiver" path="packages/apps/CellBroadcastReceiver" revision="a634487643ddc8061924ee925e78041c11ba88f6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Contacts" path="packages/apps/Contacts" revision="28137197bf5b6a4e3baf9de36d52e0e471ac1d47" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_ContactsPicker" path="packages/apps/ContactsPicker" revision="dcc20ec72ebfce794c7a2f72bf57cc46b8ab3261" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_DeskClock" path="packages/apps/DeskClock" revision="85cde5712f2f3eb6a0ffa9d6951ec4a83734586e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Dialer" path="packages/apps/Dialer" revision="81ae9e3a0246089dd89f644227509627d6e11a88" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_DocumentsUI" path="packages/apps/DocumentsUI" revision="7f7e65f7600b181647d52aa869290ad63372d169" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_EmergencyInfo" path="packages/apps/EmergencyInfo" revision="fc80d6936e5c97803e12cd8638c9f207d525a598" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Etar" path="packages/apps/Etar" revision="8173ec802ed046d1670ec03962e686e393a85335" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_EuiccPolicy" path="packages/apps/EuiccPolicy" revision="3b3c28e8e537ffd182def2dedde3987b01a60f0f" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_ExactCalculator" path="packages/apps/ExactCalculator" revision="933974f9fd722e5c79ee0343a251ad5444ac8a23" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_FMRadio" path="packages/apps/FMRadio" revision="095ae21580f2893b1f00f0bd9b503dc766899ad1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_FlipFlap" path="packages/apps/FlipFlap" revision="4866b33735fd4ad7033079c59d1c7f8d6d02fd74" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Gallery2" path="packages/apps/Gallery2" revision="73803da5c066e0d6f67319d28087c965234b7850" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Glimpse" path="packages/apps/Glimpse" revision="89b473594ec8ad01417624e670912450ce5df7e9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Jelly" path="packages/apps/Jelly" revision="64a74fbbc667b19d789c955677bf68f9b8b3eb7e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Launcher3" path="packages/apps/Launcher3" revision="5f26fe66475643ec08fe71a4021946aa57307192" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_LineageCustomizer" path="packages/apps/LineageCustomizer" revision="84b03919bfb15aa3c72bacdd28c1f900df9385db" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Messaging" path="packages/apps/Messaging" revision="e8d54f169338b16d545d175868645ead8c83e979" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Profiles" path="packages/apps/Profiles" revision="0abb3a177f1532b6b85621a7250a6431027f02a6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Recorder" path="packages/apps/Recorder" revision="624957ca18496e7b63df3d5e4e040f8c99ca72b7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Seedvault" path="packages/apps/Seedvault" revision="cd6ab3fa1631d8c230b16a66239faca1e370b27e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_SettingsIntelligence" path="packages/apps/SettingsIntelligence" revision="cd1325fdb721479d6936b3b045a13107584fd134" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_SimpleSettingsConfig" path="packages/apps/SimpleSettingsConfig" revision="4e6f18165761c7833967597bfe02d0f43273f91a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_TV" path="packages/apps/TV" revision="516b33d213d3ed48b33f9c422c27e6fb446d8f58" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Tag" path="packages/apps/Tag" revision="51084dfd08dad2f1724542dde393c7d2af8b6201" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_ThemePicker" path="packages/apps/ThemePicker" revision="2a9e5764da4484cb889508a489ffed694912cbe1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_TvSettings" path="packages/apps/TvSettings" revision="cfb054d62281656125cd7d6827c3570d6f580131" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_TvSystemUI" path="packages/apps/TvSystemUI" revision="f1ceabe7f445cd8ebe424c697cd45a0c4ee3e175" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_apps_Twelve" path="packages/apps/Twelve" revision="fb82f3c55451b128e1e29c611e582cb7699f7e24" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_inputmethods_LatinIME" path="packages/inputmethods/LatinIME" revision="c9e8aa87038e1194d2717ac48f207df4068cebd9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_inputmethods_LeanbackIME" path="packages/inputmethods/LeanbackIME" revision="cdcc22e5e83b52b278ec7e71edc1d89dc673ebb5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_modules_ImsMedia" path="packages/modules/ImsMedia" revision="aa3e6c5f070238cae1ec05d9997e6ac021a1e22e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_modules_Nfc" path="packages/modules/Nfc" revision="5b3b95382170fde2d778f8521e6ae3fcbc73307a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_modules_Telephony" path="packages/modules/Telephony" revision="e04c40c70a0827d88a59920c2284aa01ccecdaaa" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_modules_Uwb" path="packages/modules/Uwb" revision="77ac4a99761960023f732ba6cdcc3ce89211e747" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_modules_adb" path="packages/modules/adb" revision="f83360242ba6a66ae7570e126009ab530eeef120" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_providers_BlockedNumberProvider" path="packages/providers/BlockedNumberProvider" revision="1ae3f1eedcefb508e6ee2f4aeca275a07d33176c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_providers_BookmarkProvider" path="packages/providers/BookmarkProvider" revision="053b026c73c7073c13bc4e7e6496deaa7cf0f7b1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_providers_CalendarProvider" path="packages/providers/CalendarProvider" revision="8636011ebbb6f25cf45edd914700811275c1b0ba" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_providers_CallLogProvider" path="packages/providers/CallLogProvider" revision="3e0b666db218d97df9447a6d5a7d40726cfb9585" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_providers_ContactsProvider" path="packages/providers/ContactsProvider" revision="48149493947b89699c4e158a22739b5182136b57" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_providers_DownloadProvider" path="packages/providers/DownloadProvider" revision="bde34d877dfbab0bdca190e2916f0e5ef10fa07a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_resources_devicesettings" path="packages/resources/devicesettings" revision="625deca0bfd868e227cfc7367ac22d0a1a2e6013" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_screensavers_PhotoTable" path="packages/screensavers/PhotoTable" revision="f3451a4cc5403f9b6f66d4864c21c19676704932" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_services_BuiltInPrintService" path="packages/services/BuiltInPrintService" revision="c343ebe454ba2de5309058657304e4c3f5c65303" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_services_Car" path="packages/services/Car" revision="6a5269f716e0bd6510344d1a8a9a057346d1d79c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_services_DeviceAsWebcam" path="packages/services/DeviceAsWebcam" revision="c5b6159d081ed2e417974388d8f98a58d6b57656" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_services_Mms" path="packages/services/Mms" revision="1a630ef37b20b486b4c14709c415e64582718a81" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_packages_wallpapers_LivePicker" path="packages/wallpapers/LivePicker" revision="e8d8a14c5e366d21d091c74fcdf47e7a70aa88b3" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b" path="prebuilts/clang/kernel/linux-x86/clang-r416183b" revision="54220fd601050b350b2af7adc913089ebf0e7aed" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_prebuilts_extract-tools" path="prebuilts/extract-tools" revision="aaeb969a477321411279c03799f45ae9f94f770b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_prebuilts_tools-lineage" path="prebuilts/tools-lineage" revision="7cf9452c82a0265d00e8c444f25639b7aa66969d" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_bpf" path="system/bpf" revision="1787201ef62581ee5532fdb1e5b0cbc3fb137dab" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_ca-certificates" path="system/ca-certificates" revision="3eafa7527b96dee31eb8afd7586f3e4ca8c07de0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_chre" path="system/chre" revision="a0edaf6836e32fb54a077c068cfd472f2cc1fca5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_extras" path="system/extras" revision="378b92d7f4511cb3f23a34fecc694b9704530374" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_libfmq" path="system/libfmq" revision="f727482ff0c6a26b4c64c5106c62c176415b2d81" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_libufdt" path="system/libufdt" revision="70c20864187df19f3e7d358ca8436f77d61a3f39" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_libziparchive" path="system/libziparchive" revision="8908f2ad624aa8b7ed15b2f877e0a26fb1156553" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_logging" path="system/logging" revision="336e1707c8258adf1f1c5c5511218b533f3a22e8" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_memory_libdmabufheap" path="system/memory/libdmabufheap" revision="57925b760460430b1424bf0fa4cb0ffe001b9cfd" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_memory_libion" path="system/memory/libion" revision="abd899da1a42064c66067bc84f427bf27edd81f9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_netd" path="system/netd" revision="fb7e47052620fd1139522e2b3d1343c8680f7c0f" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_security" path="system/security" revision="123cc4af487922618cd99f28d05736e47eba7b00" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_system_usb" path="system/usb" revision="2c8cc049b8d42dee64c361e0d1f27ca051f2d1be" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_tools_extract-utils" path="tools/extract-utils" revision="78ba5d58c4b06712e18bb387a2a72eac8fbc8d70" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_apn" path="vendor/apn" revision="35d822d750556e09dafaa2950ea87e912b49eab1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_codeaurora_telephony" path="vendor/codeaurora/telephony" revision="5a048ec75771d4cc7becce6ab71c06de55f7a374" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_agm" path="hardware/qcom-caf/sm8450/audio/agm" revision="35c3491ff5566de4f60a64ad47e74fb39cd192e0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_agm" path="hardware/qcom-caf/sm8450-6.6/audio/agm" revision="58c1c901810528802a10560399d6bc20d8bb29ce" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_agm" path="hardware/qcom-caf/sm8550/audio/agm" revision="6651285685a74501f26d47d84963230c1f7d8d3c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_agm" path="hardware/qcom-caf/sm8650/audio/agm" revision="ec6b675a3487fa6481756a6978fcc1f0d8b9a0b3" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_agm" path="hardware/qcom-caf/sm8750/audio/agm" revision="853c0f6afd242b506636c9af47cb4ed64a4056f0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_agm" path="hardware/qcom-caf/sm8850/audio/agm" revision="ddb43619de0aee37b95f2e1720cc9f186355ad1e" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_arpal-lx" path="hardware/qcom-caf/sm8450/audio/pal" revision="e60d689361b27004fa6fff1cdb26d895b1be72f7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_arpal-lx" path="hardware/qcom-caf/sm8450-6.6/audio/pal" revision="b6964d9063f9d839af9a48f049fb247484410289" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_arpal-lx" path="hardware/qcom-caf/sm8550/audio/pal" revision="c4949689ac552ce13edc13265ff16c0735994e00" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_arpal-lx" path="hardware/qcom-caf/sm8650/audio/pal" revision="11390828f46ae7036dfac2002f28993b2f5ed67a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_arpal-lx" path="hardware/qcom-caf/sm8750/audio/pal" revision="c0f825a2320577b9069783947ceec764bef8f672" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_arpal-lx" path="hardware/qcom-caf/sm8850/audio/pal" revision="f75d1c5fa09e4ed507670fda90a5d6ac082f4dfd" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audio" path="vendor/qcom/opensource/commonsys/audio" revision="d73c0cdc4877aea38e4f159fde9991022c8740d9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audio-commonsys-intf" path="vendor/qcom/opensource/commonsys-intf/audio" revision="50598b206c44cf5366dc6b00cb7173c616f233ec" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal" path="vendor/qcom/opensource/audio-hal/st-hal" revision="943789d6972cc2e05b9e26afbb21cd53253784d7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal-ar" path="vendor/qcom/opensource/audio-hal/st-hal-ar" revision="2b05733d2d7c0e6f3813d51ae0216160f4fef681" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audio-hal_st-hal-ar" path="vendor/qcom/opensource/audio-hal/st-hal-ar-legacy" revision="219a0a322c2dd330531a13ed55c507e9bc442fef" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" path="hardware/qcom-caf/sm8450/audio/graphservices" revision="75d5e460413cad62a53f4621f9d9bd04ab664afd" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" path="hardware/qcom-caf/sm8450-6.6/audio/graphservices" revision="704ed68ff3361831c7a6e001e884e3b77d72e8b5" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" path="hardware/qcom-caf/sm8550/audio/graphservices" revision="1d2e82222dbc35b9b2cff966281cd2b7a26d081a" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" path="hardware/qcom-caf/sm8650/audio/graphservices" revision="49a735ba16fe132dbb2075590ff51603eafb68f7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" path="hardware/qcom-caf/sm8750/audio/graphservices" revision="62591b81ddb14cb1ddecf2a8e7162f2082456793" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_audioreach-graphservices" path="hardware/qcom-caf/sm8850/audio/graphservices" revision="80098a6384e3447fdf2dfb3bec0e9c61b950f42b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_core-utils-sys" path="vendor/qcom/opensource/core-utils-sys" revision="c149e22f0750751d34e42380e43087a3340f2288" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_core-utils-vendor" path="vendor/qcom/opensource/core-utils-vendor" revision="414fa42592568a6d9537f804c3d7dd4a95fcfd86" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="hardware/qcom-caf/sm8450/data-ipa-cfg-mgr" revision="a17b3e29dcbef0ebf49cbd8e9e5f5eda1e2bc72c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="hardware/qcom-caf/sm8450-6.6/data-ipa-cfg-mgr" revision="eab39efbc08eb034b20bfa2a0e8dd598b220c1d0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="hardware/qcom-caf/sm8550/data-ipa-cfg-mgr" revision="a37a4556aceab0da28a60e21fd1b887fe83347c7" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="hardware/qcom-caf/sm8650/data-ipa-cfg-mgr" revision="0b5c34253eb7786e84ba5f99b7c53c0f0331b839" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="hardware/qcom-caf/sm8750/data-ipa-cfg-mgr" revision="5c754092b8e85dd72904b9a5c62a687bae9ce627" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="hardware/qcom-caf/sm8850/data-ipa-cfg-mgr" revision="7609751c45981edb1a2c1be1e638b4748525c171" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_data-ipa-cfg-mgr" path="vendor/qcom/opensource/data-ipa-cfg-mgr-legacy-um" revision="897e6561f4c16cc1ab0bf397e6c0a657a1ed6231" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_dataipa" path="hardware/qcom-caf/sm8450-6.6/dataipa" revision="44593c76e204899f0ff9f7fe4fa8736b0463110b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_dataipa" path="hardware/qcom-caf/sm8550/dataipa" revision="a964339653ed78a7638b391487aa63b932ce80b6" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_dataipa" path="hardware/qcom-caf/sm8650/dataipa" revision="5c103a0f8f3d253498096e0f956e83567b8684aa" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_dataipa" path="hardware/qcom-caf/sm8750/dataipa" revision="c6206833bd59478caaa0a69e9d71f1bbfa866a96" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_dataipa" path="hardware/qcom-caf/sm8850/dataipa" revision="4b9d4eccbe0ffc0bc1d89bb0eb0642a1365c34b0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_dataservices" path="vendor/qcom/opensource/dataservices" revision="86a07cbb22386860173943ab55720461981f47b2" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display" path="vendor/qcom/opensource/display" revision="74a5c56b6229dbe518b43cf781e4c52e1a5ecb71" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-commonsys" path="vendor/qcom/opensource/commonsys/display" revision="6ce6b29f83971ac0dca528ca45e27bf8ef5075b9" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-commonsys-intf" path="vendor/qcom/opensource/commonsys-intf/display" revision="fbd3e92a492a2d192595e6ae0237cc5eb32f74cb" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-core" path="hardware/qcom-caf/sm8450-6.6/display/core" revision="372783d5eff5310aaf498349d930c6b2ccd45c2c" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-core" path="hardware/qcom-caf/sm8750/display/core" revision="89aa1914da50aae0fb1b2ebf3db38d34fba5f748" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-core" path="hardware/qcom-caf/sm8850/display/core" revision="3f56965f0690fee568903083f09a8349a803da31" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-intf" path="hardware/qcom-caf/sm8450-6.6/display/intf" revision="321608d1ce7f0364d69d93ee9cf3c759d54fec55" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-intf" path="hardware/qcom-caf/sm8750/display/intf" revision="19b5c055b40bc3d7af4309662eea98c7e7a72cee" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_display-intf" path="hardware/qcom-caf/sm8850/display/intf" revision="70a4f1221f36758cb22595470571fcee5b976561" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_fm-commonsys" path="vendor/qcom/opensource/commonsys/fm" revision="9ec99f94c26bff0bb9859985f445326a61d09ded" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_healthd-ext" path="vendor/qcom/opensource/healthd-ext" revision="9bdd090e6b5797d339e96b060c03412f36993554" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_interfaces" path="vendor/qcom/opensource/interfaces" revision="b75ec20e94b35e067f3af67e628df294b49505d0" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_libfmjni" path="vendor/qcom/opensource/libfmjni" revision="c5ace14ef01fc5842c64284daf26c4ee6b210811" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_libqspa" path="vendor/qcom/opensource/libqspa" revision="5349531e2b04b1fb3562cbf7298670210f89d676" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_libvmmem" path="vendor/qcom/opensource/libvmmem" revision="a4a0b08614eb1de238dd1fbe4cef94213560d5f1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_power" path="vendor/qcom/opensource/power" revision="2a237fa09a5f410e559ec8b7b3473969ac64d9bb" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_thermal-engine" path="vendor/qcom/opensource/thermal-engine" revision="0815f34094ebc952c8e1dd3619e384c7f9d1195b" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_usb" path="vendor/qcom/opensource/usb" revision="0d32cd0034b767aa8a6b5fbc8516570af8cf3e5f" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_vibrator" path="vendor/qcom/opensource/vibrator" revision="97d88ab231d84ba0b5549e6d6148522d6d73ee24" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/android_vendor_qcom_opensource_wfd-commonsys" path="vendor/qcom/opensource/commonsys/wfd" revision="b54a2fce355046c790949e9ec3445a7065dc5665" remote="ishtar17-tuna-lineage" />
+  <extend-project name="LineageOS/scripts" path="lineage/scripts" revision="673ea75e549b55cc23d6287947709655525700f1" remote="ishtar17-tuna-lineage" />
+  <extend-project name="OTA" path="evolution/OTA" revision="c62f7094fd814fba77b18fbd2c29e4bb89926a8b" />
+  <extend-project name="OTA" path="evolution/OTA-VANILLA" revision="72c970945d8eeae3491fa62d2d0ae7e1b95c8ae8" />
+  <extend-project name="TheParasiteProject/packages_apps_BtHelper" path="packages/apps/BtHelper" revision="fbcd1f249ce4c04b5631c0aa90a05e6e8ab43928" />
+  <extend-project name="art" path="art" revision="2ae0ac223eccfbdebc5ec5a4bb2795d58c13326d" />
+  <extend-project name="bionic" path="bionic" revision="f8b37b8c5b5cdc7c69a01107fbbb56b2a8ae8420" />
+  <extend-project name="bootable_recovery" path="bootable/recovery" revision="7f7a7931ed6e5d1eda50a096917f766b17d59f6b" />
+  <extend-project name="build" path="build/make" revision="75f33f854b8f750c46b5fd666457cea5c3636a65" />
+  <extend-project name="build_soong" path="build/soong" revision="6d3f832007e9040df8fbeb757b68228ae00e2e87" />
+  <extend-project name="device_evolution_sepolicy" path="device/lineage/sepolicy" revision="8c6224ff52ec84d0207f35b7ea166ffe795dbfb1" />
+  <extend-project name="external_FadingEdgeLayout" path="external/FadingEdgeLayout" revision="0165827a1c0c7076faa236fb01dcd5f877595ecf" />
+  <extend-project name="external_bouncycastle" path="external/bouncycastle" revision="56e5dac751581c7bd6dbe363d7ba3f8e8862c5bf" />
+  <extend-project name="external_pffft" path="external/pffft" revision="8af7b29aa6cab91efcbd6d4bc417e82964747a68" />
+  <extend-project name="external_piex" path="external/piex" revision="f036cb56369c876cd9b03b5acfa60d2511837b17" />
+  <extend-project name="external_steam-audio" path="external/steam-audio" revision="1540a227e3d34d84734e3aebddb655753170778c" />
+  <extend-project name="frameworks_av" path="frameworks/av" revision="8e6f34b6babe951b980f77a449828749bcfafd2b" />
+  <extend-project name="frameworks_base" path="frameworks/base" revision="7ce477290165bc3c0a6299464db471e11acd8c12" />
+  <extend-project name="frameworks_libs_systemui" path="frameworks/libs/systemui" revision="a545beb37be87a7feccbbcc76bd894d5cff3d289" />
+  <extend-project name="frameworks_native" path="frameworks/native" revision="49687694bd18a4a2df972f89b6717dbfce610721" />
+  <extend-project name="frameworks_opt_net_wifi" path="frameworks/opt/net/wifi" revision="240b2b56792357bb92153c842949e1e0433c41f8" />
+  <extend-project name="frameworks_opt_telephony" path="frameworks/opt/telephony" revision="06469e757eb3e0da70eeba02ef270b5d28dc8c1e" />
+  <extend-project name="hardware_google_pixel" path="hardware/google/pixel" revision="8e3a91851a182c6be19cd9d8809ec636b77e179e" />
+  <extend-project name="hardware_interfaces" path="hardware/interfaces" revision="d4f377ed8d027e31118669138e5b475f9366b202" />
+  <extend-project name="hardware_lineage_compat" path="hardware/lineage/compat" revision="8331a856009dbf5439d1340748738cf73c7db611" />
+  <extend-project name="hardware_qcom_display" path="hardware/qcom-caf/sm8150/display" revision="e74ff2ba65720052fda8238e5f6bb7a67f171c79" />
+  <extend-project name="kernel_configs" path="kernel/configs" revision="23c046e2d6d78d20bb4195d8fa73218018e2b7c0" />
+  <extend-project name="lineage-sdk" path="lineage-sdk" revision="a96a3b14d84a0a091fe3fa932bf543f4479f2d60" />
+  <extend-project name="manifest" path="evolution/manifest" revision="ece84bf074f2e10cb02bbe96d7b1e153aea8c84c" />
+  <extend-project name="packages_apps_AppLocker" path="packages/apps/AppLocker" revision="065f2f5553bcf297fe503b28ef15433447df92a5" />
+  <extend-project name="packages_apps_ColumbusService" path="packages/apps/ColumbusService" revision="b8167ad9c86adebdf54fe3bba0e03f37ee112ed6" />
+  <extend-project name="packages_apps_EvoEgg" path="packages/apps/EvoEgg" revision="8a36dc721f67f05e2054fd89965d221eb17e4fae" />
+  <extend-project name="packages_apps_Evolver" path="packages/apps/Evolver" revision="0261171167f09ee4f3a51fe8176ea1bd7fb2340b" />
+  <extend-project name="packages_apps_FaceUnlock" path="packages/apps/FaceUnlock" revision="817e02a974215b100915814267fabbfdb5961f88" />
+  <extend-project name="packages_apps_GameSpace" path="packages/apps/GameSpace" revision="f046de4d28415ce074f85758c44d74764cd9a9e6" />
+  <extend-project name="packages_apps_LMOFreeform" path="packages/apps/LMOFreeform" revision="bbd156fd62965346c26ba71cb9139489745d8f2c" />
+  <extend-project name="packages_apps_LineageParts" path="packages/apps/LineageParts" revision="aa7fc9d9878a526f96c7f00c81f86146e4194f62" />
+  <extend-project name="packages_apps_OmniStyle" path="packages/apps/OmniStyle" revision="15432cf870458b15259312b6e4c27c3e194a9939" />
+  <extend-project name="packages_apps_Sandbox" path="packages/apps/Sandbox" revision="fda7e163893dac66381594806cec1f80d00b146c" />
+  <extend-project name="packages_apps_Settings" path="packages/apps/Settings" revision="8b2dded5b421a6ec28434b59f7843883874b5058" />
+  <extend-project name="packages_apps_SetupWizard" path="packages/apps/SetupWizard" revision="c1cb7df61cb621232b9ce940d7baf1e80cec9d28" />
+  <extend-project name="packages_apps_Stk" path="packages/apps/Stk" revision="0c7c29561ad125d6553b19f05029a429fac4eaff" />
+  <extend-project name="packages_apps_SystemUIClocks" path="packages/apps/SystemUIClocks" revision="8a71fe2071923496c3a3f48e444ac33edc513c0d" />
+  <extend-project name="packages_apps_ThemeStore" path="packages/apps/ThemeStore" revision="d96bfe6e6b52236ac5845ac4ed5ac4c93b5fad65" />
+  <extend-project name="packages_apps_Updater" path="packages/apps/Updater" revision="e0c3089a7b69fa7062a7ebe4d6d434371342a4e0" />
+  <extend-project name="packages_apps_WallpaperPicker2" path="packages/apps/WallpaperPicker2" revision="7a2a208c999d7304d6e62aa62ddd6bb09b415547" />
+  <extend-project name="packages_modules_Bluetooth" path="packages/modules/Bluetooth" revision="eb0ba14ece37d3aee3187625673e4eafa45e1ce2" />
+  <extend-project name="packages_modules_Connectivity" path="packages/modules/Connectivity" revision="c1b50222f2947b912adff22cea13b1176325da53" />
+  <extend-project name="packages_modules_Permission" path="packages/modules/Permission" revision="6c36404f4a0c9f54c3906e95f38e90c15fa50e4c" />
+  <extend-project name="packages_modules_Wifi" path="packages/modules/Wifi" revision="a45b3c140b9ff68b6e082e2efe3009603f2bdfa1" />
+  <extend-project name="packages_modules_common" path="packages/modules/common" revision="3f4367f7d6a3ce865bb73b5e975706324598c881" />
+  <extend-project name="packages_providers_MediaProvider" path="packages/providers/MediaProvider" revision="cf3463bad69e071f28b2a6882b2925048add631d" />
+  <extend-project name="packages_providers_TelephonyProvider" path="packages/providers/TelephonyProvider" revision="9fd378250c5aab56dfb460994d59dcb88d0dd290" />
+  <extend-project name="packages_resources_apps" path="packages/resources/apps" revision="91d835b073de0f3208430467a217a14549777cc8" />
+  <extend-project name="packages_services_AxQuickLook" path="packages/services/AxQuickLook" revision="8499db252757d86d348a406eaae1f325ba4926f0" />
+  <extend-project name="packages_services_OmniJaws" path="packages/services/OmniJaws" revision="83f9fb29597f91e6b3685d46c3068449af440e2a" />
+  <extend-project name="packages_services_Telecomm" path="packages/services/Telecomm" revision="3be358b7a129fb6486913c8125e2301c906f7deb" />
+  <extend-project name="packages_services_Telephony" path="packages/services/Telephony" revision="b07a812762ff58516a7014c58d3b5b8b8819f19e" />
+  <extend-project name="system_core" path="system/core" revision="06651c729df4d7c451fd96ae7d52f0838ea19698" />
+  <extend-project name="system_fs_fs_mgr" path="system/fs/fs_mgr" revision="72063d709ceb5636795a5b8e148bc6f15fa6679f" />
+  <extend-project name="system_libhwbinder" path="system/libhwbinder" revision="3a07e34e48a56b2c6ba0ae80090be3ec9c77bc19" />
+  <extend-project name="system_media" path="system/media" revision="b141a77d249bc0fcec5f48d5d03df0c719b46f16" />
+  <extend-project name="system_memory_libmeminfo" path="system/memory/libmeminfo" revision="bf930d72e5fcab38ac143a800d1de39ed604a8cc" />
+  <extend-project name="system_sepolicy" path="system/sepolicy" revision="c3997bf608b40a7217d0eb2257af887afa78617b" />
+  <extend-project name="system_update_engine" path="system/update_engine" revision="1ef2cbc4f6f3fee374b9124b005da6eab13f8880" />
+  <extend-project name="system_vold" path="system/vold" revision="6d1461e1b7618ba30272450633a5971f2e89710b" />
+  <extend-project name="vendor_evolution" path="vendor/lineage" revision="3f7c545720e61b85a0e707393dc015807da32b80" />
+  <extend-project name="vendor_extras" path="vendor/extras" revision="09818c2085fddb26c211760ba7e83548c3c80aca" />
+  <extend-project name="vendor_gms" path="vendor/gms" revision="d5490a1323f348fff1cc35f091b29ba583c67a84" />
+  <extend-project name="vendor_gms-mosey" path="vendor/gms-mosey" revision="931dc880a8f4c76b6a55a37cf53b7fd449094e24" />
+  <extend-project name="vendor_packages_SettingsGoogle" path="vendor/unbundled_google/packages/SettingsGoogle" revision="b2aaa80ee7cbc7c90d6f77b928b6239888539899" />
+  <extend-project name="vendor_packages_SystemUIGoogle" path="vendor/unbundled_google/packages/SystemUIGoogle" revision="222caf0c881aba942d4506dbb2a0e7ffbd4f73ad" />
+  <extend-project name="vendor_pixel-style" path="vendor/pixel-style" revision="46d245100d5d314c59f8c549555a8e9bd13d9e1e" />
+  <extend-project name="vendor_themes" path="vendor/themes" revision="7d8236cf8495ea673652c5cfa3a3eaf773f39542" />
+</manifest>

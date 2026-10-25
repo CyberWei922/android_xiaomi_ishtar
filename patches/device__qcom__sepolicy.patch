@@ -1,0 +1,13 @@
+diff --git a/generic/private/qti-testscripts.te b/generic/private/qti-testscripts.te
+index 23819b8..2497d43 100644
+--- a/generic/private/qti-testscripts.te
++++ b/generic/private/qti-testscripts.te
+@@ -31,7 +31,7 @@ type qti-testscripts_exec, system_file_type, exec_type, file_type;
+ type qti-testscripts, domain, mlstrustedsubject;
+ userdebug_or_eng(`
+   typeattribute  qti-testscripts coredomain;
+-  permissive qti-testscripts;
++  # Keep this debug domain subject to its existing SELinux rules.
+   init_daemon_domain(qti-testscripts)
+ 
+   #this is shell scripts and need /system/bin/sh

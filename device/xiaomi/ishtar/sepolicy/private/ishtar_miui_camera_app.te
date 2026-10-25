@@ -1,0 +1,34 @@
+# Copyright (C) 2026 CyberWei922
+# SPDX-License-Identifier: Apache-2.0
+
+# A system-side app domain, selected only for the platform-signed MIUI package.
+typeattribute ishtar_miui_camera_app coredomain;
+app_domain(ishtar_miui_camera_app)
+net_domain(ishtar_miui_camera_app)
+bluetooth_domain(ishtar_miui_camera_app)
+
+# Platform camera/media APIs, with standard app-domain data/graphics permissions.
+allow ishtar_miui_camera_app {
+    cameraserver_service
+    audioserver_service
+    mediaserver_service
+    mediaextractor_service
+    mediadrmserver_service
+    mediametrics_service
+    thermal_service
+    stats_service
+    app_api_service
+    radio_service
+    system_api_service
+}:service_manager find;
+
+# Preserve the existing app-data type and MCS convention during data-preserving OTA.
+# No raw persist access, generic vendor library access or permissive declaration.
+
+# Preserve the standard platform-app navigation-key configuration read.
+# qemu.hw.mainkeys is the only exact key assigned to this public type.
+get_prop(ishtar_miui_camera_app, qemu_hw_prop)
+
+# Camera worker reads aggregate CPU, IO and memory PSI statistics during setup.
+# Limit this to the dedicated camera domain and read/open/getattr only.
+allow ishtar_miui_camera_app { proc_pressure_cpu proc_pressure_io proc_pressure_mem }:file { read open getattr };

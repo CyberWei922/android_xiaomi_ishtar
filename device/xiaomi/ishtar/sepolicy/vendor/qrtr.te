@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+
+# Operations observed for /data/vendor/qrtr/qrtr-lookup.txt.
+allow vendor_qrtr vendor_qrtr_lookup_data_file:dir { getattr search write add_name };
+allow vendor_qrtr vendor_qrtr_lookup_data_file:file { create open write setattr };

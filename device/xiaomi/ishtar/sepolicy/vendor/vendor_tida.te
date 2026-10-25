@@ -1,0 +1,11 @@
+# Dedicated domain for /odm/bin/tidad@1.2.
+type vendor_tida, domain;
+type vendor_tida_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_tida)
+hal_server_domain(vendor_tida, hal_xiaomi_tida)
+hwbinder_use(vendor_tida)
+get_prop(vendor_tida, hwservicemanager_prop)
+allow vendor_tida hidl_manager_hwservice:hwservice_manager find;
+
+# libtida@1.2 imports IMTService::getService; do not grant all HIDL services.
+hal_client_domain(vendor_tida, hal_xiaomi_mtd)

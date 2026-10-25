@@ -1,0 +1,82 @@
+diff --git a/aidl/VibratorOL/Vibrator.cpp b/aidl/VibratorOL/Vibrator.cpp
+index e470dfb..345b01e 100644
+--- a/aidl/VibratorOL/Vibrator.cpp
++++ b/aidl/VibratorOL/Vibrator.cpp
+@@ -584,7 +584,19 @@ ndk::ScopedAStatus VibratorOL::getCapabilities(int32_t* _aidl_return) {
+ #else
+         std::vector<CompositePrimitive> supportedPrimitives;
+         getSupportedPrimitives(&supportedPrimitives);
+-        if (supportedPrimitives.size() > 0)
++        // Composition requires every mandatory primitive, not merely one waveform.
++        bool hasRequiredPrimitives = true;
++        for (const auto primitive : {CompositePrimitive::NOOP, CompositePrimitive::CLICK,
++                                    CompositePrimitive::QUICK_RISE, CompositePrimitive::SLOW_RISE,
++                                    CompositePrimitive::QUICK_FALL, CompositePrimitive::LIGHT_TICK,
++                                    CompositePrimitive::LOW_TICK}) {
++            if (std::find(supportedPrimitives.begin(), supportedPrimitives.end(), primitive) ==
++                supportedPrimitives.end()) {
++                hasRequiredPrimitives = false;
++                break;
++            }
++        }
++        if (hasRequiredPrimitives)
+ #endif
+             *_aidl_return |= IVibrator::CAP_COMPOSE_EFFECTS;
+     }
+@@ -780,7 +792,9 @@ ndk::ScopedAStatus VibratorOL::getSupportedPrimitives(std::vector<CompositePrimi
+         CompositePrimitive::LOW_TICK,
+     };
+ #else
+-    for (int32_t primitiveId = static_cast<int32_t>(CompositePrimitive::NOOP);
++    // NOOP is a delay-only primitive and has no FIFO waveform.
++    supported->push_back(CompositePrimitive::NOOP);
++    for (int32_t primitiveId = static_cast<int32_t>(CompositePrimitive::CLICK);
+          primitiveId <= static_cast<int32_t>(CompositePrimitive::LOW_TICK);
+          primitiveId++) {
+         const struct effect_stream *stream;
+@@ -861,11 +875,15 @@ ndk::ScopedAStatus VibratorOL::getPrimitiveDuration(CompositePrimitive primitive
+     int ret = 0;
+ 
+ #ifdef USE_EFFECT_STREAM
+-    primitive_id |= PRIMITIVE_ID_MASK ;
+-    const struct effect_stream *stream;
+-    stream = get_effect_stream(primitive_id);
+-    if (stream != NULL && stream->play_rate_hz != 0)
+-        *durationMs = ((stream->length * 1000) / stream->play_rate_hz) + 1;
++    *durationMs = 0;
++    if (primitive == CompositePrimitive::NOOP)
++        return ndk::ScopedAStatus::ok();
++
++    primitive_id |= PRIMITIVE_ID_MASK;
++    const struct effect_stream *stream = get_effect_stream(primitive_id);
++    if (stream == nullptr || stream->play_rate_hz == 0)
++        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
++    *durationMs = ((stream->length * 1000) / stream->play_rate_hz) + 1;
+ 
+     ALOGD("primitive-%d duration is %dms", primitive, *durationMs);
+     return ndk::ScopedAStatus::ok();
+@@ -916,6 +934,10 @@ void VibratorOL::composePlayThread(VibratorOL *vibrator,
+             }
+         }
+ 
++        // The requested delay above is the entire NOOP; never send it to the motor.
++        if (e.primitive == CompositePrimitive::NOOP)
++            continue;
++
+         vibrator->ff.playPrimitive((static_cast<int>(e.primitive)), e.scale, &playLengthMs);
+         nfd = epoll_wait(vibrator->epollfd, &events, 1, playLengthMs);
+         if (nfd == -1 && (errno != EINTR)) {
+@@ -971,6 +993,13 @@ ndk::ScopedAStatus VibratorOL::compose(const std::vector<CompositeEffect>& compo
+     int status, nfd = 0, durationMs = 0, timeoutMs = 0;
+     struct epoll_event events;
+ 
++#ifdef USE_EFFECT_STREAM
++    int32_t capabilities = 0;
++    getCapabilities(&capabilities);
++    if (!(capabilities & IVibrator::CAP_COMPOSE_EFFECTS))
++        return ndk::ScopedAStatus::fromExceptionCode(EX_UNSUPPORTED_OPERATION);
++#endif
++
+     if (composite.size() > ComposeSizeMax) {
+         return ndk::ScopedAStatus::fromExceptionCode(EX_ILLEGAL_ARGUMENT);
+     }

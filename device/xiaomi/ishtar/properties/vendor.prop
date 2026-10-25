@@ -1,0 +1,14 @@
+# Audio
+# fluencetype=none: PAL graphs, not the legacy HAL fluence string.
+ro.vendor.audio.sdk.fluencetype=none
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.fluence.voicerec=false
+persist.vendor.audio.fluence.speaker=true
+persist.vendor.audio.fluence.tmic.enabled=false
+vendor.audio.feature.fluence.enable=true
+
+# Fingerprint
+persist.vendor.fingerprint.sensor_location=720|2541|123
+
+# NFC
+ro.vendor.se.chip.model=ST54K

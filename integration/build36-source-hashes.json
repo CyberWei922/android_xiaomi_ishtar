@@ -1,0 +1,102 @@
+{
+  "run": 36,
+  "files": {
+    "device/qcom/sepolicy_vndr/sm8550/qva/vendor/test/aoncameraservice_app.te": "a7bfd71261709ad58ea94904114db2b7ce0e89285dbd273dc8c785377a29609f",
+    "device/qcom/sepolicy_vndr/sm8550/qva/vendor/test/vendor_cta_app.te": "61f6beef94de38fdb7b581207a22d1b87c77382b8fd687b20224c2d76595f73b",
+    "device/qcom/sepolicy_vndr/sm8550/qva/vendor/test/hal_debugutils_default.te": "52c5c28d6aa6dcbba2564f0acabc900954395c5a7ee8f6e05cc043dcdeeb17b4",
+    "device/qcom/sepolicy_vndr/sm8550/qva/vendor/test/vendor_logkit_app.te": "c197c670ce9113c8cb4ab8aaa1750b2db2bbc4f24dd435eaabc59b59ab17fce0",
+    "device/qcom/sepolicy_vndr/sm8550/generic/vendor/test/pdt_app.te": "d9a14cf7b944110c85dd416f0bca5b560bfeac98fe87c1e2030091fb8015ada8",
+    "device/qcom/sepolicy/generic/private/qti-testscripts.te": "97a4a63c2bdfe02d31bfb4064d49eb0cdcf3194062c707ad17370c00f1f4d616",
+    "device/qcom/sepolicy_vndr/sm8550/generic/vendor/test/vendor-qti-testscripts.te": "69e1aa34c77bac101c2ec518dc5186544106c0693a39ad3faa1b3957067ebe54",
+    "system/sepolicy/private/su.te": "07aab340f5a9487ee8f2efdd67486d67fcb6194c849c86738bf25048f6c79efd",
+    "system/update_engine/payload_consumer/postinstall_runner_action.cc": "255c7effc2dfeb9ec4d0699e2376195d2e64a99badf00dd03c297db59f0cc1f6",
+    "system/update_engine/Android.bp": "52532839829228b3b50f0750bf136846f04560b66cfb881301b92ab0e658169f",
+    "vendor/lineage/prebuilt/common/bin/backuptool_postinstall.sh": "c2d1e629690837997eba4e71692b9fea2149c6a5a0e4244cbe54273bfd1868dc",
+    "vendor/lineage/prebuilt/common/bin/backuptool_ab.sh": "7613926de078be3a4f2a2790647f345e962d9129f556fa5a5ccafaf88dfdc834",
+    "vendor/lineage/prebuilt/common/bin/backuptool_ab.functions": "7096c4224709877eec19551ebe8a47e106961e0c9dd303f21d64e2cd34cca91f",
+    "vendor/lineage/prebuilt/common/bin/50-lineage.sh": "362fbbea03f91f8106bc19ef36cf5602b7a0a8b1190fa37f2495026fd3a49ab1",
+    "device/lineage/sepolicy/common/private/update_engine.te": "e82e5272ade35628dcbd033fa20a0978a43d54b3b3bedf17f7ac2254cd8fcba6",
+    "device/lineage/sepolicy/common/private/file_contexts": "22733f94866a513a1275215a9672b6350afe88fd2274d872fa6ceead3e574e1d",
+    "system/update_engine/backuptool_broker/broker.h": "078d0ce3ec730ef2876995925c5c38dcb1564c566c5192c0cfa1806d74d97825",
+    "system/update_engine/backuptool_broker/broker.cpp": "13eac290b1a6b458e447b3bfa2c1b97794fe17d4f37b1c764eb92b3c44b1844e",
+    "system/update_engine/backuptool_broker/main.cpp": "427073d786c5fb85587d47e3cc461053cb4fe036efdd255d40ceb09b973966b0",
+    "system/update_engine/backuptool_broker/Android.bp": "2898f92f87203a36897b35401d657b717a45c6f9eb87f6c575a4e9a97e539f5b",
+    "device/lineage/sepolicy/common/private/backuptool.te": "12f479b6846b38b0befde18a331830216a9c975112a5e8addfe5a1bfd6b6a632",
+    "system/update_engine/backuptool_broker/backuptool_staged.sh": "0835b6701de36661a04e1f37a723002b861fb3bce4efbc9eef31c9076dc32bcb",
+    "system/update_engine/backuptool_broker/worker.cpp": "59a99e791dfb872d82c1088a66894b65e123225da6176fab715c2bb596b416a3",
+    "system/update_engine/backuptool_broker/worker.h": "ef36782b9d56fc1661695c7e85560a693337c928d3cf9bb73e48b35f23785c2f",
+    "system/update_engine/backuptool_store/Android.bp": "7419dc862e8de4ea33d7b01a3b732475a5895d897b0f9d13535fe655b4d7a57a",
+    "system/update_engine/backuptool_store/COPYING": "f6b78c087c3ebdf0f3c13415070dd480a3f35d8fc76f3d02180a407c1c812f79",
+    "system/update_engine/backuptool_store/io.cpp": "1e8ba94a74db4271f1f2b4adf78b456d2ca0c2ace1a600d5f0476038e50d257c",
+    "system/update_engine/backuptool_store/main.cpp": "4b6b1c9d14bf5f5cfae5035d0e123ef5ec291ca704ac571614e04e13c5826e61",
+    "system/update_engine/backuptool_store/offline.cpp": "05bb8d346eceafde2bc30ebe33543a9f17d827ddcdce761ae364ba40951f1194",
+    "system/update_engine/backuptool_store/store.h": "e02d5a9485da4fc5cb9c4291bdb173137a573c5bef479e46b732f681b558b340",
+    "frameworks/native/services/surfaceflinger/Scheduler/Scheduler.h": "9bff167d9930a7d62476a918f47479beb7c03c9ff0e1269bf1a66df300f20415",
+    "frameworks/native/services/surfaceflinger/Scheduler/Scheduler.cpp": "6565202d890abf33f23e09693b6e8fbbb87a03508c8911ca701c00505b7b2ff9",
+    "frameworks/native/services/surfaceflinger/SurfaceFlinger.cpp": "c30fd2ebb5a2e0b30a9ad403d5a4923962cfd7895c382f1960b864c095562403",
+    "frameworks/native/services/surfaceflinger/tests/unittests/SchedulerTest.cpp": "a53ae59af67872cd5168f7e6cfce49e816d870387f8a9a6eb3308f1db17d30ee",
+    "frameworks/native/services/surfaceflinger/tests/unittests/TestableSurfaceFlinger.h": "bef078868edc77223fb4948fb23cbab72d68381a488d7a255821738ef9c584bc",
+    "frameworks/native/services/surfaceflinger/tests/unittests/SurfaceFlinger_DisplayTransactionCommitTest.cpp": "7536cae61cb055abff73dadbabbe81bb3bfd5ed227579727a5d898afbc184e49",
+    "device/xiaomi/sm8550-common/configs/permissions/privapp-permissions-hotword.xml": "62c652d772041159962d05eef2dff24b187838b282de9c748aea3479d7c3a571",
+    "device/xiaomi/ishtar/BoardConfig.mk": "5e7fef177a1c13bcfc8ff34f9fabee42b9306ddd388833ffe03d722b39c70d81",
+    "device/xiaomi/ishtar/root/init_boot-KernelSU-v3.3.1.img": "d1188cf4dcf960b53a16a4fceabec1d70b887f165e2a557bdf20600f85654ddc"
+  },
+  "repos": {
+    "frameworks/native": {
+      "head": "49687694bd18a4a2df972f89b6717dbfce610721",
+      "current_diff_sha256": "58ba29358de397271a7ec80730605b346efe920a6dad7fd3fa1dd059d50c4d11"
+    },
+    "system/update_engine": {
+      "head": "1ef2cbc4f6f3fee374b9124b005da6eab13f8880",
+      "current_diff_sha256": "86b85db3134772ed1c5cb793c12a153e9d5f1982f5720077e94f07ef6cd8223a"
+    },
+    "vendor/lineage": {
+      "head": "3f7c545720e61b85a0e707393dc015807da32b80",
+      "current_diff_sha256": "ffa1a0bf3431f451ac764b95e4fa86d5a3ce245990d9382726d89a867d2c372d"
+    },
+    "system/sepolicy": {
+      "head": "c3997bf608b40a7217d0eb2257af887afa78617b",
+      "current_diff_sha256": "0045d1bf956c5407131238a59affac4318c5ba9d3872a963b22a11122eb1df69"
+    },
+    "device/lineage/sepolicy": {
+      "head": "8c6224ff52ec84d0207f35b7ea166ffe795dbfb1",
+      "current_diff_sha256": "c2998aedac847b41af844d89999519ff99af9bf9f1d3c5da930554b8fbcd2cd8"
+    },
+    "device/qcom/sepolicy": {
+      "head": "98d96fe9b1f4ea0b35a8bb5ce0ac2ae3bf766647",
+      "current_diff_sha256": "53165f00e6582e03cedbd7026f98fa3af45bff9884dcc5613496f1fd6702de06"
+    },
+    "device/qcom/sepolicy_vndr/sm8550": {
+      "head": "3246964ec405f5c7f9c6aa15e7331b4de1c04bbc",
+      "current_diff_sha256": "16969d11d8094dcaefa92f17ec41ff34f553fa4448724fd13a49748805152796"
+    },
+    "packages/apps/Settings": {
+      "head": "8b2dded5b421a6ec28434b59f7843883874b5058",
+      "current_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "device/xiaomi/ishtar": {
+      "head": "719e3e212764a33bb65a82e824594e30c562eb4e",
+      "current_diff_sha256": "753997fb3cf7ae03cf31ea7b8969209602ac14b16d40a9499e82600a3ab4b832"
+    },
+    "device/xiaomi/sm8550-common": {
+      "head": "9b424fbf62981955997c1e11edc9ffc4a26fcae5",
+      "current_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "kernel/xiaomi/sm8550-devicetrees": {
+      "head": "84022f844cfc0a7807e103d672361d0a66a82d48",
+      "current_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build/make": {
+      "head": "75f33f854b8f750c46b5fd666457cea5c3636a65",
+      "current_diff_sha256": "6b0cfd8e9e7b3326dabbf91e5dada8e19bf4ceb5dac5982c0c5941ad03781415"
+    },
+    "build/soong": {
+      "head": "6d3f832007e9040df8fbeb757b68228ae00e2e87",
+      "current_diff_sha256": "29ef9c40b0ca65e1818486f6cac708b8c1118db272168d3fb2ad3740d2020250"
+    },
+    "frameworks/base": {
+      "head": "7ce477290165bc3c0a6299464db471e11acd8c12",
+      "current_diff_sha256": "2be9bd87e398cb24cbb55bf0cde301b78a5e36dac664c37841f8f22bb4cbbec2"
+    }
+  }
+}

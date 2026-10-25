@@ -1,0 +1,4 @@
+runtime_resource_overlay {
+    name: "WifiResIshtar",
+    device_specific: true
+}

@@ -1,0 +1,54 @@
+# Dedicated domain for /odm/bin/mtd@1.3.
+type vendor_mtd, domain;
+type vendor_mtd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_mtd)
+hal_server_domain(vendor_mtd, hal_xiaomi_mtd)
+hwbinder_use(vendor_mtd)
+get_prop(vendor_mtd, hwservicemanager_prop)
+allow vendor_mtd hidl_manager_hwservice:hwservice_manager find;
+
+# Startup AVCs identify smcinvoke INVOKE_REQ 0x9801 / SERVER_REQ 0x9803
+# and DMA_HEAP_IOCTL_ALLOC 0x4800. Keep access scoped to this daemon.
+allow vendor_mtd tee_device:chr_file { getattr open read write ioctl };
+allowxperm vendor_mtd tee_device:chr_file ioctl { 0x9801 0x9803 };
+allow vendor_mtd { vendor_dmabuf_qseecom_heap_device vendor_dmabuf_qseecom_ta_heap_device }:chr_file { open read ioctl };
+allowxperm vendor_mtd { vendor_dmabuf_qseecom_heap_device vendor_dmabuf_qseecom_ta_heap_device }:chr_file ioctl { 0x4800 };
+
+# libmt@1.3 imports IFidoService/IMlipayService::getService.
+hal_client_domain(vendor_mtd, hal_xiaomi_mfidoca)
+hal_client_domain(vendor_mtd, hal_mlipay)
+
+# MTService startup obtains ISystemSuspend, as seen in the current AVCs.
+wakelock_use(vendor_mtd)
+
+# MT startup maps and unmaps QCE crypto buffers.
+allow vendor_mtd vendor_qce_device:chr_file { getattr open read write ioctl };
+allowxperm vendor_mtd vendor_qce_device:chr_file ioctl { 0x870a 0x870b };
+
+# Read the existing TEE listener readiness property.
+get_prop(vendor_mtd, vendor_tee_listener_prop)
+
+# Parent-directory metadata/traversal observed during startup.
+# File access and Unix DAC are separate and remain unresolved here.
+allow vendor_mtd mnt_vendor_file:dir { getattr search };
+allow vendor_mtd vendor_persist_data_file:dir { getattr search };
+
+# Exact status properties written by libmt@1.3. Consumer access is audited
+# under global Permissive before any Enforcing candidate.
+set_prop(vendor_mtd, vendor_mtd_widevine_prop)
+set_prop(vendor_mtd, vendor_mtd_rpmb_prop)
+
+# Separate exact types; no writes to vendor_system_prop/vendor_default_prop.
+set_prop(vendor_mtd, vendor_mtd_provision_status_prop)
+set_prop(vendor_mtd, vendor_mtd_feature_state_prop)
+
+# Exact RKP status output observed from MTService::rkp_get_status.
+set_prop(vendor_mtd, vendor_mtd_rkp_status_prop)
+
+# The shipped service invokes restorecon and reads the label database.
+# This grants no relabel, persist-file or Unix-DAC bypass permissions.
+allow vendor_mtd file_contexts_file:file { getattr open read };
+
+# devid_attestation_reload reports its result through this exact vendor key.
+# No generic vendor property write or persist/DAC permission is added.
+set_prop(vendor_mtd, vendor_mtd_attestation_status_prop)

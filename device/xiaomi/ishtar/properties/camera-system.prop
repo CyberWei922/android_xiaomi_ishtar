@@ -1,0 +1,9 @@
+# Camera03 compatibility properties; auxiliary allowlist is merged into vendor.prop.
+persist.vendor.camera.privapp.list=com.android.camera
+persist.vendor.camera.maxRAWSizes=19
+persist.sys.camera.allow_ultraraw_dng_size=true
+ro.miui.build.region=global
+ro.miui.notch=1
+ro.miui.ui.version.name=V816
+ro.miui.ui.version.code=816
+ro.product.mod_device=ishtar_global

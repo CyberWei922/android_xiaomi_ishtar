@@ -1,0 +1,53 @@
+diff --git a/vibrator/effect/effect.cpp b/vibrator/effect/effect.cpp
+index f09d09a..9b9ea4e 100644
+--- a/vibrator/effect/effect.cpp
++++ b/vibrator/effect/effect.cpp
+@@ -34,6 +34,7 @@
+ 
+ #define LOG_TAG "libqtivibratoreffect.xiaomi"
+ 
++#include <aidl/android/hardware/vibrator/CompositePrimitive.h>
+ #include <aidl/android/hardware/vibrator/Effect.h>
+ #include <android-base/logging.h>
+ #include <filesystem>
+@@ -44,6 +45,7 @@
+ 
+ #include "effect.h"
+ 
++using aidl::android::hardware::vibrator::CompositePrimitive;
+ using aidl::android::hardware::vibrator::Effect;
+ 
+ namespace {
+@@ -69,7 +71,12 @@ std::unique_ptr<effect_stream> readEffectStreamFromFile(uint32_t uniqueEffectId)
+ 
+     std::ifstream data(filePath, std::ios::in | std::ios::binary);
+     if (!data.is_open()) {
+-        LOG(ERROR) << "Failed to open " << filePath << " for effect " << effectId;
++        if ((uniqueEffectId & kPrimitiveMask) != 0) {
++            // Missing primitive files mean the corresponding effect is unsupported.
++            LOG(VERBOSE) << "No waveform for primitive " << effectId;
++        } else {
++            LOG(ERROR) << "Failed to open " << filePath << " for effect " << effectId;
++        }
+         return nullptr;
+     }
+ 
+@@ -109,6 +116,18 @@ const struct effect_stream* get_effect_stream(uint32_t effectId) {
+         if (newEffectStream) {
+             auto result = sEffectStreams.emplace(effectId, *newEffectStream);
+             return &result.first->second;
++        } else if ((effectId & kPrimitiveMask) != 0) {
++            // A missing primitive must not turn into an unrelated CLICK. THUD has
++            // the same defined sensation in both APIs, so reuse its exact waveform.
++            if (effectId == (static_cast<uint32_t>(CompositePrimitive::THUD) | kPrimitiveMask)) {
++                newEffectStream = readEffectStreamFromFile(static_cast<uint32_t>(Effect::THUD));
++                if (newEffectStream) {
++                    newEffectStream->effect_id = static_cast<uint32_t>(CompositePrimitive::THUD);
++                    auto result = sEffectStreams.emplace(effectId, *newEffectStream);
++                    return &result.first->second;
++                }
++            }
++            return nullptr;
+         } else if (effectId == (uint32_t)Effect::DOUBLE_CLICK) {
+             LOG(VERBOSE) << "Could not get double click effect, duplicating click effect";
+             newEffectStream = duplicateEffect(get_effect_stream((uint32_t)Effect::CLICK),

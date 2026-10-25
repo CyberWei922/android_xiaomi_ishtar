@@ -1,0 +1,98 @@
+diff --git a/common/private/backuptool.te b/common/private/backuptool.te
+index b948b61..7c75877 100644
+--- a/common/private/backuptool.te
++++ b/common/private/backuptool.te
+@@ -1,11 +1,32 @@
+ type backuptool, domain, coredomain;
+ 
++# Protocol 2 stages only in broker tmpfs. Never grant a worker raw block or
++# mount privileges, or writes/relabels to active/target system file types.
++r_dir_file(backuptool, system_file_type)
++# Respect Treble: only explicitly supported vendor configuration files are
++# readable; generic vendor apps, executables and private HAL files stay denied.
++allow backuptool vendor_file:dir r_dir_perms;
++allow backuptool vendor_file:lnk_file r_file_perms;
++r_dir_file(backuptool, vendor_configs_file)
++allow backuptool rootfs:dir search;
++allow backuptool backuptool_broker_root_file:dir r_dir_perms;
++allow backuptool backuptool_broker_root_file:file r_file_perms;
++allow backuptool postinstall_file:dir r_dir_perms;
++allow backuptool postinstall_file:file r_file_perms;
++allow backuptool postinstall_file:lnk_file r_file_perms;
++allow backuptool backuptool_workspace_file:dir create_dir_perms;
++allow backuptool backuptool_workspace_file:file create_file_perms;
++allow backuptool backuptool_workspace_file:lnk_file { create read getattr setattr unlink rename };
++allow backuptool { shell_exec toolbox_exec backuptool_store_exec postinstall_exec }:file { rx_file_perms execute_no_trans };
++allow backuptool self:global_capability_class_set { chown fowner fsetid };
++allow backuptool update_engine:fd use;
++allow backuptool update_engine:fifo_file rw_file_perms;
++neverallow backuptool self:global_capability_class_set { sys_admin sys_chroot mknod dac_override dac_read_search };
++neverallow backuptool dev_type:blk_file { open read write ioctl };
++neverallow backuptool fs_type:filesystem { mount remount unmount relabelfrom relabelto };
++
+ neverallow {
+     domain
+     -recovery
+     -update_engine
+ } backuptool:process transition;
+-
+-userdebug_or_eng(`
+-    permissive backuptool;
+-')
+diff --git a/common/private/file_contexts b/common/private/file_contexts
+index 29a24a8..2695a97 100644
+--- a/common/private/file_contexts
++++ b/common/private/file_contexts
+@@ -24,3 +24,10 @@
+ 
+ # Sandbox
+ /data/system_ce/[0-9]*/sandbox/vault(/.*)?  u:object_r:ax_sandbox_vault_file:s0
++
++# Native OTA mount broker; executes only from the privileged updater.
++/system/bin/backuptool_broker  u:object_r:backuptool_broker_exec:s0
++
++# Offline tmpfs staging helper; exact native caller checks guard each mode.
++/system/bin/backuptool_store u:object_r:backuptool_store_exec:s0
++/system/bin/backuptool_staged\.sh u:object_r:postinstall_exec:s0
+diff --git a/common/private/update_engine.te b/common/private/update_engine.te
+index 4ae6555..262f116 100644
+--- a/common/private/update_engine.te
++++ b/common/private/update_engine.te
+@@ -11,3 +11,37 @@ allow update_engine labeledfs:filesystem { mount unmount };
+ # Allow transition to backuptool domain
+ allow update_engine self:process setexec;
+ domain_trans(update_engine, postinstall_exec, backuptool)
++
++# Native broker executes in update_engine, with a private mount namespace.
++# Its workspace is volatile; no system_file write or worker SYS_ADMIN grant.
++type backuptool_broker_exec, exec_type, system_file_type, file_type;
++type backuptool_workspace_file, file_type;
++allow update_engine backuptool_broker_exec:file { rx_file_perms execute_no_trans };
++allow update_engine self:process setfscreate;
++# Current kernel selinux_mount checks mounton even for MS_PRIVATE on /.
++allow update_engine rootfs:dir mounton;
++# rootcontext= calls may_context_mount_inode_relabel: relabelfrom is checked
++# against the tmpfs superblock; associate is checked for the new root label.
++allow update_engine tmpfs:filesystem { mount unmount relabelfrom };
++allow update_engine backuptool_workspace_file:dir create_dir_perms;
++allow update_engine backuptool_workspace_file:dir mounton;
++allow backuptool_workspace_file tmpfs:filesystem associate;
++# Retain the existing userdebug overlay_remounter's system_file_type rules.
++# The native broker independently requires getcon()==update_engine before I/O.
++# Applications, shell and addon workers must never execute this entrypoint.
++neverallow { appdomain shell backuptool } backuptool_broker_exec:file execute;
++
++# Only tmpfs state is writable through VFS; inactive partitions are mounted
++# read-only as postinstall_file and committed offline through existing block I/O.
++type backuptool_broker_root_file, file_type;
++type backuptool_store_exec, exec_type, system_file_type, file_type;
++allow backuptool_broker_root_file tmpfs:filesystem associate;
++allow update_engine backuptool_broker_root_file:dir { create_dir_perms mounton };
++allow update_engine backuptool_broker_root_file:file create_file_perms;
++allow update_engine backuptool_workspace_file:file r_file_perms;
++allow update_engine backuptool_workspace_file:lnk_file r_file_perms;
++allow update_engine backuptool_store_exec:file { rx_file_perms execute_no_trans };
++neverallow { appdomain shell } backuptool_store_exec:file execute;
++
++# Reap only the private worker process group after its controller exits.
++allow update_engine backuptool:process sigkill;
