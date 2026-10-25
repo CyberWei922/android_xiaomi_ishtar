@@ -2,18 +2,28 @@
 
 **English** | [简体中文](zh-CN/STATUS.md)
 
-Recorded on October 25, 2026. Build numbers refer to development runs.
+Recorded on October 26, 2026. Build numbers refer to development runs.
 
-## build46 — installed source snapshot
+## build47 — installed source snapshot
+
+- Android 17 / SDK 37 / Evolution X 12.3, incremental `1792944920`. Default Enforcing boot, KSU root, kswapd binding, data marker and 25 user applications were verified after installation.
+- The shipped camera HAL had a rejected write to `persist.vendor.aiie_capture_log.debug`, classified as `vendor_default_prop`. Added only an exact string label to the existing `vendor_camera_prop`; native policy queries confirmed the ownership mismatch before the change. The actual OTA and installed property label match, and the existing camera set permission is present. No new allow rule or property value change was made. A subsequent camera HAL write has not been observed in this verification.
+- Reviewed user-root MLS categories: `s0:c512,c768` on `/data/data` and `/data/user_de/0` is the intended user0 isolation computed and reapplied by `vold_prepare_subdirs` and libselinux. An earlier corruption diagnosis and temporary nonrecursive `s0` relabel were withdrawn; boot restored the intended categories. The initial verifier incorrectly expected `s0` and triggered a temporary Permissive fallback. After correcting the verifier, a separate default-Enforcing boot passed, and both diagnostics and shell package compilation succeeded with the intended labels. No MLS permission or boot relabel workaround was added. The exact callsites of the older dex2oat root probes remain unattributed.
+- A shell application cache directory retained an `xposed_file` label absent from the current policy, appearing as `unlabeled` to ART. Its inode matched the captured denial and the system dry run expected `shell_data_file`, which ART can already read. Restored only that directory nonrecursively; its metadata and child contexts were preserved, shell package compilation succeeded, and the label persisted after reboot. The origin of the old label is unproven.
+- All 57 source pins, 34 OTA payload/installer partition hashes and seven boot image readbacks passed. Kernel Image, camera module, KSU and TWRP are retained. The separate confirmation startup guard committed without restoring Permissive; the crash buffer was empty during the bounded startup check.
+- ROM policy remains `3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`, declared permissive domains `[]`; the loaded policy has only the upstream KSU root-domain exception. OTA SHA256: `3c4fbf83685b57e2e1c4a18a0a3d51e71296c0a343fab362765deea1ee1123a9`.
+- The owner confirmed the requested camera, fingerprint, NFC reading and Bluetooth checks on build46 **Enforcing**. Build47 changes one label only; exhaustive hardware and long-duration certification remain open. No camera UI automation was used.
+
+## build46 — previous Enforcing boot and owner checks
 
 - Android 17 / SDK 37 / Evolution X 12.3, incremental `1792936083`.
 - Default **Enforcing** selected by `androidboot.selinux=enforcing` in bootconfig and kernel command line, plus `enforcing=1`. Normal boot completed with no host-side enable command. The post-fs-data guard observed Enforcing; it was disarmed after verification and did not restore Permissive.
-- Core PIDs were stable over the 30-second observation, the crash buffer was empty, and kswapd was verified in `/kswapd` under Enforcing. These are bounded startup checks; complete manual hardware and long-duration acceptance remain pending.
+- Core PIDs were stable over the 30-second observation, the crash buffer was empty, and kswapd was verified in `/kswapd` under Enforcing. These are bounded startup checks; exhaustive hardware and long-duration acceptance remain open; the requested owner checklist subsequently passed.
 - Six jobs, Full LTO and existing memory guards. All 57 source pins, 34 OTA payload/installer partition hashes and seven target boot readbacks passed verification.
 - Installed from build45 preserving 25 user applications and the data marker. KSU v3.3.1 LKM root, TWRP, AVB root flags=3 and kernel 5.15.211 remain present.
 - Only the device BoardConfig boot mode changed. Actual ROM policy is unchanged from45: `3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`, declared permissive domains `[]`. The live policy has only the upstream KSU `ksu` root-domain exception.
 - OTA SHA256: `cfba3de2630dbea88573d05748166b437ba63cc6b04e58c4eb4570122f976687`.
-- Owner camera, fingerprint, NFC reading and Bluetooth checklist passed in Permissive. The Enforcing functional checklist remains pending. No camera UI automation was used.
+- Owner camera, fingerprint, NFC reading and Bluetooth checklist subsequently passed on build46 Enforcing. No camera UI automation was used.
 
 ## Kernel reclaim attachment repair in build45
 
@@ -36,7 +46,7 @@ Recorded on October 25, 2026. Build numbers refer to development runs.
 - Normal device release now deinitializes a completed lens-parking worker after the power-down decision. This prevents stale STOP/exit state from carrying into the next acquisition. Existing thread joining and power ownership checks are retained; no register tables or firmware were changed.
 - The rebuilt camera module was verified in the actual OTA and on the phone: `ea88ece9db5674f8d657ca3202d914a86db52264d4c2b620559cf1eb912f809b`. The kernel Image remains unchanged.
 - 3 consecutive camera open/close cycles passed with active/released clients and a stable provider. Fresh OIS traces showed no request-zero rejection, wrong-state parking or OIS packet-parse failure in those cycles. Temporary OIS logging and USB-awake settings were restored.
-- The owner reported that the camera tests on build43 passed without problems. This is owner functional acceptance in Permissive; camera testing under Enforcing remains separate. Photos and phone logs stay private.
+- The owner reported that the camera tests on build43 passed without problems. This is the earlier Permissive acceptance; the owner subsequently confirmed the requested camera checks on build46 Enforcing. Photos and phone logs stay private.
 - These checks do not establish stabilization quality, all camera modes, or long-duration reliability.
 
 ## Thermal startup repair in build43
@@ -55,7 +65,7 @@ Recorded on October 25, 2026. Build numbers refer to development runs.
 - Build37: rear 0.5x / 1x / 3.2x / 5x and front photos were captured and saved, with EXIF focal-length checks. A rear 1080p video was recorded and saved. This is basic capture/save coverage, not image-quality acceptance.
 - All six reapplyDisplayModes regressions passed on the phone using the build39 test binary, SHA256 `2b9a1580e5ae5d00d862314d00636dab374a3e03fced53434b594139e38fdc90`. The corrections concerned Android 17 test assumptions; production SurfaceFlinger was unchanged by those test corrections.
 
-- The owner reported fingerprint, NFC reading and Bluetooth checklist tests passed in Permissive; these need a repeat under Enforcing.
+- The owner subsequently confirmed fingerprint, NFC reading and Bluetooth checks on build46 Enforcing.
 
 ## Remaining work
 
@@ -63,7 +73,7 @@ Recorded on October 25, 2026. Build numbers refer to development runs.
 
 - MTD DAC/property probes, RIL default-property reads, audio diagnostic/boot-status probes and the camera empty-service lookup still need exact cause attribution. These observations do not establish corresponding hardware failures, and no broad permissions were granted.
 
-- Manual Enforcing hardware acceptance, complete haptic composition and broader hardware/long-duration testing remain open.
+- The requested Enforcing owner checklist passed on build46. Complete haptic composition, exhaustive hardware coverage and long-duration testing remain open.
 - The eSE service fails initialization in Permissive as well, requesting missing IEsePowerManager interfaces and reporting GPQESE_CMD_OPEN failure. Matching stock ST NFC/eSE interfaces still need investigation; no broad allow or manifest removal was used to hide it.
 - Other AVCs need individual cause review. Captured records include optional lookups, third-party probes, secure-DSP fallback probes and diagnostics; raw counts are not independent bug counts. No blanket allow rules were generated.
 - Full upstream identity of the restored kernel/module trees remains unproven; pinned file and patch hashes do not replace that provenance check.

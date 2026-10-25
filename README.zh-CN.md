@@ -21,7 +21,7 @@
 
 ## 当前状态
 
-**开发中。** build46 已保留数据刷入，KSU root 和默认 Enforcing 启动均已核验。机主反馈相机、指纹、NFC 和蓝牙在 Permissive 下检查正常；Enforcing 下人工功能验收仍待完成。见[验证状态](docs/zh-CN/STATUS.md)。
+**开发中。** build47 已保留数据刷入，KSU root 与默认 Enforcing 已核验。机主已确认 build46 Enforcing 下相机、指纹、NFC、蓝牙清单正常；build47 补正一条相机调试属性标签。范围及剩余问题见[验证状态](docs/zh-CN/STATUS.md)。
 
 当前开发配置使用 **SELinux Enforcing**、关闭 AVB 验证、KernelSU v3.3.1 LKM 和预制 TWRP。详细结果及待验证项目见[验证状态](docs/zh-CN/STATUS.md)。
 

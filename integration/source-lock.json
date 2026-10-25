@@ -1,5 +1,5 @@
 {
-  "snapshot": "Android17 build46",
+  "snapshot": "Android17 build47",
   "components": [
     {
       "path": "device/xiaomi/ishtar",
@@ -434,5 +434,5 @@
     }
   ],
   "full_kernel_upstream_identity_verified": false,
-  "device_validation_note": "Build46 installed preserving data and root, booted with Enforcing selected in kernel command line and bootconfig, and remained Enforcing after the independent recovery guard was disarmed. ROM policy unchanged from45. Owner camera, fingerprint, NFC and Bluetooth checklist passed in Permissive; Enforcing manual hardware acceptance and long-duration tests remain pending."
+  "device_validation_note": "Build47 installed preserving data and root, and a separate default Enforcing confirmation boot passed. One exact camera debug property label was corrected using an existing camera property type; no allow rule, property value, camera driver or kernel change. A shell cache label correction persisted. User-root MLS categories were confirmed to be intended vold user isolation; the earlier label-corruption diagnosis was withdrawn. Diagnostics and shell compilation succeeded with intended labels under Enforcing. Owner camera, fingerprint, NFC and Bluetooth checks passed on build46 Enforcing. Exhaustive hardware and long duration coverage remain open."
 }

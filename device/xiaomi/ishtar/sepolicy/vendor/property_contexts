@@ -27,3 +27,6 @@ ro.vendor.oem.imei2 u:object_r:vendor_radio_prop:s0 exact string
 ro.vendor.oem.meid u:object_r:vendor_radio_prop:s0 exact string
 ro.vendor.oem.ctacode u:object_r:vendor_radio_prop:s0 exact string
 persist.vendor.oem.cta_code u:object_r:vendor_radio_prop:s0 exact string
+
+# Exact debug status output from the shipped camera HAL; preserve its string ABI.
+persist.vendor.aiie_capture_log.debug u:object_r:vendor_camera_prop:s0 exact string

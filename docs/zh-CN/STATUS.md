@@ -1,8 +1,18 @@
-# 验证状态（2026-10-25）
+# 验证状态（2026-10-26）
 
 [English](../STATUS.md) | **简体中文**
 
-## build46：当前已安装的源码快照
+## build47：当前已安装的源码快照
+
+- Android 17 / SDK 37 / Evolution X 12.3，incremental `1792944920`。默认 Enforcing 开机、KSU root、kswapd 绑定、数据标记及 25 个用户应用已核验。
+- 相机 HAL 对 `persist.vendor.aiie_capture_log.debug` 的写入被错误归入 `vendor_default_prop` 而拒绝。仅补到现有 `vendor_camera_prop` 的 exact string 标签；修复前 native 策略查询确认了类型差异，实际 OTA 和安装后的标签均已匹配，现有相机写权限可覆盖。未新增 allow，未改属性值；本轮未观察到后续真实相机 HAL 写入。
+- 已核实用户根目录 MLS：`/data/data` 和 `/data/user_de/0` 的 `s0:c512,c768` 是 `vold_prepare_subdirs` 与 libselinux 按用户0计算并重设的正常隔离标签。此前“标签损坏”的判断及临时非递归改成 `s0` 的处理已撤回，开机已恢复正确类别。初次验证脚本错误要求 `s0`，触发过临时 Permissive 保护回退；修正验证后，单独一次默认 Enforcing 开机通过，保留正确标签时诊断及 shell 应用编译均成功。未新增 MLS 权限或开机改标签脚本；旧 dex2oat 根目录探测的具体调用点仍待定位。
+- shell 应用缓存目录残留当前策略没有的 `xposed_file` 标签，ART 将其视为 `unlabeled`。inode 与拒绝日志匹配，系统 dry run 预期 `shell_data_file`，现有 ART 权限可读取。仅非递归恢复这一个目录，元数据及子目录标签保留，shell 应用编译成功，重启后标签仍正确；旧标签来源未证明。
+- 57 项源码、34 个实际 OTA/安装分区哈希及7个启动镜像回读全部匹配。内核 Image、相机模块、KSU、TWRP 保留；单独确认重启的保护成功提交，该次无 Permissive 回退，限定观察期间崩溃缓冲为空。
+- ROM 策略仍为 `3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`，permissive 域 `[]`；加载策略仅有 KSU 上游 root 域例外。OTA SHA256：`3c4fbf83685b57e2e1c4a18a0a3d51e71296c0a343fab362765deea1ee1123a9`。
+- 机主已确认 build46 **Enforcing** 下相机、指纹、NFC 读卡及蓝牙清单通过。build47 只改一条标签；完整硬件及长期验收仍待持续验证。本轮未自动操作相机界面。
+
+## build46：此前默认 Enforcing 开机及机主清单验收
 
 - Android 17 / SDK 37 / Evolution X 12.3，incremental `1792936083`。
 - 默认 **Enforcing**：bootconfig 和内核命令行均为 `androidboot.selinux=enforcing`，内核参数 `enforcing=1`。正常开机通过，主机没有执行开启模式命令；post-fs-data 保护入口观察到 Enforcing，验证成功后撤销保护，没有回退到 Permissive。
@@ -11,7 +21,7 @@
 - 从 build45 保留数据安装，25 个用户应用和数据标记保留；KSU v3.3.1 LKM root、TWRP、AVB根flags=3和内核5.15.211保留。
 - 只修改本机 BoardConfig 默认启动模式，实际策略与45相同：`3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`，ROM permissive域 `[]`；加载策略仅有KSU上游 `ksu` root域例外。
 - OTA SHA256：`cfba3de2630dbea88573d05748166b437ba63cc6b04e58c4eb4570122f976687`。
-- 机主已反馈相机、指纹、NFC读卡、蓝牙清单在Permissive下通过，Enforcing下功能复测待完成。本轮未自动操作相机界面。
+- 机主随后确认相机、指纹、NFC读卡、蓝牙清单在 build46 Enforcing 下通过。本轮未自动操作相机界面。
 
 ## build45 的内存回收线程绑定修复
 
@@ -34,7 +44,7 @@
 - 正常释放设备时，在掉电判断后清理已结束的镜头停泊线程状态，避免 STOP/退出状态带入下一次打开；保留原有线程等待及电源归属判断，未改寄存器表或固件。
 - 实际 OTA 和手机中的新 camera.ko 均核验为 `ea88ece9db5674f8d657ca3202d914a86db52264d4c2b620559cf1eb912f809b`；内核 Image 未改。
 - 连续 3 次开关相机，活动客户端及释放正常，provider 稳定；新 OIS 日志未出现 request0 拒绝、停泊状态错误或 OIS 包解析失败。临时 OIS 日志及 USB 常亮设置已恢复。
-- 机主已反馈 build43 相机测试通过、未发现问题；这是 Permissive 下的人工功能验收，Enforcing 下测试另行进行。照片和手机日志不公开。
+- 机主已反馈 build43 相机测试通过、未发现问题；这是此前 Permissive 下的人工功能验收；机主随后确认 build46 Enforcing 下相机清单通过。照片和手机日志不公开。
 - 这些检查不代表已验收防抖画质、全部模式或长期可靠性。
 
 ## 温控启动项修复
@@ -44,7 +54,7 @@
 
 ## 继续保留的修复及验证
 
-- 蓝牙 offload 能力与 8 个 OEM 基带属性精确标签已实机核验，所采对应写入 AVC 未再出现；沿用现有权限，未新增 allow。蓝牙编解码配置保留，尚未验收耳机播放。
+- 蓝牙 offload 能力与 8 个 OEM 基带属性精确标签已实机核验，所采对应写入 AVC 未再出现；沿用现有权限，未新增 allow。蓝牙编解码配置保留，机主随后确认 build46 Enforcing 下蓝牙清单通过。
 - build37 的 WALT 性能访问、rootTG 提示项、kswapd cpuset、过时 ptt/boot_slpi 启动项修复仍在；9 个实机产物与 OTA 匹配，对应旧报错未再出现。
 - 缺失波形的振动 primitive 返回不支持，NOOP 仅延迟，THUD 使用对应普通波形；4 个必需校准波形未齐，暂不声明复合能力。机主反馈普通振动正常，不能称为改善了日常振动。
 
@@ -53,7 +63,7 @@
 - build37 实测后置 0.5x/1x/3.2x/5x、前摄拍照与 EXIF 焦距，后摄 1080p 录像均可保存；范围是基础拍摄保存，未验收画质。
 - build39 测试程序的 6 项 reapplyDisplayModes 在手机全部通过，程序 SHA256 `2b9a1580e5ae5d00d862314d00636dab374a3e03fced53434b594139e38fdc90`；修正的是 Android 17 测试假设，未因此改生产 SurfaceFlinger。
 
-- 机主反馈指纹、NFC读卡和蓝牙清单在Permissive下通过，Enforcing下待复测。
+- 机主随后确认指纹、NFC读卡和蓝牙清单在 build46 Enforcing 下通过。
 
 ## 剩余工作
 
@@ -61,6 +71,6 @@
 
 - MTD 的 DAC/属性探测、RIL 默认属性读取、音频调试/启动状态探测和相机空服务名查询仍需逐因归属；这些记录尚未证明对应硬件故障，没有增加宽泛权限。
 
-Enforcing 完整硬件验收、完整复合触感、更广硬件和长期测试尚未完成。eSE 服务在 Permissive 下也初始化失败，请求缺失的 IEsePowerManager 接口并报 GPQESE_CMD_OPEN 失败，仍需匹配 ST NFC/eSE 原厂接口；没有靠宽泛 allow 或移除声明隐藏错误。其他 AVC 逐项调查，可选查询、第三方探测、secure-DSP 回退探测及诊断记录不等于独立故障；未批量放行权限。存档恢复的内核/模块完整上游树身份尚未证明，文件哈希不替代来源证明。
+机主要求的 Enforcing 功能清单已在 build46 通过；完整复合触感、更广硬件和长期测试尚未完成。eSE 服务在 Permissive 下也初始化失败，请求缺失的 IEsePowerManager 接口并报 GPQESE_CMD_OPEN 失败，仍需匹配 ST NFC/eSE 原厂接口；没有靠宽泛 allow 或移除声明隐藏错误。其他 AVC 逐项调查，可选查询、第三方探测、secure-DSP 回退探测及诊断记录不等于独立故障；未批量放行权限。存档恢复的内核/模块完整上游树身份尚未证明，文件哈希不替代来源证明。
 
 Android 16 最终 incremental `1792575161` 为 Enforcing，最终策略 permissive 域为空。迁移早期的 9 个域不是最终 Android 16 遗留问题。

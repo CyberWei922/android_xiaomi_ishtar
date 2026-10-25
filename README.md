@@ -21,7 +21,7 @@ The current configuration targets **Evolution X 12.3**. The hardware configurati
 
 ## Status
 
-**Work in progress.** Build46 has been installed with data preserved, KSU root verified, and default Enforcing boot verified. The owner reports camera, fingerprint, NFC and Bluetooth checks passed in Permissive; manual functional acceptance under Enforcing is pending. See [Validation status](docs/STATUS.md).
+**Work in progress.** Build47 is installed with data preserved, KSU root and default Enforcing verified. The owner passed the requested camera, fingerprint, NFC and Bluetooth checks on build46 Enforcing. Build47 corrects one camera debug property label; see [Validation status](docs/STATUS.md) for scope and remaining work.
 
 The current development configuration uses **Enforcing SELinux**, disabled AVB verification, KernelSU v3.3.1 LKM, and prebuilt TWRP. Detailed results and remaining validation are documented in [Status](docs/STATUS.md).
 
