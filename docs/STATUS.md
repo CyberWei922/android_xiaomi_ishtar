@@ -4,14 +4,16 @@
 
 Recorded on October 25, 2026. Build numbers refer to development runs.
 
-## build45 — installed source snapshot
+## build46 — installed source snapshot
 
-- Android 17 / SDK 37 / Evolution X 12.3, incremental `1792932477`.
-- Six build jobs, existing 25G/27G memory guards and Full LTO. All 57 pinned source inputs and all 34 actual OTA payload partitions passed verification.
-- Installed from build44 preserving data. All 34 installer partition hashes and seven target boot image readbacks matched. All 24 user applications and the data marker remained present.
-- Global **Permissive**, verified KSU v3.3.1 LKM root, AVB root flags=3, preserved TWRP and kernel 5.15.211.
-- Actual ROM policy SHA256: `3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`; declared permissive domains: `[]`. The captured live policy has only the upstream KernelSU `ksu` root-domain exception; ordinary ROM domains have no permissive declaration.
-- OTA SHA256: `7eeb784d10f491c20783461026ab0cf8896bc865d4a2fa15ca9b6e5eff17f86d`.
+- Android 17 / SDK 37 / Evolution X 12.3, incremental `1792936083`.
+- Default **Enforcing** selected by `androidboot.selinux=enforcing` in bootconfig and kernel command line, plus `enforcing=1`. Normal boot completed with no host-side enable command. The post-fs-data guard observed Enforcing; it was disarmed after verification and did not restore Permissive.
+- Core PIDs were stable over the 30-second observation, the crash buffer was empty, and kswapd was verified in `/kswapd` under Enforcing. These are bounded startup checks; complete manual hardware and long-duration acceptance remain pending.
+- Six jobs, Full LTO and existing memory guards. All 57 source pins, 34 OTA payload/installer partition hashes and seven target boot readbacks passed verification.
+- Installed from build45 preserving 25 user applications and the data marker. KSU v3.3.1 LKM root, TWRP, AVB root flags=3 and kernel 5.15.211 remain present.
+- Only the device BoardConfig boot mode changed. Actual ROM policy is unchanged from45: `3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`, declared permissive domains `[]`. The live policy has only the upstream KSU `ksu` root-domain exception.
+- OTA SHA256: `cfba3de2630dbea88573d05748166b437ba63cc6b04e58c4eb4570122f976687`.
+- Owner camera, fingerprint, NFC reading and Bluetooth checklist passed in Permissive. The Enforcing functional checklist remains pending. No camera UI automation was used.
 
 ## Kernel reclaim attachment repair in build45
 
@@ -44,7 +46,7 @@ Recorded on October 25, 2026. Build numbers refer to development runs.
 
 ## Earlier repairs retained and checked
 
-- Exact vendor labels for the Bluetooth offload capability and eight OEM radio properties were verified on the device; their captured property-write denials no longer appeared. Existing domain permissions cover them; no allow rules were added for these property repairs. Bluetooth codec configuration was retained; headset playback is not tested.
+- Exact vendor labels for the Bluetooth offload capability and eight OEM radio properties were verified on the device; their captured property-write denials no longer appeared. Existing domain permissions cover them; no allow rules were added for these property repairs. Bluetooth codec configuration was retained; the owner later reported the Permissive Bluetooth checklist passed.
 - WALT performance access, unsupported rootTG hints, kswapd cpuset setup and obsolete ptt/boot_slpi startup entries were corrected in build37. Nine installed outputs still match the audited OTA and their earlier startup errors were absent.
 - Haptic primitives without calibrated data return unsupported, NOOP is delay only and THUD uses its corresponding ordinary waveform. Composition stays unadvertised because four mandatory calibrated waveforms are missing. Ordinary vibration was reported working by the owner; no improvement to everyday haptics is claimed.
 
@@ -53,13 +55,15 @@ Recorded on October 25, 2026. Build numbers refer to development runs.
 - Build37: rear 0.5x / 1x / 3.2x / 5x and front photos were captured and saved, with EXIF focal-length checks. A rear 1080p video was recorded and saved. This is basic capture/save coverage, not image-quality acceptance.
 - All six reapplyDisplayModes regressions passed on the phone using the build39 test binary, SHA256 `2b9a1580e5ae5d00d862314d00636dab374a3e03fced53434b594139e38fdc90`. The corrections concerned Android 17 test assumptions; production SurfaceFlinger was unchanged by those test corrections.
 
-- The owner also reported fingerprint tests passed in Permissive. NFC reading and Bluetooth headset playback have not yet been tested.
+- The owner reported fingerprint, NFC reading and Bluetooth checklist tests passed in Permissive; these need a repeat under Enforcing.
 
 ## Remaining work
 
+- Full-startup logging also captured an early module-loader block-directory probe and toolbox root-directory probes. The vendor module loader exited successfully and the same 103 module-success paths appeared as in build45; exact probe attribution remains open. No extra policy permissions were added.
+
 - MTD DAC/property probes, RIL default-property reads, audio diagnostic/boot-status probes and the camera empty-service lookup still need exact cause attribution. These observations do not establish corresponding hardware failures, and no broad permissions were granted.
 
-- Full Enforcing hardware acceptance, Bluetooth headset playback, complete haptic composition and broader hardware/long-duration testing remain open.
+- Manual Enforcing hardware acceptance, complete haptic composition and broader hardware/long-duration testing remain open.
 - The eSE service fails initialization in Permissive as well, requesting missing IEsePowerManager interfaces and reporting GPQESE_CMD_OPEN failure. Matching stock ST NFC/eSE interfaces still need investigation; no broad allow or manifest removal was used to hide it.
 - Other AVCs need individual cause review. Captured records include optional lookups, third-party probes, secure-DSP fallback probes and diagnostics; raw counts are not independent bug counts. No blanket allow rules were generated.
 - Full upstream identity of the restored kernel/module trees remains unproven; pinned file and patch hashes do not replace that provenance check.

@@ -50,9 +50,9 @@ ifneq ($(shell grep -c "^ISHTAR_PREBUILT_RECOVERY_CONTRACT_VERSION := 1$$" build
 $(error Apply the pinned Android17 build/make recovery patch from the integration repository)
 endif
 
-# Owner-requested temporary Permissive boot for Android17 first-boot AVC diagnosis.
-BOARD_BOOTCONFIG += androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive enforcing=0
+# Default Enforcing after build45 startup and owner functional validation.
+BOARD_BOOTCONFIG += androidboot.selinux=enforcing
+BOARD_KERNEL_CMDLINE += androidboot.selinux=enforcing enforcing=1
 
 # Properties
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/properties/camera-system.prop

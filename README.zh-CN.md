@@ -21,9 +21,9 @@
 
 ## 当前状态
 
-**开发中。** build45 已编译并保留数据刷入，root 已核验；机主已反馈 build43 相机测试通过。一次性 post-fs-data 阶段 Enforcing 启动检查已完成，结束后恢复 Permissive；Enforcing 下完整硬件验收仍待完成。具体验收范围及剩余工作见[验证状态](docs/zh-CN/STATUS.md)。
+**开发中。** build46 已保留数据刷入，KSU root 和默认 Enforcing 启动均已核验。机主反馈相机、指纹、NFC 和蓝牙在 Permissive 下检查正常；Enforcing 下人工功能验收仍待完成。见[验证状态](docs/zh-CN/STATUS.md)。
 
-当前开发配置使用 **SELinux Permissive**、关闭 AVB 验证、KernelSU v3.3.1 LKM 和预制 TWRP。详细结果及待验证项目见[验证状态](docs/zh-CN/STATUS.md)。
+当前开发配置使用 **SELinux Enforcing**、关闭 AVB 验证、KernelSU v3.3.1 LKM 和预制 TWRP。详细结果及待验证项目见[验证状态](docs/zh-CN/STATUS.md)。
 
 ## 仓库结构
 

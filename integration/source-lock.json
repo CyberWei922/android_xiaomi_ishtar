@@ -1,5 +1,5 @@
 {
-  "snapshot": "Android17 build45",
+  "snapshot": "Android17 build46",
   "components": [
     {
       "path": "device/xiaomi/ishtar",
@@ -434,5 +434,5 @@
     }
   ],
   "full_kernel_upstream_identity_verified": false,
-  "device_validation_note": "Build45 installed preserving data and KSU root; a bounded post-fs-data Enforcing startup verified actual kernel reclaim cpuset attachment and stable core processes. Permissive restored. Owner camera tests on43 passed; full Enforcing hardware acceptance remains pending."
+  "device_validation_note": "Build46 installed preserving data and root, booted with Enforcing selected in kernel command line and bootconfig, and remained Enforcing after the independent recovery guard was disarmed. ROM policy unchanged from45. Owner camera, fingerprint, NFC and Bluetooth checklist passed in Permissive; Enforcing manual hardware acceptance and long-duration tests remain pending."
 }

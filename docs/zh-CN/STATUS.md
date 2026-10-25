@@ -2,14 +2,16 @@
 
 [English](../STATUS.md) | **简体中文**
 
-## build45：当前已安装的源码快照
+## build46：当前已安装的源码快照
 
-- Android 17 / SDK 37 / Evolution X 12.3，incremental `1792932477`。
-- 6 并行、原 25G/27G 内存保护及 Full LTO；57 项源码输入和实际 OTA 全部 34 分区核验通过。
-- 从 build44 保留数据刷入，34 分区安装哈希和 7 个目标启动镜像回读匹配；24 个用户应用和数据标记保留。
-- 保持全局 **Permissive**、KSU v3.3.1 LKM root、AVB 根 flags=3、原 TWRP、内核 5.15.211。
-- 实际 ROM 策略 SHA256：`3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`，permissive 域 `[]`；实机加载策略仅有 KSU 上游主动设置的 `ksu` root 域例外，普通 ROM 域没有 permissive 声明。
-- OTA SHA256：`7eeb784d10f491c20783461026ab0cf8896bc865d4a2fa15ca9b6e5eff17f86d`。
+- Android 17 / SDK 37 / Evolution X 12.3，incremental `1792936083`。
+- 默认 **Enforcing**：bootconfig 和内核命令行均为 `androidboot.selinux=enforcing`，内核参数 `enforcing=1`。正常开机通过，主机没有执行开启模式命令；post-fs-data 保护入口观察到 Enforcing，验证成功后撤销保护，没有回退到 Permissive。
+- 核心 PID 稳定观察30秒，崩溃缓冲为空，Enforcing 下 kswapd 实际位于 `/kswapd`。这属于限定时间的启动验证，不能代替完整人工硬件或长期验收。
+- 6 并行、Full LTO 及原内存保护；57源码输入、34实际OTA/安装分区哈希、7目标启动镜像回读匹配。
+- 从 build45 保留数据安装，25 个用户应用和数据标记保留；KSU v3.3.1 LKM root、TWRP、AVB根flags=3和内核5.15.211保留。
+- 只修改本机 BoardConfig 默认启动模式，实际策略与45相同：`3dc7b3c412a8927d6fbb8a9174815dd8a476c2ee7efe8d67c9e1e0c911b10191`，ROM permissive域 `[]`；加载策略仅有KSU上游 `ksu` root域例外。
+- OTA SHA256：`cfba3de2630dbea88573d05748166b437ba63cc6b04e58c4eb4570122f976687`。
+- 机主已反馈相机、指纹、NFC读卡、蓝牙清单在Permissive下通过，Enforcing下功能复测待完成。本轮未自动操作相机界面。
 
 ## build45 的内存回收线程绑定修复
 
@@ -51,12 +53,14 @@
 - build37 实测后置 0.5x/1x/3.2x/5x、前摄拍照与 EXIF 焦距，后摄 1080p 录像均可保存；范围是基础拍摄保存，未验收画质。
 - build39 测试程序的 6 项 reapplyDisplayModes 在手机全部通过，程序 SHA256 `2b9a1580e5ae5d00d862314d00636dab374a3e03fced53434b594139e38fdc90`；修正的是 Android 17 测试假设，未因此改生产 SurfaceFlinger。
 
-- 机主也反馈指纹测试通过，当前记录为 Permissive 下人工验收；NFC 读卡及蓝牙耳机播放尚未测试。
+- 机主反馈指纹、NFC读卡和蓝牙清单在Permissive下通过，Enforcing下待复测。
 
 ## 剩余工作
 
+- 完整启动日志还捕获了早期模块加载器的块设备目录探测和 toolbox 根目录探测拒绝。vendor 模块加载器退出状态为 0，与 build45 相同的 103 条模块加载成功路径均出现；具体探测来源仍待归因，没有增加额外策略权限。
+
 - MTD 的 DAC/属性探测、RIL 默认属性读取、音频调试/启动状态探测和相机空服务名查询仍需逐因归属；这些记录尚未证明对应硬件故障，没有增加宽泛权限。
 
-Enforcing 完整硬件验收、蓝牙耳机播放、完整复合触感、更广硬件和长期测试尚未完成。eSE 服务在 Permissive 下也初始化失败，请求缺失的 IEsePowerManager 接口并报 GPQESE_CMD_OPEN 失败，仍需匹配 ST NFC/eSE 原厂接口；没有靠宽泛 allow 或移除声明隐藏错误。其他 AVC 逐项调查，可选查询、第三方探测、secure-DSP 回退探测及诊断记录不等于独立故障；未批量放行权限。存档恢复的内核/模块完整上游树身份尚未证明，文件哈希不替代来源证明。
+Enforcing 完整硬件验收、完整复合触感、更广硬件和长期测试尚未完成。eSE 服务在 Permissive 下也初始化失败，请求缺失的 IEsePowerManager 接口并报 GPQESE_CMD_OPEN 失败，仍需匹配 ST NFC/eSE 原厂接口；没有靠宽泛 allow 或移除声明隐藏错误。其他 AVC 逐项调查，可选查询、第三方探测、secure-DSP 回退探测及诊断记录不等于独立故障；未批量放行权限。存档恢复的内核/模块完整上游树身份尚未证明，文件哈希不替代来源证明。
 
 Android 16 最终 incremental `1792575161` 为 Enforcing，最终策略 permissive 域为空。迁移早期的 9 个域不是最终 Android 16 遗留问题。

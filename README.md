@@ -21,9 +21,9 @@ The current configuration targets **Evolution X 12.3**. The hardware configurati
 
 ## Status
 
-**Work in progress.** Build45 has been built and installed with data preserved and root verified. The owner reported camera tests passed on build43. A bounded Enforcing startup test from post-fs-data completed; the phone was restored to Permissive. Full Enforcing hardware acceptance remains pending. See [Validation status](docs/STATUS.md) for scopes and remaining work.
+**Work in progress.** Build46 has been installed with data preserved, KSU root verified, and default Enforcing boot verified. The owner reports camera, fingerprint, NFC and Bluetooth checks passed in Permissive; manual functional acceptance under Enforcing is pending. See [Validation status](docs/STATUS.md).
 
-The current development configuration uses **Permissive SELinux**, disabled AVB verification, KernelSU v3.3.1 LKM, and prebuilt TWRP. Detailed results and remaining validation are documented in [Status](docs/STATUS.md).
+The current development configuration uses **Enforcing SELinux**, disabled AVB verification, KernelSU v3.3.1 LKM, and prebuilt TWRP. Detailed results and remaining validation are documented in [Status](docs/STATUS.md).
 
 ## Repository layout
 
